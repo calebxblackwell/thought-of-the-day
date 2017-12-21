@@ -2,6 +2,9 @@ language: node_js
 node_js: node
 deploy:
   provider: heroku
+  heroku config: add \
+    HEROKU_OAUTH_ID=464ccc4e-d642-4d70-ae17-8d5c77138935 \
+    HEROKU_OAUTH_SECRET=86e00189-5cb0-444e-971c-ac687f28c029
   api_key:
     secure: <YOUR ENCRYPTED KEY HERE>
   app: <Full Stack Capstone>
