@@ -4,6 +4,6 @@ deploy:
   provider: heroku
   api_key:
     secure: <YOUR ENCRYPTED KEY HERE>
-  app: <YOUR APP NAME HERE>
+  app: <Full Stack Capstone>
   on:
-    repo: <YOUR REPO INFO HERE>
+    repo: <https://github.com/calebxblackwell/Full-Stack-Capstone>
