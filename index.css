@@ -1,0 +1,13 @@
+animatedBackground {
+  from {background-position: 0 0; }
+  to {background-position: 100% 0; }
+}
+#animate-area {
+width: 560px;
+height: 400px;
+background-image: url(https://pixabay.com/en/videos/rain-field-wind-blow-storm-6847/);
+background-position: 0px 0px;
+background-repeat: repeat-x;
+
+animation: animatedBackground 30s linear infinite;
+}
