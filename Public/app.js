@@ -21,3 +21,5 @@ $('#AddButton').on('click', function(e){
     displayData();
   });
 }
+//on add button click, be taken to a page which has
+//statuses posted from that day, or if none randomly generated.

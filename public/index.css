@@ -1,3 +1,4 @@
+/*Background animation area*/
 animatedBackground {
   from {background-position: 0 0; }
   to {background-position: 100% 0; }
@@ -11,3 +12,4 @@ background-repeat: repeat-x;
 
 animation: animatedBackground 30s linear infinite;
 }
+/*Font Area*/
