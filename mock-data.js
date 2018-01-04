@@ -4,12 +4,12 @@ var mockData = {
     {
       "date": "12/24",
       "text": "Merry Christmas Eve.",
-      "publishedAt":
+
     },
     {
       "date":"12/25",
       "text": "Merry Christmas!",
-      "publishedAt":
+      
     }
   ]
 };

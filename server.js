@@ -1,10 +1,31 @@
 const express = require('express');
 const app = express();
-const morgan = require('morgan');
-app.use(morgan('common'));
 app.use(express.static('public'));
-app.listen(process.env.PORT || 8080);
-//
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost:27017/full-stack-capstone');
+const Status = require('./userModel');
+//GET request
+app.get('/status', (req,res) =>{
+  const status = [
+    {status:'status update'}
+  ]
+  res.json(status)
+});
+//end get request
+//POST endpoint
+app.post('/status', (req,res) => {
+  const newStatus = new status();
+
+  newStatus.name = "String"
+  newStatus.save((error, status) => {
+    if(error){
+      res.send(error)
+    } else{
+      res.json(status)
+    }
+  })
+});
+//end POST endpoint
 let server;
 
 function runServer() {
