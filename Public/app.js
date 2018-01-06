@@ -24,3 +24,8 @@ $('#AddButton').on('click', function(e){
 });
 //on add button click, be taken to a page which has
 //statuses posted from that day, or if none randomly generated.
+$('#AddButton').on('click', function(e){
+  preventDefault();
+  $('/status').show();
+  $('mockData').show();
+});
