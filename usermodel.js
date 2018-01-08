@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const statusSchema = new Schema({
-  name: String
+  name: String,
+  date: String
 });
-module.exports = mongoose.model('status', statusSchema);
+module.exports = mongoose.model('Status', statusSchema);

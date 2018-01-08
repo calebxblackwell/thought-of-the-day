@@ -9,26 +9,11 @@ var mockData = {
     {
       "date":"12/25",
       "text": "Merry Christmas!",
-      
+
+    },
+    {
+      "date": "1/8",
+      "text": "What a crazy new year so far."
     }
   ]
 };
-//this is the function that uses AJAX to call to the server
-function getData(callbackFn){
-  setTimeout(function(){callbackFn(mockData)},1);
-}
-//these functions stay the same after we have the real API
-function displayData(data){
-  for (index in data.mockData){
-    $('body').append(
-      '<p>' + data.mockData[index].text + '</p>');
-  }
-}
-function getAndDisplayData(){
-  getData(displayData);
-}
-//on page load:
-$(function(){
-  getAndDisplayData();
-});
-//

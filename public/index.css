@@ -16,21 +16,9 @@ animation: animatedBackground 30s linear infinite;
 p {
 font-family: 'Rock Salt', cursive;
 position: center, fixed;
-font-size: 40px;
+font-size: 30px;
 color: black;
 }
 form {
   position: center, fixed;
-}
-/*Form area opaque box (make sure that the text elements
-are separate from the wrapper class, or they'll be
-transparent too.)*/
-.wrapper {
-  height: 4em;
- padding-top: 2em;
- opacity: 0.5;
- background: black;
- border-top: 3px solid #ccc;
- border-bottom: 3px solid #ccc;
- margin-top: 5.0em;
 }

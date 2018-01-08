@@ -1,9 +1,10 @@
 const express = require('express');
 const app = express();
-app.use(express.static('public'));
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/full-stack-capstone');
 const Status = require('./userModel');
+app.use(express.static('public'));
+app.use(bodyParser.json());
 //GET request
 app.get('/status', (req,res) =>{
   const status = [
@@ -14,9 +15,10 @@ app.get('/status', (req,res) =>{
 //end get request
 //POST endpoint
 app.post('/status', (req,res) => {
-  const newStatus = new status();
+  const newStatus = new Status();
 
-  newStatus.name = "String"
+  newStatus.name = req.body.text
+  newStatus.date = req.body.date
   newStatus.save((error, status) => {
     if(error){
       res.send(error)
@@ -27,7 +29,7 @@ app.post('/status', (req,res) => {
 });
 //end POST endpoint
 let server;
-
+//below is info to run the server and close the server
 function runServer() {
     const port = process.env.PORT || 8080;
     return new Promise((resolve, reject) => {
