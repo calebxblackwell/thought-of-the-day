@@ -1,27 +1,51 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-	<link rel="stylesheet" type="text/css" href="index.css">
+	<link href="index.css" rel="stylesheet" type="text/css">
 	<meta charset="utf-8">
-	<link href="https://fonts.googleapis.com/css?family=Rock+Salt" rel="stylesheet">
-
+	 <link href="https://fonts.googleapis.com/css?family=Rock+Salt" rel="stylesheet">
 	<title>Thought of the Day</title>
-
+	<div class="background"><!--class for background video-->
+	<video autoplay loop id="video-background" muted playsinline>
+		<source src="https://vimeo.com/230519613" type="video/mp4">
+		</video>
+</div><!--closing div for background class-->
 </head>
-
 <body>
-	<div class="wrapper">
-	<p>What do you have to share about today?</p>
-	<form id="newStatus">
-		<!--this box below is a date dropdown box in chrome-->
-	<input type="date" id="date" placeholder="Today's Date" class="date">
-	<input type="text" id="textbox" placeholder="New Status" class="title">
-	<button class="btn-info" id= "AddButton" type="button">Add</button>
-
-</form>
-</div><!--closing div for wrapper class-->
+	<div class="loginscreen"><!--this class is for login info-->
+		<form id="login">
+			<h1>Username</h1>
+			<input class="login-username" id="text" name="text" required>
+			<h1>Password</h1>
+			<input class="login-password" id="password" name="text" required>
+			<a href="#" class="login-account"><h1>Login</h1></a>
+			<a gref="#" class="create-account"><h1>Create Account</h1></a>
+		</form>
+	</div><!--this is the closing div for loginscreen class-->
+	<div class="register"><!--this div is for new user signup-->
+		<form id="register-user">
+			<h1>Create username:</h1>
+			<input class="register-username" id="userreg" name="text" required>
+			<h1>Create password:</h1>
+			<input class="register-password" id="passreg" name="text" required>
+			<a href="#" class="register-account"><h1>Register</h5></a>
+		</form>
+	</div><!--closing div for register class-->
+	<p>What do you have to share today?</p>
+	<div class="wrapper"><!--this class is for the user input area-->
+		<form id="new-status">
+			<!--this box below is a date dropdown box in chrome-->
+			<input class="date" id="date" placeholder="Today's Date" type="date">
+			<input class="title" id="textbox" placeholder="New Status" type="text">
+			<button class="btn-info" id="addbutton">Add</button>
+		</form>
+	</div><!--closing div for wrapper class-->
+	<footer class="footer">
+<p> Caleb Blackwell.</p><a href="https://github.com/calebxblackwell">GitHub</a>
+	</footer>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+	</script>
+	<script src="app.js" type="text/javascript">
+	</script>
 </body>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script type="text/javascript" src="app.js"></script>
 </html>

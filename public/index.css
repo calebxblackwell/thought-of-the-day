@@ -1,24 +1,115 @@
-/*Background animation area*/
-animatedBackground {
-  from {background-position: 0 0; }
-  to {background-position: 100% 0; }
+/*Background video area*/
+#video-background {
+position: fixed;
+ right: 0;
+ bottom: 0;
+ min-width: 100%;
+ min-height: 100%;
+ width: auto;
+ height: auto;
+ z-index: -100;
+ background: url('https://vimeo.com/230519613') no-repeat;
 }
-#animate-area {
-width: 560px;
-height: 400px;
-background-image: url(https://pixabay.com/en/videos/rain-field-wind-blow-storm-6847/);
-background-position: 0px 0px fixed;
-background-repeat: repeat-x;
-
-animation: animatedBackground 30s linear infinite;
+/*background color as a backup*/
+background {
+background-image: linear-gradient(120deg, #d4fc79 0%, #96e6a1 100%);
 }
 /*Font Area*/
 p {
-font-family: 'Rock Salt', cursive;
-position: center, fixed;
-font-size: 30px;
-color: black;
+  font-family: "Rock Salt", cursive;
+  font-size: 50px;
+  text-align: center;
+  padding-top:20px;
 }
-form {
-  position: center, fixed;
+/*Input area*/
+.wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%)
+
+}
+.title {
+  width: 70%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+
+}
+.title :focus {
+  border: 2px solid black;
+  border-radius: 4px;
+}
+.date {
+  width:auto;
+  padding:12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+
+}
+.date :focus{
+  border: 2px solid black;
+  border-radius: 4px;
+}
+/*Login area*/
+.loginscreen {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%)
+}
+.login-username {
+  width: 50%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+.login-username :focus{
+  border: 2px solid black;
+  border-radius: 4px;
+}
+.login-password {
+  width: 50%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+.login-password :focus{
+  border: 2px solid black;
+  border-radius: 4px;
+}
+/*Register account area*/
+.register {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%)
+}
+.register-username {
+  width: 50%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+.register-username :focus{
+  border: 2px solid black;
+  border-radius: 4px;
+}
+.register-password {
+  width: 50%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+.register-password :focus{
+  border: 2px solid black;
+  border-radius: 4px;
+}
+/*Footer*/
+.footer {
+  font-size: 14px;
+  font-color: grey;
 }
