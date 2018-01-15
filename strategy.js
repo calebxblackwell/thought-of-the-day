@@ -38,4 +38,4 @@ const localStrategy = new LocalStrategy((username, password, callback) => {
       return callback(err, false);
     });
 });
-module.exports = { localStrategy, jwtStrategy };
+module.exports = { localStrategy, };//jwtStrategy };

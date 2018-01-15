@@ -1,4 +1,4 @@
-/*Background video area*/
+/*Background video area
 #video-background {
 position: fixed;
  right: 0;
@@ -19,7 +19,9 @@ p {
   font-family: "Rock Salt", cursive;
   font-size: 50px;
   text-align: center;
-  padding-top:20px;
+}
+h3, h4, h5 {
+  font-size: 14px;
 }
 /*Input area*/
 .wrapper {
@@ -112,4 +114,5 @@ p {
 .footer {
   font-size: 14px;
   font-color: grey;
+  position: center;
 }

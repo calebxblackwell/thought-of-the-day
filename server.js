@@ -13,7 +13,7 @@ const jwtStrategy = require ('./strategy').jwtStrategy;
 //
 //GET request
 //this get request is now /protected so you need the JWT to access.
-app.get('/status/protected', jwAuth, (req, res) => {
+app.get('/status/protected', (req, res) => {
 	Status.find({}, (err, status) => {
 		if (err) {
 			res.send(err)
