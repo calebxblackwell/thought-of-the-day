@@ -1,7 +1,7 @@
 /*background*/
-body {
-background-image: linear-gradient(120deg, #d4fc79 0%, #96e6a1 100%);
-background-repeat: repeat;
+html {
+  background: url('https://cdn.pixabay.com/photo/2016/04/02/20/54/valley-of-fire-1303617_960_720.jpg') no-repeat center fixed;
+  background-size:cover;
 }
 /*Font Area*/
 header h1 {
@@ -22,8 +22,8 @@ h3, h4 {
   font-size: 14px;
 }
 .btn-info, .login-account, .create-account, .register-account {
-  background-color: #4CAF50;
-     color: white;
+  background-color: green;
+     color: black;
      padding: 14px 20px;
      margin: 8px 0;
      border: none;
@@ -31,12 +31,12 @@ h3, h4 {
      width: 100%;
 }
 .btn-info, .login-account , .create-account, .register-account :hover {
-  opacity: 0.8;
+  opacity: 0.9;
 }
 /*Input area*/
 .wrapper {
-  background: #eceeee;
-  border: 1px solid #42464b;
+  background: opaque;
+  border: 3px solid #42464b;
   border-radius: 6px;
   height: 257px;
   margin: 20px auto 0;
@@ -44,7 +44,7 @@ h3, h4 {
 
 }
 input[type="date"], input[type="text"] {
-  background: url('http://i.minus.com/ibhqW9Buanohx2.png') center left no-repeat, linear-gradient(top, #d6d7d7, #dee0e0);
+  background: white;
   border: 1px solid #a1a3a3;
   border-radius: 4px;
   box-shadow: 0 1px #fff;
@@ -62,15 +62,15 @@ input[type="date"]:focus, input[type="text"]:focus {
 }
 /*Login area*/
 .loginscreen {
-  background: #eceeee;
-  border: 1px solid #42464b;
+  background: opaque;
+  border: 3px solid #42464b;
   border-radius: 6px;
   height: 257px;
   margin: 20px auto 0;
   width: 298px;
 }
 .login-username {
-  background: url('http://i.minus.com/ibhqW9Buanohx2.png') center left no-repeat, linear-gradient(top, #d6d7d7, #dee0e0);
+  background: white;
   border: 1px solid #a1a3a3;
   border-radius: 4px;
   box-shadow: 0 1px #fff;
@@ -87,7 +87,7 @@ input[type="date"]:focus, input[type="text"]:focus {
   outline: 0;
 }
 .login-password {
-  background: url('http://i.minus.com/ibhqW9Buanohx2.png') center left no-repeat, linear-gradient(top, #d6d7d7, #dee0e0);
+  background: white;
   border: 1px solid #a1a3a3;
   border-radius: 4px;
   box-shadow: 0 1px #fff;
@@ -105,20 +105,15 @@ input[type="date"]:focus, input[type="text"]:focus {
 }
 /*Register account area*/
 .register {
-  background: url('http://i.minus.com/ibhqW9Buanohx2.png') center left no-repeat, linear-gradient(top, #d6d7d7, #dee0e0);
-  border: 1px solid #a1a3a3;
-  border-radius: 4px;
-  box-shadow: 0 1px #fff;
-  box-sizing: border-box;
-  color: #696969;
-  height: 39px;
-  margin: 31px 0 0 29px;
-  padding-left: 37px;
-  transition: box-shadow 0.3s;
-  width: 240px;
+  background: #opaque;
+  border: 3px solid #42464b;
+  border-radius: 6px;
+  height: 257px;
+  margin: 20px auto 0;
+  width: 298px;
 }
 .register-username {
-  background: url('http://i.minus.com/ibhqW9Buanohx2.png') center left no-repeat, linear-gradient(top, #d6d7d7, #dee0e0);
+  background: white;
   border: 1px solid #a1a3a3;
   border-radius: 4px;
   box-shadow: 0 1px #fff;
@@ -135,7 +130,7 @@ input[type="date"]:focus, input[type="text"]:focus {
   outline: 0;
 }
 .register-password {
-  background: url('http://i.minus.com/ibhqW9Buanohx2.png') center left no-repeat, linear-gradient(top, #d6d7d7, #dee0e0);
+  background: white;
   border: 1px solid #a1a3a3;
   border-radius: 4px;
   box-shadow: 0 1px #fff;
