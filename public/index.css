@@ -1,118 +1,162 @@
-/*Background video area
-#video-background {
-position: fixed;
- right: 0;
- bottom: 0;
- min-width: 100%;
- min-height: 100%;
- width: auto;
- height: auto;
- z-index: -100;
- background: url('https://vimeo.com/230519613') no-repeat;
-}
-/*background color as a backup*/
-background {
+/*background*/
+body {
 background-image: linear-gradient(120deg, #d4fc79 0%, #96e6a1 100%);
+background-repeat: repeat;
 }
 /*Font Area*/
-p {
+header h1 {
   font-family: "Rock Salt", cursive;
-  font-size: 50px;
-  text-align: center;
+  font-size: 40px;
+  color: black;
+  margin-bottom: 1px;
 }
-h3, h4, h5 {
+header {
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 5px;
+    background: opaque;
+    box-shadow: 0 0 10px black;
+    display: inline-block;
+}
+h3, h4 {
   font-size: 14px;
+}
+.btn-info, .login-account, .create-account, .register-account {
+  background-color: #4CAF50;
+     color: white;
+     padding: 14px 20px;
+     margin: 8px 0;
+     border: none;
+     cursor: pointer;
+     width: 100%;
+}
+.btn-info, .login-account , .create-account, .register-account :hover {
+  opacity: 0.8;
 }
 /*Input area*/
 .wrapper {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-right: -50%;
-  transform: translate(-50%, -50%)
+  background: #eceeee;
+  border: 1px solid #42464b;
+  border-radius: 6px;
+  height: 257px;
+  margin: 20px auto 0;
+  width: 298px;
 
 }
-.title {
-  width: 70%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  box-sizing: border-box;
-
-}
-.title :focus {
-  border: 2px solid black;
+input[type="date"], input[type="text"] {
+  background: url('http://i.minus.com/ibhqW9Buanohx2.png') center left no-repeat, linear-gradient(top, #d6d7d7, #dee0e0);
+  border: 1px solid #a1a3a3;
   border-radius: 4px;
-}
-.date {
-  width:auto;
-  padding:12px 20px;
-  margin: 8px 0;
+  box-shadow: 0 1px #fff;
   box-sizing: border-box;
-
+  color: #696969;
+  height: 39px;
+  margin: 31px 0 0 29px;
+  padding-left: 37px;
+  transition: box-shadow 0.3s;
+  width: 240px;
 }
-.date :focus{
-  border: 2px solid black;
-  border-radius: 4px;
+input[type="date"]:focus, input[type="text"]:focus {
+  box-shadow: 0 0 4px 1px rgba(55, 166, 155, 0.3);
+  outline: 0;
 }
 /*Login area*/
 .loginscreen {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-right: -50%;
-  transform: translate(-50%, -50%)
+  background: #eceeee;
+  border: 1px solid #42464b;
+  border-radius: 6px;
+  height: 257px;
+  margin: 20px auto 0;
+  width: 298px;
 }
 .login-username {
-  width: 50%;
-  padding: 12px 20px;
-  margin: 8px 0;
+  background: url('http://i.minus.com/ibhqW9Buanohx2.png') center left no-repeat, linear-gradient(top, #d6d7d7, #dee0e0);
+  border: 1px solid #a1a3a3;
+  border-radius: 4px;
+  box-shadow: 0 1px #fff;
   box-sizing: border-box;
+  color: #696969;
+  height: 39px;
+  margin: 31px 0 0 29px;
+  padding-left: 37px;
+  transition: box-shadow 0.3s;
+  width: 240px;
 }
 .login-username :focus{
-  border: 2px solid black;
-  border-radius: 4px;
+  box-shadow: 0 0 4px 1px rgba(55, 166, 155, 0.3);
+  outline: 0;
 }
 .login-password {
-  width: 50%;
-  padding: 12px 20px;
-  margin: 8px 0;
+  background: url('http://i.minus.com/ibhqW9Buanohx2.png') center left no-repeat, linear-gradient(top, #d6d7d7, #dee0e0);
+  border: 1px solid #a1a3a3;
+  border-radius: 4px;
+  box-shadow: 0 1px #fff;
   box-sizing: border-box;
+  color: #696969;
+  height: 39px;
+  margin: 31px 0 0 29px;
+  padding-left: 37px;
+  transition: box-shadow 0.3s;
+  width: 240px;
 }
 .login-password :focus{
-  border: 2px solid black;
-  border-radius: 4px;
+  box-shadow: 0 0 4px 1px rgba(55, 166, 155, 0.3);
+  outline: 0;
 }
 /*Register account area*/
 .register {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-right: -50%;
-  transform: translate(-50%, -50%)
+  background: url('http://i.minus.com/ibhqW9Buanohx2.png') center left no-repeat, linear-gradient(top, #d6d7d7, #dee0e0);
+  border: 1px solid #a1a3a3;
+  border-radius: 4px;
+  box-shadow: 0 1px #fff;
+  box-sizing: border-box;
+  color: #696969;
+  height: 39px;
+  margin: 31px 0 0 29px;
+  padding-left: 37px;
+  transition: box-shadow 0.3s;
+  width: 240px;
 }
 .register-username {
-  width: 50%;
-  padding: 12px 20px;
-  margin: 8px 0;
+  background: url('http://i.minus.com/ibhqW9Buanohx2.png') center left no-repeat, linear-gradient(top, #d6d7d7, #dee0e0);
+  border: 1px solid #a1a3a3;
+  border-radius: 4px;
+  box-shadow: 0 1px #fff;
   box-sizing: border-box;
+  color: #696969;
+  height: 39px;
+  margin: 31px 0 0 29px;
+  padding-left: 37px;
+  transition: box-shadow 0.3s;
+  width: 240px;
 }
 .register-username :focus{
-  border: 2px solid black;
-  border-radius: 4px;
+  box-shadow: 0 0 4px 1px rgba(55, 166, 155, 0.3);
+  outline: 0;
 }
 .register-password {
-  width: 50%;
-  padding: 12px 20px;
-  margin: 8px 0;
+  background: url('http://i.minus.com/ibhqW9Buanohx2.png') center left no-repeat, linear-gradient(top, #d6d7d7, #dee0e0);
+  border: 1px solid #a1a3a3;
+  border-radius: 4px;
+  box-shadow: 0 1px #fff;
   box-sizing: border-box;
+  color: #696969;
+  height: 39px;
+  margin: 31px 0 0 29px;
+  padding-left: 37px;
+  transition: box-shadow 0.3s;
+  width: 240px;
 }
 .register-password :focus{
-  border: 2px solid black;
-  border-radius: 4px;
+  box-shadow: 0 0 4px 1px rgba(55, 166, 155, 0.3);
+  outline: 0;
 }
 /*Footer*/
 .footer {
-  font-size: 14px;
-  font-color: grey;
-  position: center;
+  background-color: opaque;
+  height: 55px;
+  padding: 20px;
+  margin-top: 50px;
+  box-shadow: 0 0 10px black;
+  text-align: center;
 }
