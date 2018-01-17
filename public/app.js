@@ -1,11 +1,32 @@
 $(document).ready(function() {
-
-	function newStatusButton() {
-$('#nav-create-button').on('click', function () {
-		$('#new-status').removeClass('hide-display');
-		$('.start-page').addClass('hide-display');
-});
-}
+	//dropdown button functionality.
+	function navCreateButton(){
+		  $('#nav-create-button').on('click', () => {
+			$('#new-status').removeClass('.hide-display');
+			$('#register-user').addClass('.hide-display');
+			$('.start-page').addClass('.hide-display');
+		})
+	}
+	function navLoginButton() {
+		$('#nav-login-button').on('click', () => {
+			$('#register-user').removeClass('.hide-display');
+			$('#new-status').addClass('.hide-display');
+			$('.start-page').addClass('.hide-display');
+		})
+	}
+	//when the user clicks on the dropdown menu,
+	//toggle between hiding and showing dropdown content.
+	function showMenu() {
+		$('.dropbtn').on('click', () => {
+			console.log('click');
+			$('#myDropdown').toggle();
+		})
+	};
+	function hideMenu(){
+		$('li').on('click', () => {
+			$('div#myDropdown').hide();
+		})
+	};
 //post a new status
 function postNewStatus(){
 	$('#new-status').on('submit', (e) => {
@@ -51,39 +72,6 @@ function displayStatuses() {
 }
 }
 });
-//dropdown button functionality.
-function navCreateButton(){
-	$('.dropdown-content').on('click', '#nav-create-button', function(){
-		$('form#new-status :input').val("");
-		$('#new-entry').removeClass('hide-display').html(`<form id="new-status" method="post" name="new-status">
-			<input class="date" id="date" placeholder="Today's Date" type="date"> <input class="title" id="textbox" placeholder="New Status" type="text"> <button class="btn-info" id="addbutton">Add</button>
-		</form>`);
-		$('#status-container').addClass('hide-display');
-		postNewStatus();
-	})
-}
-function navLoginButton() {
-	$('#nav-login-button').click(function (){
-		displayStatuses();
-		$('#status-container').removeClass('hide-display');
-		$('#new-status').addClass('hide-display');
-		$('.start-page').addClass('hide-display');
-	})
-}
-//when the user clicks on the dropdown menu,
-//toggle between hiding and showing dropdown content.
-function showMenu() {
-	$('.dropbtn').click(function (){
-		console.log('click');
-		$('#myDropdown').toggle();
-	})
-};
-function hideMenu(){
-	$('li').on('click', function(){
-		$('div#myDropdown').hide();
-	})
-};
-
 //ajax request to GET authentication info when inputting username/password
 $('#login').on('submit', (e) =>{
 	e.preventDefault();
@@ -118,14 +106,6 @@ $('#register-user').on('submit', (e) => {
 	.fail((err) => {
 		console.log("error");
 	});
-	$(function () {
-		postNewStatus();
- 		NewStatusButton();
- 		showMenu();
- 		hideMenu();
- 		displayStatuses();
- 		navCreateButton();
- 		navLoginButton();
-	})
-//end bracket
+
+//end bracket for document ready function
 });
