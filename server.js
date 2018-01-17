@@ -11,7 +11,8 @@ app.use(bodyParser.json());
 const localStrategy = require ('./strategy').localStrategy;
 const jwtStrategy = require ('./strategy').jwtStrategy;
 //
-app.get("/", (request, response) => {
+app.get("/status", (request, response) => {
+		console.log('I got a GET request');
     response.sendFile(__dirname + '/public/index.html');
 });
 //GET request all statuses from the database.

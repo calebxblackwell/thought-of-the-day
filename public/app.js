@@ -2,6 +2,7 @@ $(document).ready(function() {
 	//dropdown button functionality.
 	function navCreateButton(){
 		  $('#nav-create-button').on('click', () => {
+				console.log('click');
 			$('#new-status').removeClass('.hide-display');
 			$('#register-user').addClass('.hide-display');
 			$('.start-page').addClass('.hide-display');
@@ -18,7 +19,6 @@ $(document).ready(function() {
 	//toggle between hiding and showing dropdown content.
 	function showMenu() {
 		$('.dropbtn').on('click', () => {
-			console.log('click');
 			$('#myDropdown').toggle();
 		})
 	};
