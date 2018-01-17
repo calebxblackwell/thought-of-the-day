@@ -1,53 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<link href="index.css" rel="stylesheet" type="text/css">
-	<meta charset="utf-8">
-	 <link href="https://fonts.googleapis.com/css?family=Rock+Salt" rel="stylesheet">
+	<meta charset="UTF-8">
 	<title>Thought of the Day</title>
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Rock+Salt" rel="stylesheet">
+	<link href="index.css" rel="stylesheet">
 </head>
 <body>
-	<header class="banner">
-	<h1>What do you have to share today?</h1>
-</header>
+	<header role="banner">
+		<div class="header-container">
+			<h1>What do you have to share today?</h1>
+		</div>
+	</header>
+<navigation role="navigation" class="row">
+	<div class="dropdown"><!--creates a dropdown menu-->
+		<button class="dropbtn">Menu</button>
+		<div class="dropdown-content" id="myDropdown">
+			<ul>
+				<li class="nav-button" id="nav-create-button">Post New Status</li>
+				<li class="nav-button" id="nav-login-button">Login/Create Account</li>
+			</ul>
+		</div>
+	</div><!--end div for dropdown class-->
+</navigation>
 
-	<main class="main">
-	<div class="loginscreen"><!--this class is for login info-->
-		<form id="login">
-			<h3>Username</h3>
-			<input class="login-username" id="text" name="text" type="text" required>
-			<h3>Password</h3>
-			<input class="login-password" id="password" name="text" type="password" required>
-			<button class="login-account">Login</button>
-			<button class="create-account">Create Account</button>
+	<section class="start-page row"><!--start page with login-->
+		<h2>Login or Create an Account.</h2>
+		<form id="login" name="login">
+			<input placeholder="Username" class="login-username" id="text" name="text" required="" type="text">
+			<input placeholder="Password" class="login-password" id="password" name="text" required="" type="password"> <button class="login-account">Login</button> <button class="create-account">Create Account</button>
 		</form>
-	</div><!--this is the closing div for loginscreen class-->
+	</section><!--end of start page-->
 
-	<div class="register"><!--this div is for new user signup-->
-		<form id="register-user">
-			<h3>Create username:</h3>
-			<input class="register-username" id="userreg" name="text" type="text" required>
-			<h3>Create password:</h3>
-			<input class="register-password" id="passreg" name="text" type="password" required>
-			<button class="register-account">Register</button>
-		</form>
-	</div><!--closing div for register class-->
-
-	<div class="wrapper"><!--this class is for the user input area-->
-		<form id="new-status">
-			<!--this box below is a date dropdown box in chrome-->
+	<section class="hide-display row" id="new-entry"><!--new status page-->
+		<form id="new-status" method="post" name="new-status">
 			<input class="date" id="date" placeholder="Today's Date" type="date">
 			<input class="title" id="textbox" placeholder="New Status" type="text">
 			<button class="btn-info" id="addbutton">Add</button>
 		</form>
-	</div><!--closing div for wrapper class-->
+	</section><!--end of new status page-->
+
+	<section class="hide-display row" id="register"><!--register user page-->
+		<form id="register-user" name="register-user">
+			<input placeholder="Create Username" class="register-username" id="userreg" name="text" required="" type="text">
+			<input placeholder="Create Password" class="register-password" id="passreg" name="text" required="" type="password"> <button class="register-account">Register</button>
+		</form>
+	</section><!--end of register user page-->
+
+  <section id="status-container" class="hide-display row">
+        <h1 class="section-header">Statuses</h1>
+
+        <div id="statuses">
+        </div>
+    </section>
+
+	<footer class="footer">
+		<h4>Made by Caleb Blackwell.</h4><a href="https://github.com/calebxblackwell">GitHub</a>
+	</footer>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
 	</script>
 	<script src="app.js" type="text/javascript">
 	</script>
-</main>
 </body>
-<footer class="footer">
-<h4> Made by Caleb Blackwell.</h4><a href="https://github.com/calebxblackwell">GitHub</a>
-</footer>
 </html>

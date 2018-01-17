@@ -1,9 +1,9 @@
 const express = require('express');
-const app = express();
 const mongoose = require('mongoose');
 const Status= require ('./statusmodel');
 const bodyParser = require('body-parser');
 const passport = require('passport');
+const app = express();
 mongoose.connect('mongodb://localhost:27017/full-stack-capstone');
 app.use(express.static('public'));
 app.use(bodyParser.json());
@@ -11,31 +11,46 @@ app.use(bodyParser.json());
 const localStrategy = require ('./strategy').localStrategy;
 const jwtStrategy = require ('./strategy').jwtStrategy;
 //
-//GET request
-//this get request is now /protected so you need the JWT to access.
-app.get('/status/protected', (req, res) => {
-	Status.find({}, (err, status) => {
-		if (err) {
-			res.send(err)
-		} else {
-			res.json(status)
-		}
-	});
+app.get("/", (request, response) => {
+    response.sendFile(__dirname + '/public/index.html');
 });
+//GET request all statuses from the database.
+app.get('/status', (req, res) => {
+	Status.find()
+		.then(status => {
+			res.json(status);
+		})
+		.catch(err => {
+			console.error(err);
+			res.status(500).json({
+				error: 'something went wrong'
+			});
+		})
+	});
 //end get request
-//POST endpoint
+//POST a new status.
 app.post('/status', (req, res) => {
-  //req.body;
-	const newStatus = new Status();
-	newStatus.name = req.body.text
-	newStatus.date = req.body.date
-	newStatus.save((error, status) => {
-		if (error) {
-			res.send(error)
-		} else {
-			res.json(status)
-		}
+  console.log(req.body);
+	const requiredFields = ['date', 'text'];
+	for (let i = 0; i < requiredFields.lenth; i++) {
+        const field = requiredFields[i];
+        if (!(field in req.body)) {
+            const message = `Missing \`${field}\` in request body`
+            console.error(message);
+            return res.status(400).send(message);
+					}
+			}
+		Status.create({
+			textbox : req.body.text,
+			date : req.body.date,
 	})
+	.then(status => res.status(201).json(status))
+			.catch(err => {
+					console.error(err);
+					res.status(500).json({
+							error: 'Something went wrong'
+					});
+			});
 });
 //end POST endpoint
 let server;
