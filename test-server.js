@@ -23,12 +23,36 @@ function generateMockData() {
     text: faker.Lorem.paragraph()
   }
 }
-describe('status page', function () {
-  it('should exist', function () {
+function tearDownDb() {
+    console.warn('Deleting database');
+    return mongoose.connection.dropDatabase();
+}
+describe('Full Stack Capstone', function () {
+
+    before(function () {
+        return runServer(TEST_DATABASE_URL);
+    });
+
+    beforeEach(function () {
+        return seedMockData();
+    });
+
+    afterEach(function () {
+        return tearDownDb();
+    });
+
+    after(function () {
+        return closeServer();
+    })
+});
+
+describe('index page', function () {
+  it('should exist', function (done) {
     return chai.request(app)
       .get('/')
-      .then(function (res) {
+      .end(function (res) {
         res.should.have.status(200);
+        done();
       });
   });
 });
