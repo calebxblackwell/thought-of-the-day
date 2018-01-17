@@ -7,8 +7,23 @@ const app = require('../server.js');
 chai.should();
 
 chai.use(chaiHttp);
-
-describe('index page', function () {
+//pull data
+function seedMockData(){
+  console.info('seeding mock data');
+  const seedData = [];
+  for (let i=1; i <=10; i++) {
+    seedData.push(generateMockData());
+  }
+  //returns a Promise
+  return Status.insertMany(seedData);
+}
+function generateMockData() {
+  return {
+    date: faker.date(),
+    text: faker.Lorem.paragraph()
+  }
+}
+describe('status page', function () {
   it('should exist', function () {
     return chai.request(app)
       .get('/')
