@@ -1,11 +1,17 @@
 $(document).ready(function() {
 	//dropdown button functionality.
 	function navCreateButton(){
-		  $('#nav-create-button').on('click', () => {
-				console.log('click');
-			$('#new-status').removeClass('.hide-display');
+		$('.dropdown-content').on('click', '#nav-create-button', () => {
+			$('form#new-status :input').val("");
+			$('#new-status').removeClass('.hide-display').html(`<form id="new-status" method="post" name="new-status">
+				<input class="date" id="date" placeholder="Today's Date" type="date">
+				<input class="title" id="textbox" placeholder="New Status" type="text">
+				<button class="btn-info" id="addbutton">Add</button>
+			</form>`);
 			$('#register-user').addClass('.hide-display');
 			$('.start-page').addClass('.hide-display');
+			$('#status-container').addClass('.hide-display');
+			postNewStatus();
 		})
 	}
 	function navLoginButton() {
@@ -13,8 +19,18 @@ $(document).ready(function() {
 			$('#register-user').removeClass('.hide-display');
 			$('#new-status').addClass('.hide-display');
 			$('.start-page').addClass('.hide-display');
+			$('#status-container').addClass('.hide-display');
 		})
-	}
+}
+function navShowStatuses(){
+	$('#nav-status-button').on('click', () =>{
+		displayStatuses();
+		$('#status-container').removeClass('.hide-display');
+		$('#new-status').addClass('.hide-display');
+		$('.start-page').addClass('.hide-display');
+		$('#register-user').addClass('.hide-display');
+	})
+}
 	//when the user clicks on the dropdown menu,
 	//toggle between hiding and showing dropdown content.
 	function showMenu() {
@@ -60,7 +76,7 @@ function displayStatuses() {
 	})
 	.done(function(data) {
 		if (data.length === 0){
-			$('#status-container').html('No statuses found.');
+			$('#status-container').html('<h3> No statuses found.</h3>');
 		};
 		let htmlOutput = "";
 		window.location = "index.html";
@@ -106,6 +122,4 @@ $('#register-user').on('submit', (e) => {
 	.fail((err) => {
 		console.log("error");
 	});
-
-//end bracket for document ready function
-});
+});//end bracket for document ready function
