@@ -91,12 +91,12 @@ $('#login').on('submit', (e) =>{
 		type: 'GET',
 		url: '/status' ,
 		data: JSON.stringify({
-			username: $("#text").val()
+			username: $("#text").val(),
 			password: $("#password").val()
 		}),
-	}),
+	})
 	.done((result) => {
-		//return data;
+		//return data
 	})
 	.fail((err) => {
 		console.log("error");
@@ -108,13 +108,13 @@ $('#register-user').on('submit', (e) => {
 		type: 'GET',
 		url: '/status',
 		data: JSON.stringify({
-			username: $("#userreg").val();
-			password: $("#passreg").val();
+			username: $("#userreg").val(),
+			password: $("#passreg").val()
 		}),
-	}),
+	})
 	.done((result) => {
 		//return data;
-	}),
+	})
 	.fail((err) => {
 		console.log("error");
 	});
