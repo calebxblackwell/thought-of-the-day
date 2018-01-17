@@ -7,6 +7,6 @@ deploy:
     HEROKU_OAUTH_SECRET=86e00189-5cb0-444e-971c-ac687f28c029
   api_key:
     secure: <YOUR ENCRYPTED KEY HERE>
-  app: <Full Stack Capstone>
+  app: <Thought of the Day, Full Stack Capstone>
   on:
-    repo: <https://github.com/calebxblackwell/Full-Stack-Capstone>
+    repo: <https://github.com/calebxblackwell/thought-of-the-day>
