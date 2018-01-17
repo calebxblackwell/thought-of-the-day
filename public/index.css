@@ -49,6 +49,9 @@ h2, h3, h4 {
   text-align: center;
   color: black;
 }
+h2, h3 { /*sets opacity for easier reading*/
+  background: rgba(204, 204, 204, 0.7);
+}
 /*Form area*/
 form fieldset {
     border: none;
