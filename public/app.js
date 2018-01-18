@@ -1,7 +1,9 @@
-$(document).ready(function() {
+
 	//dropdown button functionality.
 	function navCreateButton(){
+
 		$('.dropdown-content').on('click', '#nav-create-button', () => {
+			console.log("hello");
 			$('form#new-status :input').val("");
 			$('#new-status').removeClass('.hide-display').html(`<form id="new-status" method="post" name="new-status">
 				<input class="date" id="date" placeholder="Today's Date" type="date">
@@ -91,7 +93,7 @@ function displayStatuses() {
 	});
 }
 }
-});
+//});
 //ajax request to GET authentication info when inputting username/password
 $('#login').on('submit', (e) =>{
 	e.preventDefault();
@@ -126,4 +128,15 @@ $('#register-user').on('submit', (e) => {
 	.fail((err) => {
 		console.log("error");
 	});
+});
+	$(document).ready(function() {
+
+navCreateButton();
+navLoginButton();
+navShowStatuses();
+postNewStatus();
+//displayStatuses();
+//newStatus();
+showMenu();
+hideMenu();
 });//end bracket for document ready function
