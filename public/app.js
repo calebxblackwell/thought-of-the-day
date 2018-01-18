@@ -47,12 +47,16 @@ function navShowStatuses(){
 function postNewStatus(){
 	$('#new-status').on('submit', (e) => {
 		e.preventDefault();
+		let dateInput = $(this).parent().find('#date').val();
+		let textInput = $(this).parent().find('#text').val();
+		let dataInput = {
+			'date': dateInput,
+			'text': textInput,
+		};
+		let htmlOutput = "";
 		$.ajax({
 			type: 'POST',
-			data: JSON.stringify({
-				text: $("#textbox").val(),
-				date: $("#date").val()
-			}),
+			data: JSON.stringify(dataInput),
 			url: '/status',
 			contentType: 'application/JSON',
 		})
@@ -74,7 +78,7 @@ function displayStatuses() {
 		type: 'GET',
 		url: '/status',
 	})
-	.done(function(data) {
+	.done((data) => {
 		if (data.length === 0){
 			$('#status-container').html('<h3> No statuses found.</h3>');
 		};
@@ -82,7 +86,7 @@ function displayStatuses() {
 		window.location = "index.html";
 		//return data;
 	})
-	.fail(function(err) {
+	.fail((err) => {
 		console.log("error");
 	});
 }
