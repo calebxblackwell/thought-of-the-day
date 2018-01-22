@@ -25,7 +25,8 @@
     "express": "^4.16.2",
     "losttype-listing": "^0.2.0",
     "mongoose": "^5.0.0-rc2",
-    "morgan": "^1.9.0"
+    "morgan": "^1.9.0",
+    "passport-jwt": "^3.0.1"
   },
   "devDependencies": {
     "bcryptjs": "^2.4.3",

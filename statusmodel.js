@@ -1,40 +1,27 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
-const Schema = mongoose.Schema;
 
-const UserSchema = new Schema({
-  status: {
-    name: String,
-    date: String,
-  },
-  username: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  password: {
-    type: String,
-    required: true,
-  },
-  firstName: {type: String, default: ''},
-  lastName: {type: String, default: ''}
-  //collection: "statuses"
+const userSchema = new mongoose.Schema({
+    username: {
+        type: String,
+        required: false
+    },
+    password: {
+        type: String,
+        required: false
+    }
 });
-module.exports = mongoose.model('User', UserSchema);
-//this is the info that you need to keep passwords secure by never returning
-//a password value, only username/firstName/lastName
-//also used bcrypt js
-UserSchema.methods.serialize = function() {
-  return {
-    username: this.username || '',
-    firstName: this.firstName || '',
-    lastName: this.lastName || ''
-  };
-};
-UserSchema.methods.validatePassword = function(password) {
-  return bcrypt.compare(password, this.password);
+
+userSchema.methods.validatePassword = function (password, callback) {
+    bcrypt.compare(password, this.password, (err, isValid) => {
+        if (err) {
+            callback(err);
+            return;
+        }
+        callback(null, isValid);
+    });
 };
 
-UserSchema.statics.hashPassword = function(password) {
-  return bcrypt.hash(password, 10);
-};
+const User = mongoose.model('User', userSchema);
+
+module.exports = User;
