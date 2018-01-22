@@ -18,16 +18,16 @@
 	<div class="dropdown"><!--creates a dropdown menu-->
 		<button class="dropbtn">Menu</button>
 		<div class="dropdown-content" id="myDropdown">
-			<ul><!--using anchor tags <a href="#idToJumpTo">-->
-				<li class="nav-button" id="nav-create-button"><a href="#new-entry">Post New Status</a></li>
-				<li class="nav-button" id="nav-login-button"><a href="#register">Login/Create Account</a></li>
-				<li class="nav-button" id="nav-status-button"><a href="#statuses">Show All Statuses</a></li>
-			</ul>
+			<ul>
+				<li><a href="#" class="nav-button" data-action="new-entry">Post New Status</a></li>
+			<li><a href="#" class="nav-button" data-action="register">Login/Create Account</a></li>
+			<li><a href="#" class="nav-button" data-action="status-container">Show All Statuses</a></li>
+		</ul>
 		</div>
 	</div><!--end div for dropdown class-->
 </navigation>
 
-	<section class="start-page row"><!--start page with login-->
+	<section class="start-page row page"><!--start page with login-->
 		<h2>Login, or use menu to create an account.</h2>
 		<form id="login" name="login">
 			<input placeholder="Username" class="login-username" id="text" name="text" required="" type="text">
@@ -36,7 +36,7 @@
 		</form>
 	</section><!--end of start page-->
 
-	<section class="hide-display row" id="new-entry"><!--new status page-->
+	<section class="hide-display row page" id="new-entry"><!--new status page-->
 		<form id="new-status" method="post" name="new-status">
 			<input class="date" id="date" placeholder="Today's Date" type="date">
 			<input class="title" id="textbox" placeholder="New Status" type="text">
@@ -44,7 +44,7 @@
 		</form>
 	</section><!--end of new status page-->
 
-	<section class="hide-display row" id="register"><!--register user page-->
+	<section class="hide-display row page" id="register"><!--register user page-->
 		<form id="register-user" name="register-user">
 			<input placeholder="Create Username" class="register-username" id="userreg" name="text" required="" type="text">
 			<input placeholder="Create Password" class="register-password" id="passreg" name="text" required="" type="password">
@@ -52,7 +52,7 @@
 		</form>
 	</section><!--end of register user page-->
 
-  <section id="status-container" class="hide-display row">
+  <section id="status-container" class="hide-display row page">
         <h1 class="section-header">Statuses</h1>
 
         <div id="statuses">

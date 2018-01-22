@@ -139,6 +139,17 @@ function postNewStatus() {
 		})
 	};
 
+	function dropdownKB() {
+		  $('.nav-button').on('click', function(e) {
+		    e.preventDefault();
+
+		    var $this = $(this);
+		    var action = $this.attr('data-action');
+
+		    $('.page').addClass('hide-display');
+		    $('#' + action).removeClass('hide-display');
+		  });
+		}
 
 	$(document).ready(function() {
 		navCreateButton();
@@ -146,7 +157,7 @@ function postNewStatus() {
 		navShowStatuses();
 		postNewStatus();
 		displayStatuses();
-		//newStatus();
+		dropdownKB();
 		showMenu();
 		hideMenu();
 	}); //end bracket for document ready function
