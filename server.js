@@ -33,7 +33,7 @@ app.get('/status', (req, res) => {
 app.post('/status', (req, res) => {
   console.log(req.body);
 	const requiredFields = ['date', 'text'];
-	for (let i = 0; i < requiredFields.lenth; i++) {
+	for (let i = 0; i < requiredFields.length; i++) {
         const field = requiredFields[i];
         if (!(field in req.body)) {
             const message = `Missing \`${field}\` in request body`
@@ -83,5 +83,75 @@ function closeServer() {
 if (require.main === module) {
     runServer().catch(err => console.error(err));
 }
+//creating a new user
+app.post('/user', (req,res) => {
+  let username = req.body.username;
+  username = username.trim();
+  let password = req.body.password;
+  password = password.trim();
+  bcrypt.genSalt(10, (err,salt) => {
+    if (err) {
+      return res.status(500).json({
+        message: 'Internal server error'
+      });
+    }
+    bcrypt.hash(password, salt, (err, hash) => {
+      if (err) {
+        return res.status(500).json({
+          message: 'error' +err
+        });
+      }
+      User.create({
+                username,
+                password: hash,
+            }, (err, item) => {
+                if (err) {
+                    return res.status(500).json({
+                        message: 'error 98' + err
+                    });
+                }
+                if (item) {
+                    console.log(`User \`${username}\` created.`);
+                    return res.json(item);
+                }
+            });
+        });
+    });
+});
+//user sign in area
+app.post('/users/signin', (req, res) => {
+    const user = req.body.username;
+    const pw = req.body.password;
+    User
+        .findOne({
+            username: req.body.username
+        },  (err, items) => {
+            if (err) {
+                return res.status(500).json({
+                    message: "Internal server error"
+                });
+            }
+            if (!items) {
+                return res.status(401).json({
+                    message: "Not found!"
+                });
+            } else {
+                items.validatePassword(req.body.password, (err, isValid) => {
+                    if (err) {
+                        console.log('Error validating password.');
+                    }
+                    if (!isValid) {
+                        return res.status(401).json({
+                            message: "Not found"
+                        });
+                    } else {
+                        var logInTime = new Date();
+                        console.log("Logged in: " + req.body.username + ' at ' + logInTime);
+                        return res.json(req.body.username);
+                    }
+                });
+            };
+        });
+});
 
 module.exports = {runServer, app, closeServer};

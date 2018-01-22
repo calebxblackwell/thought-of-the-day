@@ -1,15 +1,9 @@
-function postNewStatus() {
-	$('#nav-create-button').on('click',() => {
-		$('#new-status').removeClass('hide-display');
-		$('.start-page').addClass('hide-display');
-	});
-}
 //post a new status
 function postNewStatus() {
 	$('#new-status').on('submit', (e) => {
 		e.preventDefault();
 		let dateInput = $(this).parent().find('#date').val();
-		let textInput = $(this).parent().find('#text').val();
+		let textInput = $(this).parent().find('#textbox').val();
 		let dataInput = {
 			'date': dateInput,
 			'text': textInput,
@@ -17,16 +11,17 @@ function postNewStatus() {
 		let htmlOutput = "";
 		$.ajax({
 			type: 'POST',
+			dataType: 'json',
 			data: JSON.stringify(dataInput),
 			url: '/status',
 			contentType: 'application/JSON',
 		}).done((data) => {
 			htmlOutput += data.date;
-			htmlOutput += data.textbox;
+			htmlOutput += data.text;
 			$('#statuses').html(htmlOutput);
-			$('form#newStatus :input').val("");
 			$('#new-entry').addClass('hide-display');
 			$('#status-container').removeClass('hide-display');
+			console.log("Post");
 		}).fail((err) => {
 			console.log("error");
 		});

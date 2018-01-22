@@ -5,8 +5,6 @@
 const { Strategy: LocalStrategy } = require('passport-local');
 const { JWT_SECRET } = require('./config');
 const { User } = require ('./statusmodel');
-//const { User } = require ('./auth-router');
-//this is the local authentication strategy.
 const localStrategy = new LocalStrategy((username, password, callback) => {
   let user;
 //looking for a user with the username provided
@@ -38,4 +36,5 @@ const localStrategy = new LocalStrategy((username, password, callback) => {
       return callback(err, false);
     });
 });
+
 module.exports = { localStrategy, };//jwtStrategy };
