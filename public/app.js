@@ -9,6 +9,7 @@ function postNewStatus() {
 			'text': textInput,
 		};
 		let htmlOutput = "";
+		//console.log('date: ' + $(this).parent().find('#date').val(););
 		$.ajax({
 			type: 'POST',
 			dataType: 'json',
@@ -21,7 +22,6 @@ function postNewStatus() {
 			$('#statuses').html(htmlOutput);
 			$('#new-entry').addClass('hide-display');
 			$('#status-container').removeClass('hide-display');
-			console.log("Post");
 		}).fail((err) => {
 			console.log("error");
 		});
@@ -73,8 +73,8 @@ function postNewStatus() {
 		const inputUsername = $('.register-username').val();
 		const inputPassword = $('.register-password').val();
 		const newUserObject = {
-			username: username,
-			password: password
+			username: inputUsername,
+			password: inputPassword
 		};
 		$.ajax({
 			type: 'GET',

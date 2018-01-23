@@ -31,7 +31,8 @@ app.get('/status', (req, res) => {
 //end get request
 //POST a new status.
 app.post('/status', (req, res) => {
-  console.log(req.body);
+  //console.log(req.body);
+	//console.log(req.data);
 	const requiredFields = ['date', 'text'];
 	for (let i = 0; i < requiredFields.length; i++) {
         const field = requiredFields[i];
