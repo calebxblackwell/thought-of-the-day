@@ -2,11 +2,11 @@
 function postNewStatus() {
 	$('#new-status').on('submit', (e) => {
 		e.preventDefault();
-		let dateInput = $(this).parent().find('#date').val();
-		let textInput = $(this).parent().find('#textbox').val();
-		let dataInput = {
-			'date': dateInput,
-			'text': textInput,
+			let dateInput = $('#date').val();
+			let textInput = $('#textbox').val();
+			let dataInput = {
+				'date': dateInput,
+				'text': textInput,
 		};
 		let htmlOutput = "";
 		//console.log('date: ' + $(this).parent().find('#date').val(););

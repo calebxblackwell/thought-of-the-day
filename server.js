@@ -10,6 +10,7 @@ app.use(bodyParser.json());
 //
 const localStrategy = require ('./strategy').localStrategy;
 const jwtStrategy = require ('./strategy').jwtStrategy;
+//console.log('before Status.create')
 //
 app.get("/status", (request, response) => {
 		console.log('I got a GET request');
@@ -31,7 +32,7 @@ app.get('/status', (req, res) => {
 //end get request
 //POST a new status.
 app.post('/status', (req, res) => {
-  //console.log(req.body);
+  console.log(req.body);
 	//console.log(req.data);
 	const requiredFields = ['date', 'text'];
 	for (let i = 0; i < requiredFields.length; i++) {
@@ -42,7 +43,8 @@ app.post('/status', (req, res) => {
             return res.status(400).send(message);
 					}
 			}
-		Status.create({
+		Status
+		.create({
 			textbox : req.body.text,
 			date : req.body.date,
 	})
