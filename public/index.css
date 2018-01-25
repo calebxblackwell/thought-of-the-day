@@ -4,7 +4,7 @@ header {
     margin-bottom: 20px;
     padding: 5px;
     background: #403D39;
-    box-shadow: 0 0 10px black;
+    box-shadow: 0 0 10px #EB5E28;
     display: inline-block;
 }
 .login-page {
@@ -35,7 +35,7 @@ section {
     margin: 30px;
     padding: 10px;
     background-color: #403D39;
-    border: 2px solid #EB5E28;
+    box-shadow: 0 0 10px #EB5E28;
     border-radius: 10px;
     text-align: center;
 }
