@@ -2,23 +2,28 @@
  $('.login-page').click(function(){
  	window.location.reload();
  })
+ //user should have to be logged in in order to post a status.
+ var loggedInUser = "";
 //post a new status
 function postNewStatus() {
 	$('#new-status').on('submit', (e) => {
 		e.preventDefault();
+			if (!(loggedInUser)){alert('Please log in or register.');}
+			else {
 			let dateInput = $('#date').val();
 			let textInput = $('#textbox').val();
 			let dataInput = {
 				'date': dateInput,
 				'text': textInput,
 		};
+	};
 		let htmlOutput = "";
-		//console.log('date: ' + $(this).parent().find('#date').val(););
+
 		$.ajax({
 			type: 'POST',
 			dataType: 'json',
 			data: JSON.stringify(dataInput),
-			url: '/status',
+			url: '/status' + loggedInUser,
 			contentType: 'application/JSON',
 		}).done((data) => {
 			console.log(data);
@@ -52,7 +57,8 @@ function postNewStatus() {
 			.fail((err) => {
 				console.log("error");
 			})
-	}
+
+}
 	//login Area
 	$('.login-account').click(function() {
 		const inputUsername = $('.login-username').val();
@@ -67,6 +73,7 @@ function postNewStatus() {
 				url: '/status',
 				data: JSON.stringify(loginObject),
 			}).done((result) => {
+				loggedInUser = result;
 				//return data
 			}).fail((err) => {
 				console.log("error");
@@ -86,6 +93,8 @@ function postNewStatus() {
 			url: '/status',
 			data: JSON.stringify(newUserObject),
 		}).done((result) => {
+			alert('Thanks for signing up! You may now sign in with your username and password.');
+			loggedInUser = result;
 			//return data;
 		}).fail((err) => {
 			console.log("error");
