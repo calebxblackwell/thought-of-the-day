@@ -3,13 +3,16 @@ header {
     width: 100%;
     margin-bottom: 20px;
     padding: 5px;
-    background: opaque;
+    background: #403D39;
     box-shadow: 0 0 10px black;
     display: inline-block;
 }
+.login-page {
+  float: right;
+}
 /*background*/
 html {
-  background: url('https://cdn.pixabay.com/photo/2016/04/02/20/54/valley-of-fire-1303617_960_720.jpg') no-repeat center fixed;
+  background: #CCC5B9;
   background-size:cover;
   margin: 0 auto;
   padding: 0;
@@ -22,17 +25,17 @@ html {
 /*login and create acct button*/
 button {
     margin: 5px;
-    background: white;
+    background: #FFFCF2;
     padding: 8px;
     border-radius: 5px;
-    border: 1px solid black;
+    border: 1px solid #EB5E28;
 }
 /*login box*/
 section {
     margin: 30px;
     padding: 10px;
-    background-color: opaque;
-    border: 2px solid white;
+    background-color: #403D39;
+    border: 2px solid #EB5E28;
     border-radius: 10px;
     text-align: center;
 }
@@ -40,18 +43,16 @@ section {
 header h1 {
   font-family: "Rock Salt", cursive;
   font-size: 40px;
-  color: black;
+  color: #FFFCF2;
   margin-bottom: 1px;
   text-align: center;
 }
-h2, h3, h4 {
-  font-size: 16px;
+h1, h2, h3, h4 {
+  font-size: 18px;
   text-align: center;
-  color: black;
+  color: #FFFCF2;
 }
-h2, h3 { /*sets opacity for easier reading*/
-  background: rgba(204, 204, 204, 0.7);
-}
+
 /*Form area*/
 form fieldset {
     border: none;
@@ -97,15 +98,15 @@ navigation ul li {
     cursor:pointer;
 }
 .dropbtn {
-   background-color: white;
+   background-color: #FFFCF2;
    color: black;
    padding: 10px;
    font-size: 16px;
-   border: none;
+   border: 1px solid #EB5E28;
    cursor: pointer;
 }
 .dropbtn :hover, .dropbtn :focus {
-  background-color: white;
+  background-color: #FFFCF2;
 }
 .dropdown {
     position: relative;
@@ -114,7 +115,7 @@ navigation ul li {
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: white;
+    background-color: #FFFCF2;
     min-width: 160px;
     width: 250px;
     z-index: 1;
@@ -125,7 +126,7 @@ navigation ul li {
     display: block;
 }
 .dropdown-content li:hover {
-    color: gray;
+    color: #403D39;
 }
 .dropdown:hover .dropdown-content {
     display: block;
@@ -142,17 +143,17 @@ navigation ul li {
   display: inline;
 }
 #entries {
-   border: 1px solid white;
+   border: 1px solid #EB5E28;
    background: opaque;
    border-radius: 15px 0 15px 0;
    margin: 15px;
    padding: 20px;
 }
 #entries button, .status-button {
-  background: white;
+  background: #FFFCF2;
    padding: 8px;
    border-radius: 5px;
-   border: 1px solid black;
+   border: 1px solid #EB5E28;
    text-align: center;
 }
 .current-status h2 {
@@ -171,10 +172,11 @@ navigation ul li {
 /*Footer*/
 .footer {
   background-color: opaque;
-  height: 105px;
-  padding: 10px;
-  margin-top: 120px;
-  box-shadow: 0 0 10px black;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  box-shadow: 0 0 10px #EB5E28;
   text-align: center;
 }
 /*Responsive area*/

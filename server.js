@@ -1,6 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const Status= require ('./statusmodel');
+const Status= require ('./models/status');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const app = express();
@@ -32,10 +32,8 @@ app.get('/status', (req, res) => {
 //end get request
 //POST a new status.
 app.post('/status', (req, res) => {
-  console.log(req.body);
-	//console.log(req.data);
-	const requiredFields = ['date', 'text'];
-	for (let i = 0; i < requiredFields.length; i++) {
+		const requiredFields = ['date', 'text'];
+		for(let i = 0; i < requiredFields.length; i++) {
         const field = requiredFields[i];
         if (!(field in req.body)) {
             const message = `Missing \`${field}\` in request body`
@@ -45,16 +43,17 @@ app.post('/status', (req, res) => {
 			}
 		Status
 		.create({
-			textbox : req.body.text,
+			text : req.body.text,
 			date : req.body.date,
-	})
-	.then(status => res.status(201).json(status))
-			.catch(err => {
-					console.error(err);
-					res.status(500).json({
-							error: 'Something went wrong'
-					});
-			});
+			username: "name name"
+		})
+		.then(status => res.status(201).json(status))
+		.catch(err => {
+				console.error(err);
+				res.status(500).json({
+						error: 'Something went wrong'
+				});
+		});
 });
 //end POST endpoint
 let server;

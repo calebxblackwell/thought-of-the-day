@@ -2,7 +2,7 @@ const express = require('express');
 const passport = require('passport');
 const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
-
+const Status = require('./models/status');
 const config = require('../config');
 const router = express.Router();
 
@@ -29,7 +29,7 @@ router.post('/refresh', jwtAuth, (req, res) => {
   res.json({authToken});
 });
 //this indicates that you need a username and password in order to continue
-router.post('/status', jsonParser,(req, res) =>{
+router.post('/', jsonParser, (req, res) =>{
   const requiredFields = ['username', 'password'];
   const missingField = requiredFields.find(field => !(field in req.body));
     if (missingField) {

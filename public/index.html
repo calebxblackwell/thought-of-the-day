@@ -11,7 +11,8 @@
 	<header role="banner">
 		<div class="header-container">
 			<h1>What do you have to share today?</h1>
-			<h2>Post a status to record your perspective on the day.</h2>
+			<button class="login-page">Login</button>
+
 		</div>
 	</header>
 <navigation role="navigation" class="row">
@@ -28,7 +29,7 @@
 </navigation>
 
 	<section class="start-page row page"><!--start page with login-->
-		<h2>Login, or use menu to create an account.</h2>
+		<h2>Login, or use the menu to create an account.</h2>
 		<form id="login" name="login">
 			<input placeholder="Username" class="login-username" id="text" name="text" required="" type="text">
 			<input placeholder="Password" class="login-password" id="password" name="text" required="" type="password">
@@ -38,6 +39,7 @@
 
 	<section class="hide-display row page" id="new-entry"><!--new status page-->
 		<form id="new-status" method="post" name="new-status">
+			<h2>Post a status to record your perspective on the day.</h2>
 			<input class="date" id="date" placeholder="Today's Date" type="date">
 			<input class="title" id="textbox" placeholder="New Status" type="text">
 			<button class="btn-info" id="addbutton">Add</button>
@@ -46,6 +48,7 @@
 
 	<section class="hide-display row page" id="register"><!--register user page-->
 		<form id="register-user" name="register-user">
+			<h2>Create a new account, or use the login button at the top of the page if you already have one.</h2>
 			<input placeholder="Create Username" class="register-username" id="userreg" name="text" required="" type="text">
 			<input placeholder="Create Password" class="register-password" id="passreg" name="text" required="" type="password">
 			<button class="register-account">Register</button>
@@ -54,6 +57,7 @@
 
   <section id="status-container" class="hide-display row page">
         <h1 class="section-header">Statuses</h1>
+				<h2> Here's what other people have said:</h2>
 
         <div id="statuses">
         </div>

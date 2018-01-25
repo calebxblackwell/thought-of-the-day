@@ -1,3 +1,7 @@
+// //header login button area
+ $('.login-page').click(function(){
+ 	window.location.reload();
+ })
 //post a new status
 function postNewStatus() {
 	$('#new-status').on('submit', (e) => {
@@ -17,11 +21,12 @@ function postNewStatus() {
 			url: '/status',
 			contentType: 'application/JSON',
 		}).done((data) => {
-			htmlOutput += data.date;
-			htmlOutput += data.text;
-			$('#statuses').html(htmlOutput);
-			$('#new-entry').addClass('hide-display');
-			$('#status-container').removeClass('hide-display');
+			console.log(data);
+			// htmlOutput += data.date;
+			// htmlOutput += data.text;
+			// $('#statuses').html(htmlOutput);
+			// $('#new-entry').addClass('hide-display');
+			// $('#status-container').removeClass('hide-display');
 		}).fail((err) => {
 			console.log("error");
 		});
