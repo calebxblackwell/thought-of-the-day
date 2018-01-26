@@ -4,7 +4,7 @@
 //against the values stored in the database.
 const { Strategy: LocalStrategy } = require('passport-local');
 const { JWT_SECRET } = require('./config');
-const { User } = require ('./statusmodel');
+const { User } = require ('./models/user');
 const { Strategy: JwtStrategy, ExtractJwt } = require('passport-jwt');
 const localStrategy = new LocalStrategy((username, password, callback) => {
   let user;

@@ -21,7 +21,6 @@ function postNewStatus() {
 
 		$.ajax({
 			type: 'POST',
-			dataType: 'json',
 			data: JSON.stringify(dataInput),
 			url: '/status' + loggedInUser,
 			contentType: 'application/JSON',
@@ -60,7 +59,8 @@ function postNewStatus() {
 
 }
 	//login Area
-	$('.login-account').click(function() {
+	$('#login').on('submit', function(e) {
+		e.preventDefault();
 		const inputUsername = $('.login-username').val();
 		const inputPassword = $('.login-password').val();
 		const loginObject = {
@@ -68,11 +68,16 @@ function postNewStatus() {
 			password: inputPassword
 		};
 		user= inputUsername;
+		console.log(loginObject);
 			$.ajax({
-				type: 'GET',
-				url: '/status',
-				data: JSON.stringify(loginObject),
+				type: 'POST',
+				url: '/users/signin',
+				headers: {
+	    'content-type': "application/json",
+	  },
+				data:JSON.stringify(loginObject),
 			}).done((result) => {
+				console.log(result);
 				loggedInUser = result;
 				//return data
 			}).fail((err) => {
@@ -80,8 +85,8 @@ function postNewStatus() {
 			});
 	})
 	//create account Area
-	$('.register-account').click(function() {
-		event.preventDefault();
+	$('.register-account').on('submit', function(e) {
+		e.preventDefault();
 		const inputUsername = $('.register-username').val();
 		const inputPassword = $('.register-password').val();
 		const newUserObject = {
@@ -89,8 +94,8 @@ function postNewStatus() {
 			password: inputPassword
 		};
 		$.ajax({
-			type: 'GET',
-			url: '/status',
+			type: 'POST',
+			url: '/user',
 			data: JSON.stringify(newUserObject),
 		}).done((result) => {
 			alert('Thanks for signing up! You may now sign in with your username and password.');

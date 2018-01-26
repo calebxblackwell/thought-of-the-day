@@ -8,8 +8,9 @@ mongoose.connect('mongodb://localhost:27017/full-stack-capstone');
 app.use(express.static('public'));
 app.use(bodyParser.json());
 //
-const localStrategy = require ('./strategy').localStrategy;
-const jwtStrategy = require ('./strategy').jwtStrategy;
+const {localStrategy, jwtStrategy} = require ('./strategy');
+passport.use(localStrategy);
+passport.use(jwtStrategy);
 //console.log('before Status.create')
 //
 app.get("/status", (request, response) => {
@@ -57,6 +58,61 @@ app.post('/status', (req, res) => {
 });
 //end POST endpoint
 let server;
+
+//creating a new user
+app.post('/user', (req,res) => {
+
+  let {username, password } = req.body;
+  // Username and password come in pre-trimmed, otherwise we throw an error
+  // before this
+
+  return User.find({username})
+    .count()
+    .then(count => {
+      if (count > 0) {
+        // There is an existing user with the same username
+        return Promise.reject({
+          code: 422,
+          reason: 'ValidationError',
+          message: 'Username already taken',
+          location: 'username'
+        });
+      }
+      // If there is no existing user, hash the password
+      return User.hashPassword(password);
+    })
+    .then(hash => {
+      return User.create({
+        username,
+        password: hash,
+      });
+    })
+    .then(user => {
+      return res.status(201).json(user.serialize());
+    })
+    .catch(err => {
+      // Forward validation errors on to the client, otherwise give a 500
+      // error because something unexpected has happened
+      if (err.reason === 'ValidationError') {
+        return res.status(err.code).json(err);
+      }
+      res.status(500).json({code: 500, message: 'Internal server error'});
+    });
+	});
+
+//user sign in area
+const createAuthToken = function(user) {
+  return jwt.sign({user}, config.JWT_SECRET, {
+    subject: user.username,
+    expiresIn: config.JWT_EXPIRY,
+    algorithm: 'HS256'
+  });
+};
+const localAuth = passport.authenticate('local', {session: false});
+app.post('/users/signin', localAuth, (req, res) => {
+	const authToken = createAuthToken(req.user.serialize());
+  res.json({authToken});
+});
 //below is info to run the server and close the server
 function runServer() {
     const port = process.env.PORT || 8080;
@@ -85,75 +141,4 @@ function closeServer() {
 if (require.main === module) {
     runServer().catch(err => console.error(err));
 }
-//creating a new user
-app.post('/user', (req,res) => {
-  let username = req.body.username;
-  username = username.trim();
-  let password = req.body.password;
-  password = password.trim();
-  bcrypt.genSalt(10, (err,salt) => {
-    if (err) {
-      return res.status(500).json({
-        message: 'Internal server error'
-      });
-    }
-    bcrypt.hash(password, salt, (err, hash) => {
-      if (err) {
-        return res.status(500).json({
-          message: 'error' +err
-        });
-      }
-      User.create({
-                username,
-                password: hash,
-            }, (err, item) => {
-                if (err) {
-                    return res.status(500).json({
-                        message: 'error 98' + err
-                    });
-                }
-                if (item) {
-                    console.log(`User \`${username}\` created.`);
-                    return res.json(item);
-                }
-            });
-        });
-    });
-});
-//user sign in area
-app.post('/users/signin', (req, res) => {
-    const user = req.body.username;
-    const pw = req.body.password;
-    User
-        .findOne({
-            username: req.body.username
-        },  (err, items) => {
-            if (err) {
-                return res.status(500).json({
-                    message: "Internal server error"
-                });
-            }
-            if (!items) {
-                return res.status(401).json({
-                    message: "Not found!"
-                });
-            } else {
-                items.validatePassword(req.body.password, (err, isValid) => {
-                    if (err) {
-                        console.log('Error validating password.');
-                    }
-                    if (!isValid) {
-                        return res.status(401).json({
-                            message: "Not found"
-                        });
-                    } else {
-                        var logInTime = new Date();
-                        console.log("Logged in: " + req.body.username + ' at ' + logInTime);
-                        return res.json(req.body.username);
-                    }
-                });
-            };
-        });
-});
-
 module.exports = {runServer, app, closeServer};
