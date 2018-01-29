@@ -78,6 +78,7 @@ function postNewStatus() {
 				data:JSON.stringify(loginObject),
 			}).done((result) => {
 				console.log(result);
+				localStorage.setItem('token',result.authToken);
 				loggedInUser = result;
 				//return data
 			}).fail((err) => {
@@ -85,7 +86,7 @@ function postNewStatus() {
 			});
 	})
 	//create account Area
-	$('.register-account').on('submit', function(e) {
+	$('#register-user').on('submit', function(e) {
 		e.preventDefault();
 		const inputUsername = $('.register-username').val();
 		const inputPassword = $('.register-password').val();
@@ -97,12 +98,15 @@ function postNewStatus() {
 			type: 'POST',
 			url: '/user',
 			data: JSON.stringify(newUserObject),
+			contentType: 'application/json',
+		 	dataType: 'json',
 		}).done((result) => {
+			console.log(result);
 			alert('Thanks for signing up! You may now sign in with your username and password.');
 			loggedInUser = result;
 			//return data;
 		}).fail((err) => {
-			console.log("error");
+			console.log(err);
 		});
 	})
 	//dropdown button functionality.

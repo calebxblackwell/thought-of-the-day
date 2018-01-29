@@ -4,6 +4,9 @@ const Status= require ('./models/status');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const app = express();
+const User = require ('./models/user');
+const jwt = require('jsonwebtoken');
+const config = require('./config');
 mongoose.connect('mongodb://localhost:27017/full-stack-capstone');
 app.use(express.static('public'));
 app.use(bodyParser.json());
@@ -69,6 +72,7 @@ app.post('/user', (req,res) => {
   return User.find({username})
     .count()
     .then(count => {
+			console.log(username);
       if (count > 0) {
         // There is an existing user with the same username
         return Promise.reject({
