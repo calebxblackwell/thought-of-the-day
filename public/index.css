@@ -1,9 +1,10 @@
 /*header*/
 header {
     width: 100%;
+    margin-top: 30px;
     margin-bottom: 10px;
     padding: 20px;
-    background: #403D39;
+    background: #CCC5B9;
     box-shadow: 0 0 10px #EB5E28;
     display: inline-block;
 }
@@ -12,7 +13,7 @@ header {
 }
 /*background*/
 html {
-  background: #CCC5B9;
+  background: white;
   background-size:cover;
   margin: 0 auto;
   padding: 0;
@@ -25,7 +26,7 @@ html {
 /*login and create acct button*/
 button {
     margin: 5px;
-    background: #FFFCF2;
+    background: #EB5E28;
     padding: 8px;
     border-radius: 5px;
     border: 1px solid #EB5E28;
@@ -34,7 +35,7 @@ button {
 section {
     margin: 30px;
     padding: 10px;
-    background-color: #403D39;
+    background-color: #CCC5B9;
     box-shadow: 0 0 10px #EB5E28;
     border-radius: 10px;
     text-align: center;
@@ -43,14 +44,14 @@ section {
 header h1 {
   font-family: "Rock Salt", cursive;
   font-size: 40px;
-  color: #FFFCF2;
+  color: #403D39;
   margin-bottom: 1px;
   text-align: center;
 }
 h1, h2, h3, h4 {
   font-size: 18px;
   text-align: center;
-  color: #FFFCF2;
+  color: #403D39;
 }
 
 /*Form area*/
@@ -93,43 +94,26 @@ ul {
 }
 /*Navigation area*/
 navigation ul li {
-    display: inline;
+    display: inline-block;
+    float: left;
+    color: black;
+    text-align: center;
+    padding-left: 20px;
+    padding-top: 2px;
     font-size: 16px;
     cursor:pointer;
-}
-.dropbtn {
-   background-color: #FFFCF2;
-   color: black;
-   padding: 10px;
-   font-size: 16px;
-   border: 1px solid #EB5E28;
-   cursor: pointer;
 }
 .dropbtn :hover, .dropbtn :focus {
   background-color: #FFFCF2;
 }
 .dropdown {
-    position: relative;
-    display: inline-block;
-}
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #FFFCF2;
-    min-width: 160px;
-    width: 250px;
-    z-index: 1;
-}
-.dropdown-content li {
-    color: black;
-    padding: 12px 16px;
-    display: block;
-}
-.dropdown-content li:hover {
-    color: #403D39;
-}
-.dropdown:hover .dropdown-content {
-    display: block;
+  overflow: hidden;
+  background-color: #CCC5B9;
+  position: fixed;
+  padding-top: 10px;
+  padding-left: 2px;
+  top: 0;
+  width: 100%;
 }
 /*Status area*/
 .status-info {

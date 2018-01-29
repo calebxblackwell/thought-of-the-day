@@ -1,6 +1,7 @@
 // //header login button area
- $('.login-page').click(function(){
+ $('.login-page').click(() => {
  	window.location.reload();
+	$('#status-container').removeClass('.hide-display');
  })
  //user should have to be logged in in order to post a status.
  var loggedInUser = "";
@@ -25,12 +26,11 @@ function postNewStatus() {
 			url: '/status' + loggedInUser,
 			contentType: 'application/JSON',
 		}).done((data) => {
-			console.log(data);
 			// htmlOutput += data.date;
 			// htmlOutput += data.text;
 			// $('#statuses').html(htmlOutput);
-			// $('#new-entry').addClass('hide-display');
-			// $('#status-container').removeClass('hide-display');
+			 $('#new-entry').addClass('hide-display');
+			 $('#status-container').removeClass('hide-display');
 		}).fail((err) => {
 			console.log("error");
 		});
@@ -59,7 +59,7 @@ function postNewStatus() {
 
 }
 	//login Area
-	$('#login').on('submit', function(e) {
+	$('#login').on('submit', (e) => {
 		e.preventDefault();
 		const inputUsername = $('.login-username').val();
 		const inputPassword = $('.login-password').val();
@@ -68,7 +68,6 @@ function postNewStatus() {
 			password: inputPassword
 		};
 		user= inputUsername;
-		console.log(loginObject);
 			$.ajax({
 				type: 'POST',
 				url: '/users/signin',
@@ -77,16 +76,18 @@ function postNewStatus() {
 	  },
 				data:JSON.stringify(loginObject),
 			}).done((result) => {
-				console.log(result);
 				localStorage.setItem('token',result.authToken);
 				loggedInUser = result;
+				 $('#login').addClass('hide-display');
+				 $('#new-status').removeClass('hide-display');
+				 $('#status-container').removeClass('.hide-display');
 				//return data
 			}).fail((err) => {
-				console.log("error");
+				console.log(err);
 			});
 	})
 	//create account Area
-	$('#register-user').on('submit', function(e) {
+	$('#register-user').on('submit', (e) => {
 		e.preventDefault();
 		const inputUsername = $('.register-username').val();
 		const inputPassword = $('.register-password').val();
@@ -101,48 +102,64 @@ function postNewStatus() {
 			contentType: 'application/json',
 		 	dataType: 'json',
 		}).done((result) => {
-			console.log(result);
 			alert('Thanks for signing up! You may now sign in with your username and password.');
 			loggedInUser = result;
+			 $('#register-user').addClass('hide-display');
+			 $('#login').removeClass('hide-display');
+			 $('#status-container').removeClass('.hide-display');
 			//return data;
 		}).fail((err) => {
 			console.log(err);
 		});
 	})
 	//dropdown button functionality.
-	function navCreateButton() {
-		$('.dropdown-content').on('click', '#nav-create-button', () => {
-			$('form#new-status :input').val("");
-			$('#new-status').removeClass('.hide-display').html(`<form id="new-status" method="post" name="new-status">
-					<input class="date" id="date" placeholder="Today's Date" type="date">
-					<input class="title" id="textbox" placeholder="New Status" type="text">
-					<button class="btn-info" id="addbutton">Add</button>
-				</form>`);
-			$('#register-user').addClass('.hide-display');
-			$('.start-page').addClass('.hide-display');
-			$('#status-container').addClass('.hide-display');
-			postNewStatus();
-		})
-	}
+	
+	// function navCreateButton() {
+	// 	$('.dropdown-content').on('click', '#nav-create-button', () => {
+	// 		$('form#new-status :input').val("");
+	// 		$('#new-status').removeClass('.hide-display').html(`<form id="new-status" method="post" name="new-status">
+	// 				<input class="date" id="date" placeholder="Today's Date" type="date">
+	// 				<input class="title" id="textbox" placeholder="New Status" type="text">
+	// 				<button class="btn-info" id="addbutton">Add</button>
+	// 			</form>`);
+	// 		$('#register-user').addClass('.hide-display');
+	// 		$('.start-page').addClass('.hide-display');
+	// 		$('#status-container').addClass('.hide-display');
+	// 		postNewStatus();
+	// 	})
+	// }
+  //
+	// function navLoginButton() {
+	// 	$('#nav-login-button').on('click', () => {
+	// 		$('#register-user').removeClass('.hide-display');
+	// 		$('#new-status').addClass('.hide-display');
+	// 		$('.start-page').addClass('.hide-display');
+	// 		$('#status-container').addClass('.hide-display');
+	// 	})
+	// }
+  //
+	// function navShowStatuses() {
+	// 	$('#nav-status-button').on('click', () => {
+	// 		displayStatuses();
+	// 		$('#status-container').removeClass('.hide-display');
+	// 		$('#new-status').addClass('.hide-display');
+	// 		$('.start-page').addClass('.hide-display');
+	// 		$('#register-user').addClass('.hide-display');
+	// 	})
+	// }
 
-	function navLoginButton() {
-		$('#nav-login-button').on('click', () => {
-			$('#register-user').removeClass('.hide-display');
-			$('#new-status').addClass('.hide-display');
-			$('.start-page').addClass('.hide-display');
-			$('#status-container').addClass('.hide-display');
-		})
-	}
+	//alternate dropdown solution
+	function dropdownKB() {
+			$('.nav-button').on('click', (e) => {
+				e.preventDefault();
 
-	function navShowStatuses() {
-		$('#nav-status-button').on('click', () => {
-			displayStatuses();
-			$('#status-container').removeClass('.hide-display');
-			$('#new-status').addClass('.hide-display');
-			$('.start-page').addClass('.hide-display');
-			$('#register-user').addClass('.hide-display');
-		})
-	}
+				var $this = $(this);
+				var action = $this.attr('data-action');
+
+				$('.page').addClass('hide-display');
+				$('#' + action).removeClass('hide-display');
+			});
+		}
 	//when the user clicks on the dropdown menu,
 	//toggle between hiding and showing dropdown content.
 	function showMenu() {
@@ -157,19 +174,7 @@ function postNewStatus() {
 		})
 	};
 
-	function dropdownKB() {
-		  $('.nav-button').on('click', function(e) {
-		    e.preventDefault();
-
-		    var $this = $(this);
-		    var action = $this.attr('data-action');
-
-		    $('.page').addClass('hide-display');
-		    $('#' + action).removeClass('hide-display');
-		  });
-		}
-
-	$(document).ready(function() {
+	$(document).ready(() => {
 		navCreateButton();
 		navLoginButton();
 		navShowStatuses();
