@@ -117,11 +117,12 @@ navigation ul li {
 }
 .dropdown {
   overflow: hidden;
-  background-color: #CCC5B9;
+  background-color: opaque;
   position: fixed;
   padding-top: 10px;
   padding-left: 2px;
   top: 0;
+  left:0;
   width: 100%;
 }
 /*Status area*/

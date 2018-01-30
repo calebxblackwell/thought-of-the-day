@@ -1,6 +1,7 @@
 // //header login button area
  $('.login-page').click(() => {
- 	$('#login').removeClass('hide-display');
+	 window.location.href;
+ 	// $('#login').removeClass('hide-display');
 	//$('#status-container').removeClass('.hide-display');
  })
  //user should have to be logged in in order to post a status.
