@@ -86,6 +86,25 @@ function postNewStatus() {
 				console.log(err);
 			});
 	})
+	//new ajax request to redirect user to status page upon loggedInUser
+	$('#login').on('submit', (e) => {
+		e.preventDefault();
+	$.ajax({
+		type: 'GET',
+		url: '/status' +loggedInUser,
+		dataType: 'json',
+		contentType: 'application/json'
+	})
+	.done((result) => {
+		let dataInput = {};
+		loggedInUser = result;
+		// $('#new-status').removeClass('hide-display');
+	 // $('#status-container').removeClass('.hide-display');
+	})
+	.fail((err) => {
+		console.log(err);
+	});
+});
 	//create account Area
 	$('#register-user').on('submit', (e) => {
 		e.preventDefault();
@@ -113,40 +132,40 @@ function postNewStatus() {
 		});
 	})
 	//navbar functionality.
-  //
-	// function navCreateButton() {
-	// 	$('.dropdown-content').on('click', '#nav-create-button', () => {
-	// 		$('form#new-status :input').val("");
-	// 		$('#new-status').removeClass('.hide-display').html(`<form id="new-status" method="post" name="new-status">
-	// 				<input class="date" id="date" placeholder="Today's Date" type="date">
-	// 				<input class="title" id="textbox" placeholder="New Status" type="text">
-	// 				<button class="btn-info" id="addbutton">Add</button>
-	// 			</form>`);
-	// 		$('#register-user').addClass('.hide-display');
-	// 		$('.start-page').addClass('.hide-display');
-	// 		$('#status-container').addClass('.hide-display');
-	// 		postNewStatus();
-	// 	})
-	// }
-  //
-	// function navLoginButton() {
-	// 	$('#nav-login-button').on('click', () => {
-	// 		$('#register-user').removeClass('.hide-display');
-	// 		$('#new-status').addClass('.hide-display');
-	// 		$('.start-page').addClass('.hide-display');
-	// 		$('#status-container').addClass('.hide-display');
-	// 	})
-	// }
-  //
-	// function navShowStatuses() {
-	// 	$('#nav-status-button').on('click', () => {
-	// 		displayStatuses();
-	// 		$('#status-container').removeClass('.hide-display');
-	// 		$('#new-status').addClass('.hide-display');
-	// 		$('.start-page').addClass('.hide-display');
-	// 		$('#register-user').addClass('.hide-display');
-	// 	})
-	// }
+
+	function navCreateButton() {
+		$('.dropdown-content').on('click', '#nav-create-button', () => {
+			$('form#new-status :input').val("");
+			$('#new-status').removeClass('.hide-display').html(`<form id="new-status" method="post" name="new-status">
+					<input class="date" id="date" placeholder="Today's Date" type="date">
+					<input class="title" id="textbox" placeholder="New Status" type="text">
+					<button class="btn-info" id="addbutton">Add</button>
+				</form>`);
+			$('#register-user').addClass('.hide-display');
+			$('.start-page').addClass('.hide-display');
+			$('#status-container').addClass('.hide-display');
+			postNewStatus();
+		})
+	}
+
+	function navLoginButton() {
+		$('#nav-login-button').on('click', () => {
+			$('#register-user').removeClass('.hide-display');
+			$('#new-status').addClass('.hide-display');
+			$('.start-page').addClass('.hide-display');
+			$('#status-container').addClass('.hide-display');
+		})
+	}
+
+	function navShowStatuses() {
+		$('#nav-status-button').on('click', () => {
+			displayStatuses();
+			$('#status-container').removeClass('.hide-display');
+			$('#new-status').addClass('.hide-display');
+			$('.start-page').addClass('.hide-display');
+			$('#register-user').addClass('.hide-display');
+		})
+	}
 
 	//alternate dropdown solution
 	function dropdownKB() {
@@ -175,9 +194,9 @@ function postNewStatus() {
 	};
 
 	$(document).ready(() => {
-		// navCreateButton();
-		// navLoginButton();
-		// navShowStatuses();
+		navCreateButton();
+		navLoginButton();
+		navShowStatuses();
 		postNewStatus();
 		displayStatuses();
 		dropdownKB();

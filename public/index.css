@@ -1,10 +1,11 @@
 /*header*/
 header {
+    background-image: url("../header-image.jpg");
+    background-size: cover;
     width: 100%;
     margin-top: 30px;
     margin-bottom: 10px;
     padding: 20px;
-    background: #CCC5B9;
     box-shadow: 0 0 10px #EB5E28;
     display: inline-block;
 }
@@ -43,13 +44,21 @@ section {
 /*Font Area*/
 header h1 {
   font-family: "Rock Salt", cursive;
-  font-size: 40px;
+  font-size: 34px;
+  font-weight: bold;
   color: #403D39;
   margin-bottom: 1px;
   text-align: center;
 }
-h1, h2, h3, h4 {
+h2{
   font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  color: #403D39;
+}
+ h3, h4 {
+  font-size: 18px;
+  font-weight: normal;
   text-align: center;
   color: #403D39;
 }
@@ -162,6 +171,7 @@ navigation ul li {
   width: 100%;
   box-shadow: 0 0 10px #EB5E28;
   text-align: center;
+
 }
 /*Responsive area*/
 
