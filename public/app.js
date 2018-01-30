@@ -1,6 +1,6 @@
 // //header login button area
  $('.login-page').click(() => {
- 	window.location.reload();
+ 	$('#login').removeClass('hide-display');
 	//$('#status-container').removeClass('.hide-display');
  })
  //user should have to be logged in in order to post a status.
@@ -30,7 +30,7 @@ function postNewStatus() {
 			// htmlOutput += data.text;
 			// $('#statuses').html(htmlOutput);
 			 $('#new-entry').addClass('hide-display');
-			 $('#status-container').removeClass('hide-display');
+			// $('#status-container').removeClass('hide-display');
 		}).fail((err) => {
 			console.log("error");
 		});
@@ -78,9 +78,9 @@ function postNewStatus() {
 			}).done((result) => {
 				localStorage.setItem('token',result.authToken);
 				loggedInUser = result;
-				 $('#login').addClass('hide-display');
-				 $('#new-status').removeClass('hide-display');
-				 $('#status-container').removeClass('.hide-display');
+				 // $('#login').addClass('hide-display');
+				 // $('#new-status').removeClass('hide-display');
+				// $('#status-container').removeClass('.hide-display');
 				//return data
 			}).fail((err) => {
 				console.log(err);
@@ -104,49 +104,49 @@ function postNewStatus() {
 		}).done((result) => {
 			alert('Thanks for signing up! You may now sign in with your username and password.');
 			loggedInUser = result;
-			 $('#register-user').addClass('hide-display');
-			 $('#login').removeClass('hide-display');
-			 $('#status-container').removeClass('.hide-display');
+			 // $('#register-user').addClass('hide-display');
+			 // $('#login').removeClass('hide-display');
+			// $('#status-container').removeClass('.hide-display');
 			//return data;
 		}).fail((err) => {
 			console.log(err);
 		});
 	})
-	//dropdown button functionality.
-
-	function navCreateButton() {
-		$('.dropdown-content').on('click', '#nav-create-button', () => {
-			$('form#new-status :input').val("");
-			$('#new-status').removeClass('.hide-display').html(`<form id="new-status" method="post" name="new-status">
-					<input class="date" id="date" placeholder="Today's Date" type="date">
-					<input class="title" id="textbox" placeholder="New Status" type="text">
-					<button class="btn-info" id="addbutton">Add</button>
-				</form>`);
-			$('#register-user').addClass('.hide-display');
-			$('.start-page').addClass('.hide-display');
-			$('#status-container').addClass('.hide-display');
-			postNewStatus();
-		})
-	}
-
-	function navLoginButton() {
-		$('#nav-login-button').on('click', () => {
-			$('#register-user').removeClass('.hide-display');
-			$('#new-status').addClass('.hide-display');
-			$('.start-page').addClass('.hide-display');
-			$('#status-container').addClass('.hide-display');
-		})
-	}
-
-	function navShowStatuses() {
-		$('#nav-status-button').on('click', () => {
-			displayStatuses();
-			$('#status-container').removeClass('.hide-display');
-			$('#new-status').addClass('.hide-display');
-			$('.start-page').addClass('.hide-display');
-			$('#register-user').addClass('.hide-display');
-		})
-	}
+	//navbar functionality.
+  //
+	// function navCreateButton() {
+	// 	$('.dropdown-content').on('click', '#nav-create-button', () => {
+	// 		$('form#new-status :input').val("");
+	// 		$('#new-status').removeClass('.hide-display').html(`<form id="new-status" method="post" name="new-status">
+	// 				<input class="date" id="date" placeholder="Today's Date" type="date">
+	// 				<input class="title" id="textbox" placeholder="New Status" type="text">
+	// 				<button class="btn-info" id="addbutton">Add</button>
+	// 			</form>`);
+	// 		$('#register-user').addClass('.hide-display');
+	// 		$('.start-page').addClass('.hide-display');
+	// 		$('#status-container').addClass('.hide-display');
+	// 		postNewStatus();
+	// 	})
+	// }
+  //
+	// function navLoginButton() {
+	// 	$('#nav-login-button').on('click', () => {
+	// 		$('#register-user').removeClass('.hide-display');
+	// 		$('#new-status').addClass('.hide-display');
+	// 		$('.start-page').addClass('.hide-display');
+	// 		$('#status-container').addClass('.hide-display');
+	// 	})
+	// }
+  //
+	// function navShowStatuses() {
+	// 	$('#nav-status-button').on('click', () => {
+	// 		displayStatuses();
+	// 		$('#status-container').removeClass('.hide-display');
+	// 		$('#new-status').addClass('.hide-display');
+	// 		$('.start-page').addClass('.hide-display');
+	// 		$('#register-user').addClass('.hide-display');
+	// 	})
+	// }
 
 	//alternate dropdown solution
 	function dropdownKB() {
@@ -175,9 +175,9 @@ function postNewStatus() {
 	};
 
 	$(document).ready(() => {
-		navCreateButton();
-		navLoginButton();
-		navShowStatuses();
+		// navCreateButton();
+		// navLoginButton();
+		// navShowStatuses();
 		postNewStatus();
 		displayStatuses();
 		dropdownKB();
