@@ -72,7 +72,6 @@ app.post('/user', (req,res) => {
   return User.find({username})
     .count()
     .then(count => {
-			console.log(username);
       if (count > 0) {
         // There is an existing user with the same username
         return Promise.reject({

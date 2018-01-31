@@ -154,6 +154,7 @@ navigation ul li {
 /*Footer*/
 .footer {
   background-color: opaque;
+  position: fixed;
   left: 0;
   bottom: 0;
   width: 100%;
