@@ -95,9 +95,7 @@ function postNewStatus() {
 		},
 	})
 		.done((result) => {
-			let dataInput = {};
-			loggedInUser = result;
-				$('#new-status').removeClass('hide-display');
+			document.getElementById("new-entry");
 	})
 		.fail((err) => {
 			console.log(err);
@@ -177,15 +175,14 @@ function postNewStatus() {
 		}
 	//when the user clicks on the dropdown menu,
 	//toggle between hiding and showing dropdown content.
-	function showMenu() {
-		$('.dropbtn').on('click', () => {
-			$('#myDropdown').toggle();
-		})
-	};
-
 	function hideMenu() {
 		$('li').on('click', () => {
 			$('div#myDropdown').hide();
+		})
+	};
+	function showMenu() {
+		$('.dropbtn').on('click', () => {
+			$('#myDropdown').toggle();
 		})
 	};
 
