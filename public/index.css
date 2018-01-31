@@ -39,10 +39,9 @@ section {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    align-content: center;
-    margin: 30px;
-    padding: 10px;
-    padding-bottom: 5px;
+    align-content: space-around;
+    margin-top: 30px;
+    margin-bottom: 10px;
     background-color: #CCC5B9;
     box-shadow: 0 0 10px #EB5E28;
     border-radius: 10px;
@@ -113,9 +112,7 @@ ul {
 }
 /*Navigation area*/
 navigation ul li {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: flex-end;
+    display: inline;
     float: left;
     color: black;
     text-align: center;
@@ -142,7 +139,8 @@ navigation ul li {
 }
 /*Status area*/
 .status-container {
-  margin: 30px;
+  margin-top: 30px;
+  margin-bottom: 10px;
   padding: 10px;
   background-color: #CCC5B9;
   box-shadow: 0 0 10px #EB5E28;
@@ -153,33 +151,6 @@ navigation ul li {
 .status-text {
   display: inline;
 }
-/* #entries {
-   border: 1px solid #EB5E28;
-   background: opaque;
-   border-radius: 15px 0 15px 0;
-   margin: 15px;
-   padding: 20px;
-}
-#entries button, .status-button {
-  background: #FFFCF2;
-   padding: 8px;
-   border-radius: 5px;
-   border: 1px solid #EB5E28;
-   text-align: center;
-}
-.current-status h2 {
-    font-size: 18px;
-    font-weight: 500;
-    display: inline;
-}
-#truncate {
-    display: inline-block;
-    width: 300px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    padding: 0;
-} */
 /*Footer*/
 .footer {
   background-color: opaque;
@@ -211,3 +182,31 @@ navigation ul li {
         vertical-align: text-top;
     }
 }
+
+/* #entries {
+   border: 1px solid #EB5E28;
+   background: opaque;
+   border-radius: 15px 0 15px 0;
+   margin: 15px;
+   padding: 20px;
+}
+#entries button, .status-button {
+  background: #FFFCF2;
+   padding: 8px;
+   border-radius: 5px;
+   border: 1px solid #EB5E28;
+   text-align: center;
+}
+.current-status h2 {
+    font-size: 18px;
+    font-weight: 500;
+    display: inline;
+}
+#truncate {
+    display: inline-block;
+    width: 300px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0;
+} */

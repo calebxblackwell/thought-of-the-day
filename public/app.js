@@ -2,7 +2,7 @@
  $('.login-page').click(() => {
 	 window.location.href;
  	// $('#login').removeClass('hide-display');
-	//$('#status-container').removeClass('.hide-display');
+
  })
  //user should have to be logged in in order to post a status.
  var loggedInUser = "";
@@ -31,7 +31,6 @@ function postNewStatus() {
 			// htmlOutput += data.text;
 			// $('#statuses').html(htmlOutput);
 			 $('#new-entry').addClass('hide-display');
-			// $('#status-container').removeClass('hide-display');
 		}).fail((err) => {
 			console.log("error");
 		});
@@ -79,10 +78,8 @@ function postNewStatus() {
 			}).done((result) => {
 				localStorage.setItem('token',result.authToken);
 				loggedInUser = result;
-				 // $('#login').addClass('hide-display');
-				 // $('#new-status').removeClass('hide-display');
-				// $('#status-container').removeClass('.hide-display');
-				//return data
+				  $('#login').addClass('hide-display');
+				 	$('#new-status').removeClass('hide-display');
 			}).fail((err) => {
 				console.log(err);
 			});
@@ -90,20 +87,20 @@ function postNewStatus() {
 	//new ajax request to redirect user to status page upon loggedInUser
 	$('#login').on('submit', (e) => {
 		e.preventDefault();
-	$.ajax({
-		type: 'GET',
-		url: '/status' +loggedInUser,
-		dataType: 'json',
-		contentType: 'application/json'
+		$.ajax({
+			type: 'GET',
+			url: '/status' +loggedInUser,
+			headers: {
+				'content-type': "application/json",
+		},
 	})
-	.done((result) => {
-		let dataInput = {};
-		loggedInUser = result;
-		// $('#new-status').removeClass('hide-display');
-	 // $('#status-container').removeClass('.hide-display');
+		.done((result) => {
+			let dataInput = {};
+			loggedInUser = result;
+				$('#new-status').removeClass('hide-display');
 	})
-	.fail((err) => {
-		console.log(err);
+		.fail((err) => {
+			console.log(err);
 	});
 });
 	//create account Area
@@ -124,10 +121,8 @@ function postNewStatus() {
 		}).done((result) => {
 			alert('Thanks for signing up! You may now sign in with your username and password.');
 			loggedInUser = result;
-			 // $('#register-user').addClass('hide-display');
-			 // $('#login').removeClass('hide-display');
-			// $('#status-container').removeClass('.hide-display');
-			//return data;
+			  $('#register-user').addClass('hide-display');
+			  $('#login').removeClass('hide-display');
 		}).fail((err) => {
 			console.log(err);
 		});
