@@ -8,6 +8,7 @@ header {
     padding: 20px;
     box-shadow: 0 0 10px #EB5E28;
     display: inline-block;
+    flex-grow: 2;
 }
 .login-page {
   float: right;
@@ -34,12 +35,20 @@ button {
 }
 /*login box*/
 section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
     margin: 30px;
     padding: 10px;
+    padding-bottom: 5px;
     background-color: #CCC5B9;
     box-shadow: 0 0 10px #EB5E28;
     border-radius: 10px;
     text-align: center;
+    flex-grow: 1;
+
 }
 /*Font Area*/
 header h1 {
@@ -47,6 +56,7 @@ header h1 {
   font-size: 34px;
   font-weight: bold;
   color: #403D39;
+  text-shadow: 2px 2px white;
   margin-bottom: 1px;
   text-align: center;
 }
@@ -103,7 +113,9 @@ ul {
 }
 /*Navigation area*/
 navigation ul li {
-    display: inline-block;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-end;
     float: left;
     color: black;
     text-align: center;
@@ -116,6 +128,9 @@ navigation ul li {
   background-color: #FFFCF2;
 }
 .dropdown {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-end;
   overflow: hidden;
   background-color: opaque;
   position: fixed;
@@ -126,17 +141,19 @@ navigation ul li {
   width: 100%;
 }
 /*Status area*/
-.status-info {
-    font-weight: 500;
-    display: inline;
-    font-size: 20px;
-    padding: 10px;
-    color: black;
+.status-container {
+  margin: 30px;
+  padding: 10px;
+  background-color: #CCC5B9;
+  box-shadow: 0 0 10px #EB5E28;
+  border-radius: 10px;
+  text-align: center;
+  padding-bottom: 5px;
 }
 .status-text {
   display: inline;
 }
-#entries {
+/* #entries {
    border: 1px solid #EB5E28;
    background: opaque;
    border-radius: 15px 0 15px 0;
@@ -162,16 +179,16 @@ navigation ul li {
     overflow: hidden;
     text-overflow: ellipsis;
     padding: 0;
-}
+} */
 /*Footer*/
 .footer {
   background-color: opaque;
-  position: fixed;
   left: 0;
   bottom: 0;
   width: 100%;
   box-shadow: 0 0 10px #EB5E28;
   text-align: center;
+  flex-grow: 0;
 
 }
 /*Responsive area*/
