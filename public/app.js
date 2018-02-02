@@ -1,10 +1,30 @@
-// //header login button area
- $('.login-page').click(() => {
-	 window.location.href;
- 	// $('#login').removeClass('hide-display');
-
- })
- //user should have to be logged in in order to post a status.
+//nav bar area
+//login button
+function navLoginButton(){
+	$('#nav-login-button').on('click', () => {
+		$('.start-page').removeClass('.hide-display');
+		$('#new-status').addClass('.hide-display');
+		$('#register-user').addClass('.hide-display');
+	})
+}
+//create account button
+function navRegisterButton(){
+	$('#nav-register-button').on('click', () => {
+		$('#register-user').removeClass('.hide-display');
+		$('#new-status').addClass('.hide-display');
+		$('.start-page').addClass('.hide-display');
+	})
+}
+//status button
+function navStatusButton(){
+	$('#nav-status-button').on('click', () => {
+		$('#new-status').removeClass('.hide-display');
+		$('#register-user').addClass('.hide-display');
+		$('.start-page').addClass('.hide-display');
+	})
+}
+//end navbar area
+//user should have to be logged in in order to post a status.
  var loggedInUser = "";
 //post a new status
 function postNewStatus() {
@@ -95,7 +115,8 @@ function postNewStatus() {
 		},
 	})
 		.done((result) => {
-			document.getElementById("new-entry");
+			$('#login').addClass('hide-display');
+			$('#new-status').removeClass('hide-display');
 	})
 		.fail((err) => {
 			console.log(err);
@@ -125,74 +146,12 @@ function postNewStatus() {
 			console.log(err);
 		});
 	})
-	//navbar functionality.
-
-	function navCreateButton() {
-		$('.dropdown-content').on('click', '#nav-create-button', () => {
-			$('form#new-status :input').val("");
-			$('#new-status').removeClass('.hide-display').html(`<form id="new-status" method="post" name="new-status">
-					<input class="date" id="date" placeholder="Today's Date" type="date">
-					<input class="title" id="textbox" placeholder="New Status" type="text">
-					<button class="btn-info" id="addbutton">Add</button>
-				</form>`);
-			$('#register-user').addClass('.hide-display');
-			$('.start-page').addClass('.hide-display');
-			$('#status-container').addClass('.hide-display');
-			postNewStatus();
-		})
-	}
-
-	function navLoginButton() {
-		$('#nav-login-button').on('click', () => {
-			$('#register-user').removeClass('.hide-display');
-			$('#new-status').addClass('.hide-display');
-			$('.start-page').addClass('.hide-display');
-			$('#status-container').addClass('.hide-display');
-		})
-	}
-
-	function navShowStatuses() {
-		$('#nav-status-button').on('click', () => {
-			displayStatuses();
-			$('#status-container').removeClass('.hide-display');
-			$('#new-status').addClass('.hide-display');
-			$('.start-page').addClass('.hide-display');
-			$('#register-user').addClass('.hide-display');
-		})
-	}
-
-	//alternate dropdown solution
-	function dropdownKB() {
-			$('.nav-button').on('click', (e) => {
-				e.preventDefault();
-
-				var $this = $(this);
-				var action = $this.attr('data-action');
-
-				$('.page').addClass('hide-display');
-				$('#' + action).removeClass('hide-display');
-			});
-		}
-	//when the user clicks on the dropdown menu,
-	//toggle between hiding and showing dropdown content.
-	function hideMenu() {
-		$('li').on('click', () => {
-			$('div#myDropdown').hide();
-		})
-	};
-	function showMenu() {
-		$('.dropbtn').on('click', () => {
-			$('#myDropdown').toggle();
-		})
-	};
 
 	$(document).ready(() => {
-		navCreateButton();
 		navLoginButton();
-		navShowStatuses();
+		navRegisterButton();
+		navStatusButton();
 		postNewStatus();
 		displayStatuses();
-		dropdownKB();
-		showMenu();
-		hideMenu();
+		//navBar();
 	}); //end bracket for document ready function

@@ -15,17 +15,13 @@
 	</header>
 
 <navigation role="navigation" class="row">
-	<div class="dropdown"><!--creates a dropdown menu-->
-		<button class="dropbtn">Menu</button>
-		<div class="dropdown-content" id="myDropdown">
+		<div class="navbar" id="myDropdown">
 			<ul>
-			<li><a href="#" class="login-page">Login</a></li>
-			<li><a href="#" class="nav-button" data-action="register">Create Account</a></li>
-			<li><a href="#" class="nav-button" data-action="new-entry">Post New Status</a></li>
-			<li><a href="#" class="nav-button" data-action="status-container">Show All Statuses</a></li>
+			<li><a href="#" class="nav-login-button" data-action="login">Login</a></li>
+			<li><a href="#" class="nav-register-button" data-action="register">Create Account</a></li>
+			<li><a href="#" class="nav-status-button" data-action="new-entry">Post New Status</a></li>
 		</ul>
 		</div>
-	</div><!--end div for dropdown class-->
 </navigation>
 
 	<section class="start-page row page"><!--start page with login-->
@@ -58,13 +54,13 @@
 		</form>
 	</section><!--end of register user page-->
 
-  <section id="status-container" class=" row page"><!--class hide-display-->
+  <main id="status-container" class=" row page">
         <h2 class="section-header">Statuses</h2>
 				<h3>Look at other statuses to put your day into perspective.</h3>
 				<h3> Here's what other people have said:</h3>
         <div id="statuses">
         </div>
-    </section>
+    </main>
 
 	<footer class="footer">
 		<h3>Made by Caleb Blackwell.  || <a href="https://github.com/calebxblackwell">GitHub</a></h3>
