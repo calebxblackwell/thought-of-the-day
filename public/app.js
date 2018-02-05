@@ -9,7 +9,7 @@ function navLoginButton(){
 }
 //create account button
 function navRegisterButton(){
-	$('#nav-register-button').on('click', () => {
+	$('.nav-register-button').on('click', () => {
 		$('#register-user').removeClass('.hide-display');
 		$('#new-status').addClass('.hide-display');
 		$('.start-page').addClass('.hide-display');
@@ -28,7 +28,7 @@ function navStatusButton(){
  var loggedInUser = "";
 //post a new status
 function postNewStatus() {
-	$('#new-status').on('submit', (e) => {
+	$('.addbutton').on('submit', (e) => {
 		e.preventDefault();
 			if (!(loggedInUser)){alert('Please log in or register.');}
 			else {
@@ -50,36 +50,36 @@ function postNewStatus() {
 			// htmlOutput += data.date;
 			// htmlOutput += data.text;
 			// $('#statuses').html(htmlOutput);
-			 $('#new-entry').addClass('hide-display');
+			 $('#new-status').addClass('.hide-display');
 		}).fail((err) => {
 			console.log("error");
 		});
 	});
 }
 	//display all statuses
-	function displayStatuses() {
-		$.ajax({
-				type: 'GET',
-				url: '/status',
-			}).done((data) => {
-				if (data.length === 0) {
-					$('#status-container').html('<h3> No statuses found.</h3>');
-				};
-				let statusInput = Object.keys(data).map((status, index) => {
-					return `<div id="statuses"><input type="hidden" class="statusID" value="${status._id}">
-			<p class="status-info">Date:</p> <p class="status-text">${status.date}</p><br><br>
-			<div id="truncate"><p class="status-info">Entry:</p> <p class="status-text"> ${status.text}</p></div><br><br>
-			<button id="current-button" class="reflections-button">View</button></div>`;
-		});
-				$('#status').html(statusInput);
-			})
-			.fail((err) => {
-				console.log("error");
-			})
-
-}
+// 	function displayStatuses() {
+// 		$.ajax({
+// 				type: 'GET',
+// 				url: '/status',
+// 			}).done((data) => {
+// 				if (data.length === 0) {
+// 					$('#status-container').html('<h3> No statuses found.</h3>');
+// 				};
+// 				let statusInput = Object.keys(data).map((status, index) => {
+// 					return `<div id="statuses"><input type="hidden" class="statusID" value="${status._id}">
+// 			<p class="status-info">Date:</p> <p class="status-text">${status.date}</p><br><br>
+// 			<div id="truncate"><p class="status-info">Entry:</p> <p class="status-text"> ${status.text}</p></div><br><br>
+// 			<button id="current-button" class="reflections-button">View</button></div>`;
+// 		});
+// 				$('#status').html(statusInput);
+// 			})
+// 			.fail((err) => {
+// 				console.log("error");
+// 			})
+//
+// }
 	//login Area
-	$('#login').on('submit', (e) => {
+	$('#nav-login-button').on('submit', (e) => {
 		e.preventDefault();
 		const inputUsername = $('.login-username').val();
 		const inputPassword = $('.login-password').val();
@@ -98,7 +98,7 @@ function postNewStatus() {
 			}).done((result) => {
 				localStorage.setItem('token',result.authToken);
 				loggedInUser = result;
-				  $('#login').addClass('hide-display');
+				  $('.start-page').addClass('.hide-display');
 				 	$('#new-status').removeClass('hide-display');
 			}).fail((err) => {
 				console.log(err);
@@ -141,7 +141,7 @@ function postNewStatus() {
 			alert('Thanks for signing up! You may now sign in with your username and password.');
 			loggedInUser = result;
 			  $('#register-user').addClass('hide-display');
-			  $('#login').removeClass('hide-display');
+			  $('.start-page').removeClass('hide-display');
 		}).fail((err) => {
 			console.log(err);
 		});
@@ -152,6 +152,6 @@ function postNewStatus() {
 		navRegisterButton();
 		navStatusButton();
 		postNewStatus();
-		displayStatuses();
+		//displayStatuses();
 		//navBar();
 	}); //end bracket for document ready function
