@@ -114,7 +114,7 @@ const createAuthToken = function(user) {
 const localAuth = passport.authenticate('local', {session: false});
 app.post('/users/signin', localAuth, (req, res) => {
 	const authToken = createAuthToken(req.user.serialize());
-  res.json({authToken});
+  res.json({authToken, username:req.user.username});
 });
 //below is info to run the server and close the server
 function runServer() {

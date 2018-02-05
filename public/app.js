@@ -1,59 +1,58 @@
 //nav bar area
 //login button
 function navLoginButton(){
-	$('#nav-login-button').on('click', () => {
-		$('.start-page').removeClass('.hide-display');
-		$('#new-status').addClass('.hide-display');
-		$('#register-user').addClass('.hide-display');
+	$('.nav-login-button').on('click', () => {
+		$('.start-page').removeClass('hide-display');
+		$('#new-entry').addClass('hide-display');
+		$('#register').addClass('hide-display');
 	})
 }
 //create account button
 function navRegisterButton(){
 	$('.nav-register-button').on('click', () => {
-		$('#register-user').removeClass('.hide-display');
-		$('#new-status').addClass('.hide-display');
-		$('.start-page').addClass('.hide-display');
+		$('#register').removeClass('hide-display');
+		$('#new-entry').addClass('hide-display');
+		$('.start-page').addClass('hide-display');
 	})
 }
 //status button
 function navStatusButton(){
-	$('#nav-status-button').on('click', () => {
-		$('#new-status').removeClass('.hide-display');
-		$('#register-user').addClass('.hide-display');
-		$('.start-page').addClass('.hide-display');
+	$('.nav-status-button').on('click', () => {
+		$('#new-entry').removeClass('hide-display');
+		$('#register').addClass('hide-display');
+		$('.start-page').addClass('hide-display');
 	})
 }
 //end navbar area
-//user should have to be logged in in order to post a status.
- var loggedInUser = "";
+
 //post a new status
 function postNewStatus() {
-	$('.addbutton').on('submit', (e) => {
+	$('#new-status').on('submit', (e) => {
 		e.preventDefault();
+			let loggedInUser = localStorage.getItem('token');
 			if (!(loggedInUser)){alert('Please log in or register.');}
 			else {
-			let dateInput = $('#date').val();
-			let textInput = $('#textbox').val();
-			let dataInput = {
-				'date': dateInput,
-				'text': textInput,
-		};
-	};
+				let dateInput = $('#date').val();
+				let textInput = $('#textbox').val();
+				let dataInput = {
+					'date': dateInput,
+					'text': textInput,
+				};
+				$.ajax({
+					type: 'POST',
+					data: JSON.stringify(dataInput),
+					url: '/status',
+					contentType: 'application/JSON',
+				}).done((data) => {
+					htmlOutput += data.date;
+					htmlOutput += data.text;
+						$('#statuses').html(htmlOutput);
+					 	$('#new-entry').addClass('hide-display');
+				}).fail((err) => {
+					console.log("error");
+				});
+			};
 		let htmlOutput = "";
-
-		$.ajax({
-			type: 'POST',
-			data: JSON.stringify(dataInput),
-			url: '/status' + loggedInUser,
-			contentType: 'application/JSON',
-		}).done((data) => {
-			// htmlOutput += data.date;
-			// htmlOutput += data.text;
-			// $('#statuses').html(htmlOutput);
-			 $('#new-status').addClass('.hide-display');
-		}).fail((err) => {
-			console.log("error");
-		});
 	});
 }
 	//display all statuses
@@ -79,7 +78,7 @@ function postNewStatus() {
 //
 // }
 	//login Area
-	$('#nav-login-button').on('submit', (e) => {
+	$('#login').on('submit', (e) => {
 		e.preventDefault();
 		const inputUsername = $('.login-username').val();
 		const inputPassword = $('.login-password').val();
@@ -97,31 +96,15 @@ function postNewStatus() {
 				data:JSON.stringify(loginObject),
 			}).done((result) => {
 				localStorage.setItem('token',result.authToken);
+				localStorage.setItem('username', result.username);
 				loggedInUser = result;
-				  $('.start-page').addClass('.hide-display');
-				 	$('#new-status').removeClass('hide-display');
+				  $('.start-page').addClass('hide-display');
+				 	$('#new-entry').removeClass('hide-display');
 			}).fail((err) => {
 				console.log(err);
 			});
 	})
-	//new ajax request to redirect user to status page upon loggedInUser
-	$('#login').on('submit', (e) => {
-		e.preventDefault();
-		$.ajax({
-			type: 'GET',
-			url: '/status' +loggedInUser,
-			headers: {
-				'content-type': "application/json",
-		},
-	})
-		.done((result) => {
-			$('#login').addClass('hide-display');
-			$('#new-status').removeClass('hide-display');
-	})
-		.fail((err) => {
-			console.log(err);
-	});
-});
+
 	//create account Area
 	$('#register-user').on('submit', (e) => {
 		e.preventDefault();
