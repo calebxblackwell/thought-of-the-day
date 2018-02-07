@@ -7,7 +7,7 @@ const app = express();
 const User = require ('./models/user');
 const jwt = require('jsonwebtoken');
 const config = require('./config');
-mongoose.connect('mongodb://localhost:27017/full-stack-capstone');
+mongoose.connect(config.DATABASE_URL);
 app.use(express.static('public'));
 app.use(bodyParser.json());
 //
