@@ -2,11 +2,8 @@ language: node_js
 node_js: node
 deploy:
   provider: heroku
-  heroku config: add \
-    HEROKU_OAUTH_ID=464ccc4e-d642-4d70-ae17-8d5c77138935 \
-    HEROKU_OAUTH_SECRET=86e00189-5cb0-444e-971c-ac687f28c029
   api_key:
-    secure: <YOUR ENCRYPTED KEY HERE>
-  app: <Thought of the Day, Full Stack Capstone>
+    secure: BVBKrdvCPiD2i587X/ZtxDwqY8cYXGWvjuzS1cOcCZAG5LjH3vg5iMO9Qwy0WV/MduMqziMzdxW7Nq4QcEZYgWuhIB93Rx3OC3bO7g0sUmRnmcqs2JAZEEpEfOTAoOy59foPGrFWym6UMYi6B6W+pyFxqA+3MXMAR1gg9e3+ChdBz/6VxhCHHbUTBeV+c/Jvt8+WHe0EBVeOhvHAECXCLB0kC5Ps2dwKkTjQQhAH66flbx56LuaAuDLn+k8zhXgRSY323QxoEd6iIfosWVMh2VNvV+uv802AYz+dHrdOl4mUHli5LAwJGL6THIy+s7x26ZrPB077Gp47KmeffqvId+qUVzO37Js+i6c6cakWzNS82ijSpeB4BDl3HkNUSJrWk0DeXhbyqpm0CsJmfEhoQnD6yjUCQdZy/hqlsXrh3L19LWwcRgFeqmLofy3GnhkC4Bqa4wGZLbpM6TO6kb3tDjjrDg7bbIhtm9nG2JYdsl8iSlFJpJDyWlnubK4TOIcx1ys+DHaAnDJ8bIf0qEbxLziloLhYPl3hp3IMKeTQwxHrvetgy2sSHAXiSptXqDs5pzfrDwdVuMjfYWMcqovdLBSlDDAQPF/HGE3IXI9C6SbWt59khl6nvVTWOMWfT94O8zm2feETV3U68EB61ysM8yeKkDEb4Uj66zjzfZnSmGU=
+  app: thought-of-the-day
   on:
-    repo: <https://github.com/calebxblackwell/thought-of-the-day>
+    repo: calebxblackwell/thought-of-the-day
