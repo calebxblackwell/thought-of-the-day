@@ -44,7 +44,7 @@ function postNewStatus() {
 					url: '/status',
 					contentType: 'application/JSON',
 				}).done((data) => {
-					htmlOutput += data.date;
+					htmlOutput += moment(data.date).format("MMM Do YY");
 					htmlOutput += data.text;
 						$('#statuses').html(htmlOutput);
 					 	$('#new-entry').addClass('hide-display');
@@ -137,4 +137,12 @@ function postNewStatus() {
 		postNewStatus();
 		//displayStatuses();
 		//navBar();
+		const checkAuth = localStorage.getItem('token');
+			if(checkAuth){
+				$('.start-page').addClass('hide-display');
+				$('#new-entry').removeClass('hide-display');
+			}
+			else {
+				$('.start-page').removeClass('hide-display');
+			}
 	}); //end bracket for document ready function
