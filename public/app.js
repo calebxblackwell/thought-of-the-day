@@ -141,7 +141,7 @@ function postNewStatus() {
 
 //view statuses by id
 	function displayStatusById() {
-	    $('#status').on('click', () => {
+	    $('#statuses').on('click', () => {
 	        let idParameter = $(this).parent().find('.statusID').val();
 	        $.ajax({
 	                method: 'GET',
@@ -178,7 +178,7 @@ function postNewStatus() {
 	    let idParameter = $('div').find('.statusID').val();
 	    $.ajax({
 	            method: 'DELETE',
-	            url:'/status' + idParameter,
+	            url:'/status'+ idParameter,
 	            contentType: 'application/json',
 	            dataType: 'json'
 	        })
@@ -195,7 +195,7 @@ function postNewStatus() {
 //update statuses
 			//first retrieve the post by id and put data in form
 function retrieveStatus() {
-    $('#status').on('click', '#edit-button',() => {
+    $('#statuses').on('click', '#edit-button',() => {
         $('#new-entry').removeClass('hide-display');
         let idParameter = $(this).parent().find('.statusID').val();
         $.ajax({
@@ -271,7 +271,8 @@ function retrieveStatus() {
 		}
 //section for update/delete/and display status buttons
 function handleDisplayStatusById() {
-	$('#status').on('click', '#view-all-button',() => {
+	$('#statuses').on('click', '#view-all-button',(e) => {
+			e.preventDefault();
 			displayStatusById();
 			$('.current-status').addClass('hide-display');
 	});
@@ -283,7 +284,8 @@ function handleUpdateStatus() {
     });
 }
 function handleDeleteStatus() {
-	$('#status-container').on('click', '#delete-button',() => {
+	$('#status-container').on('click', '#delete-button',(e) => {
+			e.preventDefault();
 			deleteStatus();
 	});
 }
