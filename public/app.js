@@ -23,6 +23,20 @@ function navStatusButton(){
 		$('.start-page').addClass('hide-display');
 	})
 }
+//logout button
+function navLogoutButton(){
+	$('.nav-logout-button').on('click', () => {
+		const loggedOutUser = localStorage.removeItem('token');
+			if(loggedOutUser){
+				$('.start-page').removeClass('hide-display');
+				$('#new-entry').addClass('hide-display');
+				$('#register').addClass('hide-display');
+			}
+			else {
+				//empty
+			}
+	})
+}
 //end navbar area
 
 //post a new status
@@ -38,45 +52,34 @@ function postNewStatus() {
 					'date': dateInput,
 					'text': textInput,
 				};
+				let htmlOutput = "";
 				$.ajax({
 					type: 'POST',
 					data: JSON.stringify(dataInput),
 					url: '/status',
 					contentType: 'application/JSON',
 				}).done((data) => {
+					htmlOutput += '<h2>Date: </h2>';
 					htmlOutput += moment(data.date).format("MMM Do YY");
+					htmlOutput += '<br><br>';
+					htmlOutput += '<h2>Status: </h2>';
 					htmlOutput += data.text;
+					htmlOutput += '<br><br>';
+					htmlOutput += '<input type="hidden" class="statusID" value="';
+					htmlOutput += data._id;
+					htmlOutput += '">';
+					htmlOutput += '<button id="edit-button" class="status-button">Edit</button>';
+					htmlOutput += '<button id="delete-button" class="status-button">Delete</button>';
 						$('#statuses').html(htmlOutput);
+						$('form#new-status :input').val("");
 					 	$('#new-entry').addClass('hide-display');
 				}).fail((err) => {
 					console.log("error");
 				});
 			};
-		let htmlOutput = "";
 	});
 }
-	//display all statuses
-// 	function displayStatuses() {
-// 		$.ajax({
-// 				type: 'GET',
-// 				url: '/status',
-// 			}).done((data) => {
-// 				if (data.length === 0) {
-// 					$('#status-container').html('<h3> No statuses found.</h3>');
-// 				};
-// 				let statusInput = Object.keys(data).map((status, index) => {
-// 					return `<div id="statuses"><input type="hidden" class="statusID" value="${status._id}">
-// 			<p class="status-info">Date:</p> <p class="status-text">${status.date}</p><br><br>
-// 			<div id="truncate"><p class="status-info">Entry:</p> <p class="status-text"> ${status.text}</p></div><br><br>
-// 			<button id="current-button" class="reflections-button">View</button></div>`;
-// 		});
-// 				$('#status').html(statusInput);
-// 			})
-// 			.fail((err) => {
-// 				console.log("error");
-// 			})
-//
-// }
+
 	//login Area
 	$('#login').on('submit', (e) => {
 		e.preventDefault();
@@ -129,14 +132,133 @@ function postNewStatus() {
 			console.log(err);
 		});
 	})
+	//view statuses by id
+	function displayStatusById() {
+	    $('#status').on('click', '#current-button', () => {
+	        let idParameter = $(this).parent().find('.statusID').val();
+	        $.ajax({
+	                method: 'GET',
+	                url: '/status' + idParameter
+	            })
+	            .done((data) => {
+	                let htmlOutput = "";
+									htmlOutput += '<h2>Date: </h2>';
+									htmlOutput += moment(data.date).format("MMM Do YY");
+									htmlOutput += '<br><br>';
+									htmlOutput += '<h2>Status: </h2>';
+									htmlOutput += data.text;
+									htmlOutput += '<br><br>';
+									htmlOutput += '<input type="hidden" class="statusID" value="';
+									htmlOutput += data._id;
+									htmlOutput += '">';
+									htmlOutput += '<button id="edit-button" class="status-button">Edit</button>';
+									htmlOutput += '<button id="delete-button" class="status-button">Delete</button>';
+									 	$('#new-entry').addClass('hide-display');
+	            })
+	            .fail((error) => {
+	                console.log(error);
+	                $('#new-entry').removeClass('hide-display');
+	            })
+	    })
+	}
 
+	//delete statuses
+	function deleteStatus() {
+	    let idParameter = $('div').find('.statusID').val();
+	    $.ajax({
+	            method: 'DELETE',
+	            url:'/status' + idParameter,
+	            contentType: 'application/json',
+	            dataType: 'json'
+	        })
+	        .done((data) => {
+	            console.log('deleting status');
+	            displayStatusById();
+	        })
+	        .fail((error) => {
+	            console.log(error);
+	            $('#new-entry').removeClass('hide-display');
+	        })
+	}
+
+//update statuses
+			//first retrieve the post by id and put data in form
+function retrieveStatus() {
+    $('#status').on('click', '#edit-button',() => {
+        $('#new-entry').removeClass('hide-display');
+        let idParameter = $(this).parent().find('.statusID').val();
+        $.ajax({
+                method: 'GET',
+                url: '/status' + idParameter,
+                contentType: 'application/json'
+            })
+						.done((data) => {
+							htmlOutput += '<h2>Date: </h2>';
+							htmlOutput += moment(data.date).format("MMM Do YY");
+							htmlOutput += '<br><br>';
+							htmlOutput += '<h2>Status: </h2>';
+							htmlOutput += data.text;
+							htmlOutput += '<br><br>';
+							htmlOutput += '<input type="hidden" class="statusID" value="';
+							htmlOutput += data._id;
+							htmlOutput += '">';
+							htmlOutput += '<button id="edit-button" class="status-button">Edit</button>';
+							htmlOutput += '<button id="delete-button" class="status-button">Delete</button>';
+            })
+            .fail((error) => {
+                console.log(error);
+            })
+    });
+}
+			//then submit updated reflection
+		function updateReflection() {
+		    let idParameter = $('form').find('.reflectionID').val();
+		    let dateInput = $('form').parent().find('#date').val();
+		    let textInput = $('form').parent().find('#text').val();
+		    let newDataInput = {
+		        'date': dateInput,
+		        'text': textInput,
+		    };
+
+		    let htmlOutput = "";
+
+		    $.ajax({
+		            method: 'PUT',
+		            url: '/status'+ idParameter,
+		            contentType: 'application/json',
+		            dataType: 'json',
+		            data: JSON.stringify(newDataInput)
+		        })
+						.done((data) => {
+							htmlOutput += '<h2>Date: </h2>';
+							htmlOutput += moment(data.date).format("MMM Do YY");
+							htmlOutput += '<br><br>';
+							htmlOutput += '<h2>Status: </h2>';
+							htmlOutput += data.text;
+							htmlOutput += '<br><br>';
+							htmlOutput += '<input type="hidden" class="statusID" value="';
+							htmlOutput += data._id;
+							htmlOutput += '">';
+							htmlOutput += '<button id="edit-button" class="status-button">Edit</button>';
+							htmlOutput += '<button id="delete-button" class="status-button">Delete</button>';
+								$('form#new-status :input').val("");
+							 	$('#new-entry').addClass('hide-display');
+		        })
+		        .fail((error) => {
+		            console.log(error);
+		        })
+		}
+//document ready function
 	$(document).ready(() => {
 		navLoginButton();
 		navRegisterButton();
 		navStatusButton();
 		postNewStatus();
-		//displayStatuses();
-		//navBar();
+		navLogoutButton();
+		deleteStatus();
+		displayStatusById();
+		retrieveStatus();
+		//if you're already logged in, bypass the login page and go to post status
 		const checkAuth = localStorage.getItem('token');
 			if(checkAuth){
 				$('.start-page').addClass('hide-display');
