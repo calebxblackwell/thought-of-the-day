@@ -145,7 +145,7 @@ function postNewStatus() {
 	        let idParameter = $(this).parent().find('.statusID').val();
 	        $.ajax({
 	                method: 'GET',
-	                url: '/status' + idParameter
+	                url: '/status/' + idParameter
 	            })
 							.done((data) => {
 								htmlOutput += '<div class="current-status">';
@@ -178,7 +178,7 @@ function postNewStatus() {
 	    let idParameter = $('div').find('.statusID').val();
 	    $.ajax({
 	            method: 'DELETE',
-	            url:'/status'+ idParameter,
+	            url:'/status/'+ idParameter,
 	            contentType: 'application/json',
 	            dataType: 'json'
 	        })
@@ -200,7 +200,7 @@ function retrieveStatus() {
         let idParameter = $(this).parent().find('.statusID').val();
         $.ajax({
                 method: 'GET',
-                url: '/status' + idParameter,
+                url: '/status/' + idParameter,
                 contentType: 'application/json'
             })
 						.done((data) => {
@@ -240,7 +240,7 @@ function retrieveStatus() {
 
 		    $.ajax({
 		            method: 'PUT',
-		            url: '/status'+ idParameter,
+		            url: '/status/'+ idParameter,
 		            contentType: 'application/json',
 		            dataType: 'json',
 		            data: JSON.stringify(newDataInput)

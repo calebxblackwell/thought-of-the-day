@@ -121,8 +121,22 @@ app.post('/users/signin', localAuth, (req, res) => {
 		//hint you need to for example store userID in localstorage after
 		//they login so u have a way to send that to server to find that user
 		//statuses when needed.
+		app.get('/status', (req, res) => {
+    Status
+        .find()
+        .then(status => {
+            res.json(statuses);
+        })
+        .catch(err => {
+            console.error(err);
+            res.status(500).json({
+                error: 'something went wrong'
+            });
+        })
+});
 		app.get('/status/:id', (req, res) => {
-		    Status.findById(req.params.id)
+		    Status
+						.findById(req.params.id)
 		        .then(status => res.json(statuses))
 		        .catch(err => {
 		            console.error(err);
@@ -134,7 +148,8 @@ app.post('/users/signin', localAuth, (req, res) => {
 
 //delete statuses
 app.delete('/status/:id', (req, res) => {
-    Status.findByIdAndRemove(req.params.id)
+    Status
+				.findByIdAndRemove(req.params.id)
         .then(() => {
             res.status(204).json({
                 message: 'success'
@@ -157,7 +172,8 @@ app.put('/status/:id', (req, res) => {
 			updated[field]=req.body[field];
 		}
 	});
-	Status.findByIdAndUpdate(req.params.id, {
+	Status
+		.findByIdAndUpdate(req.params.id, {
 		$set:updated
 	}, {
 		new: true
