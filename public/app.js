@@ -141,7 +141,7 @@ function postNewStatus() {
 
 //view statuses by id
 	function displayStatusById() {
-	    $('#status').on('click', '#current-button', () => {
+	    $('#status').on('click', () => {
 	        let idParameter = $(this).parent().find('.statusID').val();
 	        $.ajax({
 	                method: 'GET',
