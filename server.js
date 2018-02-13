@@ -116,16 +116,15 @@ app.post('/users/signin', localAuth, (req, res) => {
 	const authToken = createAuthToken(req.user.serialize());
   res.json({authToken, username:req.user.username});
 });
+
+//
+
 //view statuses by id
-		//You need to get the user statues by getting them from the backend.
-		//hint you need to for example store userID in localstorage after
-		//they login so u have a way to send that to server to find that user
-		//statuses when needed.
 		app.get('/status', (req, res) => {
     Status
         .find()
         .then(status => {
-            res.json(statuses);
+            res.json(status);
         })
         .catch(err => {
             console.error(err);
@@ -137,7 +136,7 @@ app.post('/users/signin', localAuth, (req, res) => {
 		app.get('/status/:id', (req, res) => {
 		    Status
 						.findById(req.params.id)
-		        .then(status => res.json(statuses))
+		        .then(status => res.json(status))
 		        .catch(err => {
 		            console.error(err);
 		            res.status(500).json({
@@ -165,22 +164,22 @@ app.delete('/status/:id', (req, res) => {
 
 //update statuses
 app.put('/status/:id', (req, res) => {
-	const updated = {};
-	const updateableFields = ['date', 'text'];
-	updateableFields.forEach(field => {
-		if (field in req.body) {
-			updated[field]=req.body[field];
-		}
-	});
-	Status
-		.findByIdAndUpdate(req.params.id, {
-		$set:updated
-	}, {
-		new: true
-	})
-	.then(updatedStatus => res.status(204).end ())
-	.catch(err => res.status(500).json({
-		message: 'something went wrong'
+		const updated = {};
+		const updateableFields = ['date', 'text'];
+		updateableFields.forEach(field => {
+			if (field in req.body) {
+				updated[field]=req.body[field];
+			}
+		});
+			Status
+				.findByIdAndUpdate(req.params.id, {
+					$set:updated
+				}, {
+					new: true
+				})
+				.then(updatedStatus => res.status(204).end ())
+				.catch(err => res.status(500).json({
+					message: 'something went wrong'
 	}));
 });
 

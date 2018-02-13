@@ -138,6 +138,8 @@ function postNewStatus() {
 		});
 	})
 
+//
+
 
 //view statuses by id
 	function displayStatusById() {
@@ -218,7 +220,7 @@ function retrieveStatus() {
 							htmlOutput += '</p><br><br>';
 							htmlOutput += '</div>';
 							htmlOutput += '<button id="edit-button" class="status-button">Edit</button>';
-							htmlOutput += '<button id="delete-button" class="status-button">Delete</button>';
+							htmlOutput += '<button id="delete-button" data-id='data._id' class="status-button">Delete</button>';
 							htmlOutput += '<button id="view-all-button" class="status-button">View All</button>';
             })
             .fail((error) => {
