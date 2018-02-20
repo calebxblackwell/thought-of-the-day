@@ -59,23 +59,19 @@ function postNewStatus() {
 					url: '/status',
 					contentType: 'application/JSON',
 				}).done((data) => {
-					htmlOutput += '<div class="current-status">';
-					htmlOutput += '<input type="hidden" class="statusID" value="';
-					htmlOutput += data._id;
-					htmlOutput += '">';
-					htmlOutput += '<h2>Date: </h2>';
-					htmlOutput += '<p class="status-date">';
-					htmlOutput += moment(data.date).format("MMM Do YY");
-					htmlOutput += '</p><br><br>';
-					htmlOutput += '<h2>Status: </h2>';
-					htmlOutput += '<p class="status-text">';
-					htmlOutput += data.text;
-					htmlOutput += '</p><br><br>';
-					htmlOutput += '</div>';
-					htmlOutput += '<button id="edit-button" class="status-button">Edit</button>';
-					htmlOutput += '<button id="delete-button" class="status-button">Delete</button>';
-					htmlOutput += '<button id="view-all-button" class="status-button">View All</button>';
-						$('#statuses').html(htmlOutput);
+					$('#results').append(`
+						<div class="current-status">
+						<input type="hidden" class="statusID" value="${data._id}">
+						<h2>Date: </h2>
+						<p class="status-date"> ${moment(data.date).format("MMM Do YY")}</p><br><br>
+						<h2>Status: </h2>
+						<p class="status-text">
+						${data.text}</p><br><br>
+						<button id="edit-button" class="status-button">Edit</button>
+						<button id="delete-button" data-id="${data._id}" class="status-button">Delete</button>
+						<button id="view-all-button" class="status-button">View All</button>
+						</div>
+						`)
 						$('form#new-status :input').val("");
 					 	$('#new-entry').addClass('hide-display');
 				}).fail((err) => {
@@ -150,22 +146,20 @@ function postNewStatus() {
 	                url: '/status/' + idParameter
 	            })
 							.done((data) => {
-								htmlOutput += '<div class="current-status">';
-								htmlOutput += '<input type="hidden" class="statusID" value="';
-								htmlOutput += data._id;
-								htmlOutput += '">';
-								htmlOutput += '<h2>Date: </h2>';
-								htmlOutput += '<p class="status-date">';
-								htmlOutput += moment(data.date).format("MMM Do YY");
-								htmlOutput += '</p><br><br>';
-								htmlOutput += '<h2>Status: </h2>';
-								htmlOutput += '<p class="status-text">';
-								htmlOutput += data.text;
-								htmlOutput += '</p><br><br>';
-								htmlOutput += '</div>';
-								htmlOutput += '<button id="edit-button" class="status-button">Edit</button>';
-								htmlOutput += '<button id="delete-button" class="status-button">Delete</button>';
-								htmlOutput += '<button id="view-all-button" class="status-button">View All</button>';
+								$('#results').append(`
+									<div class="current-status">
+									<input type="hidden" class="statusID" value="${data._id}">
+									<h2>Date: </h2>
+									<p class="status-date"> ${moment(data.date).format("MMM Do YY")}</p><br><br>
+									<h2>Status: </h2>
+									<p class="status-text">
+									${data.text}</p><br><br>
+									<button id="edit-button" class="status-button">Edit</button>
+									<button id="delete-button" data-id="${data._id}" class="status-button">Delete</button>
+									<button id="view-all-button" class="status-button">View All</button>
+									</div>
+									`)
+
 									 	$('#new-entry').addClass('hide-display');
 	            })
 	            .fail((error) => {
@@ -206,22 +200,36 @@ function retrieveStatus() {
                 contentType: 'application/json'
             })
 						.done((data) => {
-							htmlOutput += '<div class="current-status">';
-							htmlOutput += '<input type="hidden" class="statusID" value="';
-							htmlOutput += data._id;
-							htmlOutput += '">';
-							htmlOutput += '<h2>Date: </h2>';
-							htmlOutput += '<p class="status-date">';
-							htmlOutput += moment(data.date).format("MMM Do YY");
-							htmlOutput += '</p><br><br>';
-							htmlOutput += '<h2>Status: </h2>';
-							htmlOutput += '<p class="status-text">';
-							htmlOutput += data.text;
-							htmlOutput += '</p><br><br>';
-							htmlOutput += '</div>';
-							htmlOutput += '<button id="edit-button" class="status-button">Edit</button>';
-							htmlOutput += '<button id="delete-button" data-id='data._id' class="status-button">Delete</button>';
-							htmlOutput += '<button id="view-all-button" class="status-button">View All</button>';
+							$('#results').append(`
+								<div class="current-status">
+								<input type="hidden" class="statusID" value="${data._id}">
+								<h2>Date: </h2>
+								<p class="status-date"> ${moment(data.date).format("MMM Do YY")}</p><br><br>
+								<h2>Status: </h2>
+								<p class="status-text">
+								${data.text}</p><br><br>
+								<button id="edit-button" class="status-button">Edit</button>
+								<button id="delete-button" data-id="${data._id}" class="status-button">Delete</button>
+								<button id="view-all-button" class="status-button">View All</button>
+								</div>
+								`)
+							// htmlOutput += '<div class="current-status">';
+							// htmlOutput += '<input type="hidden" class="statusID" value="';
+							// htmlOutput += data._id;
+							// htmlOutput += '">';
+							// htmlOutput += '<h2>Date: </h2>';
+							// htmlOutput += '<p class="status-date">';
+							// htmlOutput += moment(data.date).format("MMM Do YY");
+							// htmlOutput += '</p><br><br>';
+							// htmlOutput += '<h2>Status: </h2>';
+							// htmlOutput += '<p class="status-text">';
+							// htmlOutput += data.text;
+							// htmlOutput += '</p><br><br>';
+							// htmlOutput += '<button id="edit-button" class="status-button">Edit</button>';
+							// htmlOutput += '<button id="delete-button" data-id="'+ data._id +'" class="status-button">Delete</button>';
+							// htmlOutput += '<button id="view-all-button" class="status-button">View All</button>';
+							// htmlOutput += '</div>';
+
             })
             .fail((error) => {
                 console.log(error);
@@ -248,22 +256,19 @@ function retrieveStatus() {
 		            data: JSON.stringify(newDataInput)
 		        })
 						.done((data) => {
-							htmlOutput += '<div class="current-status">';
-							htmlOutput += '<input type="hidden" class="statusID" value="';
-							htmlOutput += data._id;
-							htmlOutput += '">';
-							htmlOutput += '<h2>Date: </h2>';
-							htmlOutput += '<p class="status-date">';
-							htmlOutput += moment(data.date).format("MMM Do YY");
-							htmlOutput += '</p><br><br>';
-							htmlOutput += '<h2>Status: </h2>';
-							htmlOutput += '<p class="status-text">';
-							htmlOutput += data.text;
-							htmlOutput += '</p><br><br>';
-							htmlOutput += '</div>';
-							htmlOutput += '<button id="edit-button" class="status-button">Edit</button>';
-							htmlOutput += '<button id="delete-button" class="status-button">Delete</button>';
-							htmlOutput += '<button id="view-all-button" class="status-button">View All</button>';
+							$('#results').append(`
+								<div class="current-status">
+								<input type="hidden" class="statusID" value="${data._id}">
+								<h2>Date: </h2>
+								<p class="status-date"> ${moment(data.date).format("MMM Do YY")}</p><br><br>
+								<h2>Status: </h2>
+								<p class="status-text">
+								${data.text}</p><br><br>
+								<button id="edit-button" class="status-button">Edit</button>
+								<button id="delete-button" data-id="${data._id}" class="status-button">Delete</button>
+								<button id="view-all-button" class="status-button">View All</button>
+								</div>
+								`)
 								$('form#new-status :input').val("");
 							 	$('#new-entry').addClass('hide-display');
 		        })
@@ -288,6 +293,7 @@ function handleUpdateStatus() {
 function handleDeleteStatus() {
 	$('#status-container').on('click', '#delete-button',(e) => {
 			e.preventDefault();
+			console.log($(this));
 			deleteStatus();
 	});
 }

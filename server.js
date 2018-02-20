@@ -1,10 +1,10 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const Status= require ('./models/status');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const app = express();
 const User = require ('./models/user');
+const Status = require('./models/status');
 const jwt = require('jsonwebtoken');
 const config = require('./config');
 mongoose.connect(config.DATABASE_URL);
@@ -14,8 +14,8 @@ app.use(bodyParser.json());
 const {localStrategy, jwtStrategy} = require ('./strategy');
 passport.use(localStrategy);
 passport.use(jwtStrategy);
-//console.log('before Status.create')
-//
+
+//should '/status' here be "/" since there's more than 1 endpoint?
 app.get("/status", (request, response) => {
 		console.log('I got a GET request');
     response.sendFile(__dirname + '/public/index.html');
@@ -117,8 +117,20 @@ app.post('/users/signin', localAuth, (req, res) => {
   res.json({authToken, username:req.user.username});
 });
 
-//
-
+//saving status data in the database
+app.post('/status', (req,res) => {
+			 const newStatus = new Status()
+			 newStatus.text = req.body.text
+			 newStatus.save()
+					 .then(status => {
+									 res.json(status);
+					 })
+					 .catch(err => {
+							 res.status(500).json({
+									 error: 'something went wrong'
+							 });
+					 })
+}) 
 //view statuses by id
 		app.get('/status', (req, res) => {
     Status
@@ -129,7 +141,7 @@ app.post('/users/signin', localAuth, (req, res) => {
         .catch(err => {
             console.error(err);
             res.status(500).json({
-                error: 'something went wrong'
+                error: 'Could not get all statuses from database'
             });
         })
 });
@@ -140,7 +152,7 @@ app.post('/users/signin', localAuth, (req, res) => {
 		        .catch(err => {
 		            console.error(err);
 		            res.status(500).json({
-		                error: 'something went wrong'
+		                error: 'could not get status by id from database'
 		            });
 		        });
 		});
@@ -151,13 +163,13 @@ app.delete('/status/:id', (req, res) => {
 				.findByIdAndRemove(req.params.id)
         .then(() => {
             res.status(204).json({
-                message: 'success'
+                message: 'deleted the status'
             });
         })
         .catch(err => {
             console.error(err);
             res.status(500).json({
-                error: 'Something went wrong'
+                error: 'Status did not delete'
             });
         });
 })
@@ -179,7 +191,7 @@ app.put('/status/:id', (req, res) => {
 				})
 				.then(updatedStatus => res.status(204).end ())
 				.catch(err => res.status(500).json({
-					message: 'something went wrong'
+					message: 'status did not update'
 	}));
 });
 
