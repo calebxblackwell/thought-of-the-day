@@ -62,8 +62,8 @@ function postNewStatus() {
 										<div class="current-status row list-group">
 										<div class="item  col-xs-4 col-lg-4">
 										<input type="hidden" class="statusID" value="${data._id}">
-										<h2 class="status-date group inner list-group-item-heading"> Date: ${moment(data.date).format("MMM Do YY")}</h2>
-										<h2 class="status-text group inner list-group-item-text"> Status: ${data.text}</h2>
+										<div class="status-date group inner list-group-item-heading"> <h5>Date:</h5><h6> ${moment(data.date).format("MMM Do YY")}</h6></div>
+										<div class="status-text group inner list-group-item-text"><h5> Status: </h5><h6> ${data.text}</h6></div>
 										<button id="edit-button" class="status-button col-xs-12 col-md-6">Edit</button>
 										<button id="delete-button" data-id="${data._id}" class="status-button col-xs-12 col-md-6">Delete</button>
 										<button id="view-all-button" class="status-button col-xs-12 col-md-6">View All</button>
@@ -140,18 +140,18 @@ function displayAllStatuses() {
             url: '/status'
         })
         .done((data) => {
-						$('#statuses').append(`
-												<div class="current-status row list-group">
-												<div class="item  col-xs-4 col-lg-4">
-												<input type="hidden" class="statusID" value="${data._id}">
-												<h2 class="status-date group inner list-group-item-heading"> Date: ${moment(data.date).format("MMM Do YY")}</h2>
-												<h2 class="status-text group inner list-group-item-text"> Status: ${data.text}</h2>
-												<button id="edit-button" class="status-button col-xs-12 col-md-6">Edit</button>
-												<button id="delete-button" data-id="${data._id}" class="status-button col-xs-12 col-md-6">Delete</button>
-												<button id="view-all-button" class="status-button col-xs-12 col-md-6">View All</button>
-												</div>
-												</div>
-												`)
+					$('#statuses').append(`
+											<div class="current-status row list-group">
+											<div class="item  col-xs-4 col-lg-4">
+											<input type="hidden" class="statusID" value="${data._id}">
+											<div class="status-date group inner list-group-item-heading"> <h5>Date:</h5><h6> ${moment(data.date).format("MMM Do YY")}</h6></div>
+											<div class="status-text group inner list-group-item-text"><h5> Status: </h5><h6> ${data.text}</h6></div>
+											<button id="edit-button" class="status-button col-xs-12 col-md-6">Edit</button>
+											<button id="delete-button" data-id="${data._id}" class="status-button col-xs-12 col-md-6">Delete</button>
+											<button id="view-all-button" class="status-button col-xs-12 col-md-6">View All</button>
+											</div>
+											</div>
+											`)
 				$('#new-entry').addClass('hide-display');
 			}).fail((error) => {
 				console.log(error);
@@ -170,8 +170,8 @@ function displayStatusById() {
 									<div class="current-status row list-group">
 									<div class="item  col-xs-4 col-lg-4">
 									<input type="hidden" class="statusID" value="${data._id}">
-									<h2 class="status-date group inner list-group-item-heading"> Date: ${moment(data.date).format("MMM Do YY")}</h2>
-									<h2 class="status-text group inner list-group-item-text"> Status: ${data.text}</h2>
+									<div class="status-date group inner list-group-item-heading"> <h5>Date:</h5><h6> ${moment(data.date).format("MMM Do YY")}</h6></div>
+									<div class="status-text group inner list-group-item-text"><h5> Status: </h5><h6> ${data.text}</h6></div>
 									<button id="edit-button" class="status-button col-xs-12 col-md-6">Edit</button>
 									<button id="delete-button" data-id="${data._id}" class="status-button col-xs-12 col-md-6">Delete</button>
 									<button id="view-all-button" class="status-button col-xs-12 col-md-6">View All</button>
@@ -218,8 +218,8 @@ function retrieveStatus() {
 									<div class="current-status row list-group">
 									<div class="item  col-xs-4 col-lg-4">
 									<input type="hidden" class="statusID" value="${data._id}">
-									<h2 class="status-date group inner list-group-item-heading"> Date: ${moment(data.date).format("MMM Do YY")}</h2>
-									<h2 class="status-text group inner list-group-item-text"> Status: ${data.text}</h2>
+									<div class="status-date group inner list-group-item-heading"> <h5>Date:</h5><h6> ${moment(data.date).format("MMM Do YY")}</h6></div>
+									<div class="status-text group inner list-group-item-text"><h5> Status: </h5><h6> ${data.text}</h6></div>
 									<button id="edit-button" class="status-button col-xs-12 col-md-6">Edit</button>
 									<button id="delete-button" data-id="${data._id}" class="status-button col-xs-12 col-md-6">Delete</button>
 									<button id="view-all-button" class="status-button col-xs-12 col-md-6">View All</button>
@@ -252,8 +252,8 @@ function updateStatus() {
 								<div class="current-status row list-group">
 								<div class="item  col-xs-4 col-lg-4">
 								<input type="hidden" class="statusID" value="${data._id}">
-								<h2 class="status-date group inner list-group-item-heading"> Date: ${moment(data.date).format("MMM Do YY")}</h2>
-								<h2 class="status-text group inner list-group-item-text"> Status: ${data.text}</h2>
+								<div class="status-date group inner list-group-item-heading"> <h5>Date:</h5><h6> ${moment(data.date).format("MMM Do YY")}</h6></div>
+								<div class="status-text group inner list-group-item-text"><h5> Status: </h5><h6> ${data.text}</h6></div>
 								<button id="edit-button" class="status-button col-xs-12 col-md-6">Edit</button>
 								<button id="delete-button" data-id="${data._id}" class="status-button col-xs-12 col-md-6">Delete</button>
 								<button id="view-all-button" class="status-button col-xs-12 col-md-6">View All</button>

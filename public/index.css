@@ -69,7 +69,18 @@ h2{
   text-align: center;
   color: #403D39;
 }
-
+h5 {
+  font-size: 18px;
+  font-weight: bold;
+  text-align: left;
+  color: #403D39;
+}
+h6 {
+  font-size: 18px;
+  font-weight: normal;
+  text-align: left;
+  color: #403D39;
+}
 /*Form area*/
 form fieldset {
     border: none;
