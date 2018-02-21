@@ -121,20 +121,7 @@ app.post('/users/signin', localAuth, (req, res) => {
 		username: req.user.username
 	});
 });
-//
-//saving status data in the database
-// app.post('/status', (req, res) => {
-// 	const newStatus = new Status()
-// 	newStatus.text = req.body.text
-// 	newStatus.save()
-// 		.then(status => {
-// 		res.json(status);
-// 	}).catch(err => {
-// 		res.status(500).json({
-// 			error: 'something went wrong'
-// 		});
-// 	})
-// })
+
 //view statuses by id
 app.get('/status', (req, res) => {
 	Status.find().then(status => {

@@ -135,7 +135,7 @@ $('#register-user').on('submit', (e) => {
 //
 //view statuses by id
 function displayStatusById() {
-	$('#statuses').on('click', () => {
+	$('#view-all-button').on('click', () => {
 		let idParameter = $(this).parent().find('.statusID').val();
 		$.ajax({
 			method: 'GET',
