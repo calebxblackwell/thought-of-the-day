@@ -163,19 +163,21 @@ function displayStatusById() {
 }
 //delete statuses
 function deleteStatus() {
-	let idParameter = $('div').find('.statusID').val();
-	$.ajax({
-		method: 'DELETE',
-		url: '/status/' + idParameter,
-		contentType: 'application/json',
-		dataType: 'json'
-	}).done((data) => {
-		console.log('deleting status');
-		displayStatusById();
-	}).fail((error) => {
-		console.log(error);
-		$('#new-entry').removeClass('hide-display');
-	})
+	$('#delete-button').on('click', () => {
+		let idParameter = $('div').find('.statusID').val();
+		$.ajax({
+			method: 'DELETE',
+			url: '/status/' + idParameter,
+			contentType: 'application/json',
+			dataType: 'json'
+		}).done((data) => {
+			console.log('deleting status');
+			displayStatusById();
+		}).fail((error) => {
+			console.log(error);
+			$('#new-entry').removeClass('hide-display');
+		})
+	}
 }
 //update statuses
 //first retrieve the post by id and put data in form
