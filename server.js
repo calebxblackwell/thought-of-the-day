@@ -18,33 +18,7 @@ const {
 passport.use(localStrategy);
 passport.use(jwtStrategy);
 
-// app.get("/status", (request, response) => {
-// 	console.log('I got a GET request');
-// 	response.sendFile(__dirname + '/public/index.html');
-// });
-//GET request all statuses from the database.
-app.get('/status', (req, res) => {
-	Status.find().then(status => {
-		res.json(status);
-	}).catch(err => {
-		console.error(err);
-		res.status(500).json({
-			error: 'something went wrong'
-		});
-	})
-});
-//end get request
-//view statuses by id
-app.get('/status/:id', (req, res) => {
-	Status.findById(req.params.id)
-			.then(status => res.json(status))
-			.catch(err => {
-		console.error(err);
-		res.status(500).json({
-			error: 'could not get status by id from database'
-		});
-	});
-});
+
 //POST a new status.
 app.post('/status', (req, res) => {
 	const requiredFields = ['date', 'text'];
@@ -133,7 +107,29 @@ app.post('/users/signin', localAuth, (req, res) => {
 		username: req.user.username
 	});
 });
-
+//GET request all statuses from the database.
+app.get('/status', (req, res) => {
+	Status.find().then(status => {
+		res.json(status);
+	}).catch(err => {
+		console.error(err);
+		res.status(500).json({
+			error: 'something went wrong'
+		});
+	})
+});
+//end get request
+//view statuses by id
+app.get('/status/:id', (req, res) => {
+	Status.findById(req.params.id)
+			.then(status => res.json(status))
+			.catch(err => {
+		console.error(err);
+		res.status(500).json({
+			error: 'could not get status by id from database'
+		});
+	});
+});
 
 //delete statuses
 app.delete('/status/:id', (req, res) => {

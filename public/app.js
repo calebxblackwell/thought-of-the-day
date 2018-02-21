@@ -161,6 +161,7 @@ function displayAllStatuses() {
 //view statuses by id
 function displayStatusById() {
 	$('#view-all-button').on('click', () => {
+		console.log("view all");
 		let idParameter = $(this).parent().find('.statusID').val();
 		$.ajax({
 			method: 'GET',
@@ -188,6 +189,7 @@ function displayStatusById() {
 //delete statuses
 function deleteStatus() {
 	$('#delete-button').on('click', () => {
+		console.log("delete");
 		let idParameter = $('div').find('.statusID').val();
 		$.ajax({
 			method: 'DELETE',
@@ -207,6 +209,7 @@ function deleteStatus() {
 //first retrieve the post by id and put data in form
 function retrieveStatus() {
 	$('#statuses').on('click', '#edit-button', () => {
+		console.log("edit");
 		$('#new-entry').removeClass('hide-display');
 		let idParameter = $(this).parent().find('.statusID').val();
 		$.ajax({
@@ -231,7 +234,7 @@ function retrieveStatus() {
 		})
 	});
 }
-//then submit updated reflection
+//then submit updated status 
 function updateStatus() {
 	let idParameter = $('form').find('.statusID').val();
 	let dateInput = $('form').parent().find('#date').val();
