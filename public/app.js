@@ -268,24 +268,21 @@ function updateStatus() {
 }
 //section for update/delete/and display status buttons
 function handleDisplayStatusById() {
-	$('#statuses').on('click', '#view-all-button', (e) => {
-		e.preventDefault();
+	$('#statuses').on('click', '#view-all-button', () => {
 		displayStatusById();
-		$('.current-status').addClass('hide-display');
+		//$('.current-status').addClass('hide-display');
 	});
 }
 
 function handleUpdateStatus() {
-	$('#new-entry').on('click', '#edit-button', (e) => {
+	$('#statuses').on('click', '#edit-button', (e) => {
 		e.preventDefault();
 		updateStatus();
 	});
 }
 
 function handleDeleteStatus() {
-	$('#status-container').on('click', '#delete-button', (e) => {
-		e.preventDefault();
-		console.log($(this));
+	$('#statuses').on('click', '#delete-button', () => {
 		deleteStatus();
 	});
 }
@@ -301,9 +298,9 @@ $(document).ready(() => {
 	//displayStatusById();
 	//retrieveStatus();
 	//updateStatus();
-	// handleDeleteStatus();
-	// handleUpdateStatus();
-	// handleDisplayStatusById();
+	//handleDeleteStatus();
+	//handleUpdateStatus();
+	//handleDisplayStatusById();
 	//if you're already logged in, bypass the login page and go to post status
 	const checkAuth = localStorage.getItem('token');
 	if (checkAuth) {
