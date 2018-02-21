@@ -1,6 +1,6 @@
 //nav bar area
 //login button
-function navLoginButton(){
+function navLoginButton() {
 	$('.nav-login-button').on('click', () => {
 		$('.start-page').removeClass('hide-display');
 		$('#new-entry').addClass('hide-display');
@@ -8,7 +8,7 @@ function navLoginButton(){
 	})
 }
 //create account button
-function navRegisterButton(){
+function navRegisterButton() {
 	$('.nav-register-button').on('click', () => {
 		$('#register').removeClass('hide-display');
 		$('#new-entry').addClass('hide-display');
@@ -16,7 +16,7 @@ function navRegisterButton(){
 	})
 }
 //status button
-function navStatusButton(){
+function navStatusButton() {
 	$('.nav-status-button').on('click', () => {
 		$('#new-entry').removeClass('hide-display');
 		$('#register').addClass('hide-display');
@@ -24,42 +24,43 @@ function navStatusButton(){
 	})
 }
 //logout button
-function navLogoutButton(){
+function navLogoutButton() {
 	$('.nav-logout-button').on('click', () => {
 		const loggedOutUser = localStorage.removeItem('token');
-			if(loggedOutUser){
-				$('.start-page').removeClass('hide-display');
-				$('#new-entry').addClass('hide-display');
-				$('#register').addClass('hide-display');
-			}
-			else {
-				//empty
-			}
+		if (loggedOutUser) {
+			$('.start-page').removeClass('hide-display');
+			$('#new-entry').addClass('hide-display');
+			$('#register').addClass('hide-display');
+		} else {
+			//empty
+		}
 	})
 }
 //end navbar area
-
 //post a new status
 function postNewStatus() {
 	$('#new-status').on('submit', (e) => {
 		e.preventDefault();
-			let loggedInUser = localStorage.getItem('token');
-			if (!(loggedInUser)){alert('Please log in or register.');}
-			else {
-				let dateInput = $('#date').val();
-				let textInput = $('#textbox').val();
-				let dataInput = {
-					'date': dateInput,
-					'text': textInput,
-				};
-				let htmlOutput = "";
-				$.ajax({
-					type: 'POST',
-					data: JSON.stringify(dataInput),
-					url: '/status',
-					contentType: 'application/JSON',
-				}).done((data) => {
-					$('#results').append(`
+		let loggedInUser = localStorage.getItem('token');
+		let username = localStorage.getItem('username');
+		if (!(loggedInUser)) {
+			alert('Please log in or register.');
+		} else {
+			let dateInput = $('#date').val();
+			let textInput = $('#textbox').val();
+			let dataInput = {
+				date: dateInput,
+				text: textInput,
+				username: username
+			};
+			let htmlOutput = "";
+			$.ajax({
+				type: 'POST',
+				data: JSON.stringify(dataInput),
+				url: '/status',
+				contentType: 'application/JSON',
+			}).done((data) => {
+				$('#results').append(`
 						<div class="current-status">
 						<input type="hidden" class="statusID" value="${data._id}">
 						<h2>Date: </h2>
@@ -72,81 +73,75 @@ function postNewStatus() {
 						<button id="view-all-button" class="status-button">View All</button>
 						</div>
 						`)
-						$('form#new-status :input').val("");
-					 	$('#new-entry').addClass('hide-display');
-				}).fail((err) => {
-					console.log("error");
-				});
-			};
+				$('form#new-status :input').val("");
+				$('#new-entry').addClass('hide-display');
+			}).fail((err) => {
+				console.log("error");
+			});
+		};
 	});
 }
-
-	//login Area
-	$('#login').on('submit', (e) => {
-		e.preventDefault();
-		const inputUsername = $('.login-username').val();
-		const inputPassword = $('.login-password').val();
-		const loginObject = {
-			username: inputUsername,
-			password: inputPassword
-		};
-		user= inputUsername;
-			$.ajax({
-				type: 'POST',
-				url: '/users/signin',
-				headers: {
-	    'content-type': "application/json",
-	  },
-				data:JSON.stringify(loginObject),
-			}).done((result) => {
-				localStorage.setItem('token',result.authToken);
-				localStorage.setItem('username', result.username);
-				loggedInUser = result;
-				  $('.start-page').addClass('hide-display');
-				 	$('#new-entry').removeClass('hide-display');
-			}).fail((err) => {
-				console.log(err);
-			});
-	})
-
-	//create account Area
-	$('#register-user').on('submit', (e) => {
-		e.preventDefault();
-		const inputUsername = $('.register-username').val();
-		const inputPassword = $('.register-password').val();
-		const newUserObject = {
-			username: inputUsername,
-			password: inputPassword
-		};
-		$.ajax({
-			type: 'POST',
-			url: '/user',
-			data: JSON.stringify(newUserObject),
-			contentType: 'application/json',
-		 	dataType: 'json',
-		}).done((result) => {
-			alert('Thanks for signing up! You may now sign in with your username and password.');
-			loggedInUser = result;
-			  $('#register-user').addClass('hide-display');
-			  $('.start-page').removeClass('hide-display');
-		}).fail((err) => {
-			console.log(err);
-		});
-	})
-
+//login Area
+$('#login').on('submit', (e) => {
+	e.preventDefault();
+	const inputUsername = $('.login-username').val();
+	const inputPassword = $('.login-password').val();
+	const loginObject = {
+		username: inputUsername,
+		password: inputPassword
+	};
+	user = inputUsername;
+	$.ajax({
+		type: 'POST',
+		url: '/users/signin',
+		headers: {
+			'content-type': "application/json",
+		},
+		data: JSON.stringify(loginObject),
+	}).done((result) => {
+		localStorage.setItem('token', result.authToken);
+		localStorage.setItem('username', result.username);
+		loggedInUser = result;
+		$('.start-page').addClass('hide-display');
+		$('#new-entry').removeClass('hide-display');
+	}).fail((err) => {
+		console.log(err);
+	});
+})
+//create account Area
+$('#register-user').on('submit', (e) => {
+	e.preventDefault();
+	const inputUsername = $('.register-username').val();
+	const inputPassword = $('.register-password').val();
+	const newUserObject = {
+		username: inputUsername,
+		password: inputPassword
+	};
+	$.ajax({
+		type: 'POST',
+		url: '/user',
+		data: JSON.stringify(newUserObject),
+		contentType: 'application/json',
+		dataType: 'json',
+	}).done((result) => {
+		alert('Thanks for signing up! You may now sign in with your username and password.');
+		loggedInUser = result;
+		$('#register-user').addClass('hide-display');
+		$('.start-page').removeClass('hide-display');
+	}).fail((err) => {
+		console.log(err);
+	});
+})
 //
-
-
 //view statuses by id
-	function displayStatusById() {
-	    $('#statuses').on('click', () => {
-	        let idParameter = $(this).parent().find('.statusID').val();
-	        $.ajax({
-	                method: 'GET',
-	                url: '/status/' + idParameter
-	            })
-							.done((data) => {
-								$('#results').append(`
+function displayStatusById() {
+	$('#statuses').on('click', () => {
+		let idParameter = $(this).parent().find('.statusID').val();
+		$.ajax({
+			method: 'GET',
+			url: '/status/' + idParameter
+		}).done((data) => {
+			$('#results').append(`
 									<div class="current-status">
 									<input type="hidden" class="statusID" value="${data._id}">
 									<h2>Date: </h2>
@@ -159,104 +154,41 @@ function postNewStatus() {
 									<button id="view-all-button" class="status-button">View All</button>
 									</div>
 									`)
-
-									 	$('#new-entry').addClass('hide-display');
-	            })
-	            .fail((error) => {
-	                console.log(error);
-	                $('#new-entry').removeClass('hide-display');
-	            })
-	    })
-	}
-
-	//delete statuses
-	function deleteStatus() {
-	    let idParameter = $('div').find('.statusID').val();
-	    $.ajax({
-	            method: 'DELETE',
-	            url:'/status/'+ idParameter,
-	            contentType: 'application/json',
-	            dataType: 'json'
-	        })
-	        .done((data) => {
-	            console.log('deleting status');
-	            displayStatusById();
-	        })
-	        .fail((error) => {
-	            console.log(error);
-	            $('#new-entry').removeClass('hide-display');
-	        })
-	}
-
-//update statuses
-			//first retrieve the post by id and put data in form
-function retrieveStatus() {
-    $('#statuses').on('click', '#edit-button',() => {
-        $('#new-entry').removeClass('hide-display');
-        let idParameter = $(this).parent().find('.statusID').val();
-        $.ajax({
-                method: 'GET',
-                url: '/status/' + idParameter,
-                contentType: 'application/json'
-            })
-						.done((data) => {
-							$('#results').append(`
-								<div class="current-status">
-								<input type="hidden" class="statusID" value="${data._id}">
-								<h2>Date: </h2>
-								<p class="status-date"> ${moment(data.date).format("MMM Do YY")}</p><br><br>
-								<h2>Status: </h2>
-								<p class="status-text">
-								${data.text}</p><br><br>
-								<button id="edit-button" class="status-button">Edit</button>
-								<button id="delete-button" data-id="${data._id}" class="status-button">Delete</button>
-								<button id="view-all-button" class="status-button">View All</button>
-								</div>
-								`)
-							// htmlOutput += '<div class="current-status">';
-							// htmlOutput += '<input type="hidden" class="statusID" value="';
-							// htmlOutput += data._id;
-							// htmlOutput += '">';
-							// htmlOutput += '<h2>Date: </h2>';
-							// htmlOutput += '<p class="status-date">';
-							// htmlOutput += moment(data.date).format("MMM Do YY");
-							// htmlOutput += '</p><br><br>';
-							// htmlOutput += '<h2>Status: </h2>';
-							// htmlOutput += '<p class="status-text">';
-							// htmlOutput += data.text;
-							// htmlOutput += '</p><br><br>';
-							// htmlOutput += '<button id="edit-button" class="status-button">Edit</button>';
-							// htmlOutput += '<button id="delete-button" data-id="'+ data._id +'" class="status-button">Delete</button>';
-							// htmlOutput += '<button id="view-all-button" class="status-button">View All</button>';
-							// htmlOutput += '</div>';
-
-            })
-            .fail((error) => {
-                console.log(error);
-            })
-    });
+			$('#new-entry').addClass('hide-display');
+		}).fail((error) => {
+			console.log(error);
+			$('#new-entry').removeClass('hide-display');
+		})
+	})
 }
-			//then submit updated reflection
-		function updateStatus() {
-		    let idParameter = $('form').find('.statusID').val();
-		    let dateInput = $('form').parent().find('#date').val();
-		    let textInput = $('form').parent().find('#text').val();
-		    let newDataInput = {
-		        'date': dateInput,
-		        'text': textInput,
-		    };
-
-		    let htmlOutput = "";
-
-		    $.ajax({
-		            method: 'PUT',
-		            url: '/status/'+ idParameter,
-		            contentType: 'application/json',
-		            dataType: 'json',
-		            data: JSON.stringify(newDataInput)
-		        })
-						.done((data) => {
-							$('#results').append(`
+//delete statuses
+function deleteStatus() {
+	let idParameter = $('div').find('.statusID').val();
+	$.ajax({
+		method: 'DELETE',
+		url: '/status/' + idParameter,
+		contentType: 'application/json',
+		dataType: 'json'
+	}).done((data) => {
+		console.log('deleting status');
+		displayStatusById();
+	}).fail((error) => {
+		console.log(error);
+		$('#new-entry').removeClass('hide-display');
+	})
+}
+//update statuses
+//first retrieve the post by id and put data in form
+function retrieveStatus() {
+	$('#statuses').on('click', '#edit-button', () => {
+		$('#new-entry').removeClass('hide-display');
+		let idParameter = $(this).parent().find('.statusID').val();
+		$.ajax({
+			method: 'GET',
+			url: '/status/' + idParameter,
+			contentType: 'application/json'
+		}).done((data) => {
+			$('#results').append(`
 								<div class="current-status">
 								<input type="hidden" class="statusID" value="${data._id}">
 								<h2>Date: </h2>
@@ -269,55 +201,90 @@ function retrieveStatus() {
 								<button id="view-all-button" class="status-button">View All</button>
 								</div>
 								`)
-								$('form#new-status :input').val("");
-							 	$('#new-entry').addClass('hide-display');
-		        })
-		        .fail((error) => {
-		            console.log(error);
-		        })
-		}
-//section for update/delete/and display status buttons
-function handleDisplayStatusById() {
-	$('#statuses').on('click', '#view-all-button',(e) => {
-			e.preventDefault();
-			displayStatusById();
-			$('.current-status').addClass('hide-display');
+		}).fail((error) => {
+			console.log(error);
+		})
 	});
 }
-function handleUpdateStatus() {
-    $('#new-entry').on('click', '#edit-button',(e) => {
-        e.preventDefault();
-        updateStatus();
-    });
+//then submit updated reflection
+function updateStatus() {
+	let idParameter = $('form').find('.statusID').val();
+	let dateInput = $('form').parent().find('#date').val();
+	let textInput = $('form').parent().find('#text').val();
+	let newDataInput = {
+		'date': dateInput,
+		'text': textInput,
+	};
+	let htmlOutput = "";
+	$.ajax({
+		method: 'PUT',
+		url: '/status/' + idParameter,
+		contentType: 'application/json',
+		dataType: 'json',
+		data: JSON.stringify(newDataInput)
+	}).done((data) => {
+		$('#results').append(`
+								<div class="current-status">
+								<input type="hidden" class="statusID" value="${data._id}">
+								<h2>Date: </h2>
+								<p class="status-date"> ${moment(data.date).format("MMM Do YY")}</p><br><br>
+								<h2>Status: </h2>
+								<p class="status-text">
+								${data.text}</p><br><br>
+								<button id="edit-button" class="status-button">Edit</button>
+								<button id="delete-button" data-id="${data._id}" class="status-button">Delete</button>
+								<button id="view-all-button" class="status-button">View All</button>
+								</div>
+								`)
+		$('form#new-status :input').val("");
+		$('#new-entry').addClass('hide-display');
+	}).fail((error) => {
+		console.log(error);
+	})
 }
+//section for update/delete/and display status buttons
+function handleDisplayStatusById() {
+	$('#statuses').on('click', '#view-all-button', (e) => {
+		e.preventDefault();
+		displayStatusById();
+		$('.current-status').addClass('hide-display');
+	});
+}
+
+function handleUpdateStatus() {
+	$('#new-entry').on('click', '#edit-button', (e) => {
+		e.preventDefault();
+		updateStatus();
+	});
+}
+
 function handleDeleteStatus() {
-	$('#status-container').on('click', '#delete-button',(e) => {
-			e.preventDefault();
-			console.log($(this));
-			deleteStatus();
+	$('#status-container').on('click', '#delete-button', (e) => {
+		e.preventDefault();
+		console.log($(this));
+		deleteStatus();
 	});
 }
 //document ready function
-	$(document).ready(() => {
-		navLoginButton();
-		navRegisterButton();
-		navStatusButton();
-		postNewStatus();
-		navLogoutButton();
-		deleteStatus();
-		displayStatusById();
-		retrieveStatus();
-		updateStatus();
-		handleDeleteStatus();
-		handleUpdateStatus();
-		handleDisplayStatusById();
-		//if you're already logged in, bypass the login page and go to post status
-		const checkAuth = localStorage.getItem('token');
-			if(checkAuth){
-				$('.start-page').addClass('hide-display');
-				$('#new-entry').removeClass('hide-display');
-			}
-			else {
-				$('.start-page').removeClass('hide-display');
-			}
-	}); //end bracket for document ready function
+$(document).ready(() => {
+	navLoginButton();
+	navRegisterButton();
+	navStatusButton();
+	postNewStatus();
+	navLogoutButton();
+	//deleteStatus();
+	//displayStatusById();
+	//retrieveStatus();
+	//updateStatus();
+	// handleDeleteStatus();
+	// handleUpdateStatus();
+	// handleDisplayStatusById();
+	//if you're already logged in, bypass the login page and go to post status
+	const checkAuth = localStorage.getItem('token');
+	if (checkAuth) {
+		$('.start-page').addClass('hide-display');
+		$('#new-entry').removeClass('hide-display');
+	} else {
+		$('.start-page').removeClass('hide-display');
+	}
+}); //end bracket for document ready function
