@@ -18,12 +18,10 @@ const {
 passport.use(localStrategy);
 passport.use(jwtStrategy);
 
-
-//should '/status' here be "/" since there's more than 1 endpoint?
-app.get("/status", (request, response) => {
-	console.log('I got a GET request');
-	response.sendFile(__dirname + '/public/index.html');
-});
+// app.get("/status", (request, response) => {
+// 	console.log('I got a GET request');
+// 	response.sendFile(__dirname + '/public/index.html');
+// });
 //GET request all statuses from the database.
 app.get('/status', (req, res) => {
 	Status.find().then(status => {
@@ -36,6 +34,17 @@ app.get('/status', (req, res) => {
 	})
 });
 //end get request
+//view statuses by id
+app.get('/status/:id', (req, res) => {
+	Status.findById(req.params.id)
+			.then(status => res.json(status))
+			.catch(err => {
+		console.error(err);
+		res.status(500).json({
+			error: 'could not get status by id from database'
+		});
+	});
+});
 //POST a new status.
 app.post('/status', (req, res) => {
 	const requiredFields = ['date', 'text'];
@@ -125,27 +134,7 @@ app.post('/users/signin', localAuth, (req, res) => {
 	});
 });
 
-//view statuses by id
-app.get('/status', (req, res) => {
-	Status.find().then(status => {
-		res.json(status);
-	}).catch(err => {
-		console.error(err);
-		res.status(500).json({
-			error: 'Could not get all statuses from database'
-		});
-	})
-});
-app.get('/status/:id', (req, res) => {
-	Status.findById(req.params.id)
-			.then(status => res.json(status))
-			.catch(err => {
-		console.error(err);
-		res.status(500).json({
-			error: 'could not get status by id from database'
-		});
-	});
-});
+
 //delete statuses
 app.delete('/status/:id', (req, res) => {
 	Status.findByIdAndRemove(req.params.id).then(() => {
