@@ -51,7 +51,9 @@ app.post('/status', (req, res) => {
 		text: req.body.text,
 		date: req.body.date,
 		username: "name name"
-	}).then(status => res.status(201).json(status)).catch(err => {
+	})
+	.then(status => res.status(201).json(status))
+	.catch(err => {
 		console.error(err);
 		res.status(500).json({
 			error: 'Something went wrong'
@@ -70,7 +72,8 @@ app.post('/user', (req, res) => {
 	// before this
 	return User.find({
 		username
-	}).count().then(count => {
+	}).count()
+		.then(count => {
 		if (count > 0) {
 			// There is an existing user with the same username
 			return Promise.reject({

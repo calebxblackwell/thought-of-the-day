@@ -26,14 +26,12 @@ function navStatusButton() {
 //logout button
 function navLogoutButton() {
 	$('.nav-logout-button').on('click', () => {
-		const loggedOutUser = localStorage.removeItem('token');
-		if (loggedOutUser) {
+		 localStorage.removeItem('token');
 			$('.start-page').removeClass('hide-display');
 			$('#new-entry').addClass('hide-display');
 			$('#register').addClass('hide-display');
-		} else {
-			//empty
-		}
+			$('.nav-logout-button').addClass('hide-display');
+			$('.nav-login-button').removeClass('hide-display');
 	})
 }
 //end navbar area
@@ -60,7 +58,10 @@ function postNewStatus() {
 				url: '/status',
 				contentType: 'application/JSON',
 			}).done((data) => {
-				$('#results').append(`
+				console.log(data);
+				//console.log($('#results'));
+				//$(this).data("id")
+				$('#statuses').append(`
 						<div class="current-status">
 						<input type="hidden" class="statusID" value="${data._id}">
 						<h2>Date: </h2>
@@ -104,6 +105,8 @@ $('#login').on('submit', (e) => {
 		loggedInUser = result;
 		$('.start-page').addClass('hide-display');
 		$('#new-entry').removeClass('hide-display');
+		$('.nav-login-button').addClass('hide-display');
+		$('.nav-logout-button').removeClass('hide-display');
 	}).fail((err) => {
 		console.log(err);
 	});
@@ -177,7 +180,7 @@ function deleteStatus() {
 			console.log(error);
 			$('#new-entry').removeClass('hide-display');
 		})
-	}
+	})
 }
 //update statuses
 //first retrieve the post by id and put data in form
@@ -284,9 +287,12 @@ $(document).ready(() => {
 	//if you're already logged in, bypass the login page and go to post status
 	const checkAuth = localStorage.getItem('token');
 	if (checkAuth) {
+		$('.nav-login-button').addClass('hide-display');
 		$('.start-page').addClass('hide-display');
 		$('#new-entry').removeClass('hide-display');
 	} else {
+		$('.nav-logout-button').addClass('hide-display');
+		$('.nav-login-button').removeClass('hide-display');
 		$('.start-page').removeClass('hide-display');
 	}
 }); //end bracket for document ready function
