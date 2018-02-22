@@ -57,19 +57,27 @@ function postNewStatus() {
 				data: JSON.stringify(dataInput),
 				url: '/status',
 				contentType: 'application/JSON',
-			}).done((data) => {
-				$('#statuses').append(`
+			})        .done((statuses) => {
+								statuses.forEach((status) => {
+									$('#statuses').append(`
 										<div class="current-status row list-group">
-										<div class="item  col-xs-4 col-lg-4">
-										<input type="hidden" class="statusID" value="${data._id}">
-										<div class="status-date group inner list-group-item-heading"> <h5>Date:</h5><h6> ${moment(data.date).format("MMM Do YY")}</h6></div>
-										<div class="status-text group inner list-group-item-text"><h5> Status: </h5><h6> ${data.text}</h6></div>
-										<button id="edit-button" class="status-button col-xs-12 col-md-6">Edit</button>
-										<button id="delete-button" data-id="${data._id}" class="status-button col-xs-12 col-md-6">Delete</button>
-										<button id="view-all-button" class="status-button col-xs-12 col-md-6">View All</button>
+											<div class="item  col-xs-4 col-lg-4">
+												<input type="hidden" class="statusID" value="${status._id}">
+												<div class="status-date group inner list-group-item-heading">
+													<h5>Date:</h5>
+													<h6> ${moment(status.date).format("MMM Do YY")}</h6>
+												</div>
+												<div class="status-text group inner list-group-item-text">
+													<h5> Status: </h5>
+													<h6> ${status.text}</h6>
+												</div>
+												<button id="edit-button" class="status-button col-xs-12 col-md-6">Edit</button>
+												<button id="delete-button" data-id="${status._id}" class="status-button col-xs-12 col-md-6">Delete</button>
+												<button id="view-all-button" class="status-button col-xs-12 col-md-6">View All</button>
+											</div>
 										</div>
-										</div>
-										`)
+															`)
+								})
 				$('form#new-status :input').val("");
 				$('#new-entry').addClass('hide-display');
 			}).fail((err) => {
@@ -139,19 +147,27 @@ function displayAllStatuses() {
             method: 'GET',
             url: '/status'
         })
-        .done((data) => {
-					$('#statuses').append(`
-											<div class="current-status row list-group">
-											<div class="item  col-xs-4 col-lg-4">
-											<input type="hidden" class="statusID" value="${data._id}">
-											<div class="status-date group inner list-group-item-heading"> <h5>Date:</h5><h6> ${moment(data.date).format("MMM Do YY")}</h6></div>
-											<div class="status-text group inner list-group-item-text"><h5> Status: </h5><h6> ${data.text}</h6></div>
-											<button id="edit-button" class="status-button col-xs-12 col-md-6">Edit</button>
-											<button id="delete-button" data-id="${data._id}" class="status-button col-xs-12 col-md-6">Delete</button>
-											<button id="view-all-button" class="status-button col-xs-12 col-md-6">View All</button>
-											</div>
-											</div>
-											`)
+        .done((statuses) => {
+					statuses.forEach((status) => {
+						$('#statuses').append(`
+							<div class="current-status row list-group">
+								<div class="item  col-xs-4 col-lg-4">
+									<input type="hidden" class="statusID" value="${status._id}">
+									<div class="status-date group inner list-group-item-heading">
+										<h5>Date:</h5>
+										<h6> ${moment(status.date).format("MMM Do YY")}</h6>
+									</div>
+									<div class="status-text group inner list-group-item-text">
+										<h5> Status: </h5>
+										<h6> ${status.text}</h6>
+									</div>
+									<button id="edit-button" class="status-button col-xs-12 col-md-6">Edit</button>
+									<button id="delete-button" data-id="${status._id}" class="status-button col-xs-12 col-md-6">Delete</button>
+									<button id="view-all-button" class="status-button col-xs-12 col-md-6">View All</button>
+								</div>
+							</div>
+												`)
+					})
 				$('#new-entry').addClass('hide-display');
 			}).fail((error) => {
 				console.log(error);
@@ -159,38 +175,48 @@ function displayAllStatuses() {
 			})
 		}
 //view statuses by id
-function displayStatusById() {
-	$('#view-all-button').on('click', () => {
-		console.log("view all");
-		let idParameter = $(this).parent().find('.statusID').val();
+
+	$('#statuses').on('click', '#view-all-button', () => {
+			console.log("view all");
+		let idParameter = $(this).attr("data-id")
+		console.log(idParameter);
 		$.ajax({
 			method: 'GET',
 			url: '/status' + idParameter
-		}).done((data) => {
-			$('#statuses').append(`
+		})        .done((statuses) => {
+							statuses.forEach((status) => {
+								$('#statuses').append(`
 									<div class="current-status row list-group">
-									<div class="item  col-xs-4 col-lg-4">
-									<input type="hidden" class="statusID" value="${data._id}">
-									<div class="status-date group inner list-group-item-heading"> <h5>Date:</h5><h6> ${moment(data.date).format("MMM Do YY")}</h6></div>
-									<div class="status-text group inner list-group-item-text"><h5> Status: </h5><h6> ${data.text}</h6></div>
-									<button id="edit-button" class="status-button col-xs-12 col-md-6">Edit</button>
-									<button id="delete-button" data-id="${data._id}" class="status-button col-xs-12 col-md-6">Delete</button>
-									<button id="view-all-button" class="status-button col-xs-12 col-md-6">View All</button>
+										<div class="item  col-xs-4 col-lg-4">
+											<input type="hidden" class="statusID" value="${status._id}">
+											<div class="status-date group inner list-group-item-heading">
+												<h5>Date:</h5>
+												<h6> ${moment(status.date).format("MMM Do YY")}</h6>
+											</div>
+											<div class="status-text group inner list-group-item-text">
+												<h5> Status: </h5>
+												<h6> ${status.text}</h6>
+											</div>
+											<button id="edit-button" class="status-button col-xs-12 col-md-6">Edit</button>
+											<button id="delete-button" data-id="${status._id}" class="status-button col-xs-12 col-md-6">Delete</button>
+											<button id="view-all-button" class="status-button col-xs-12 col-md-6">View All</button>
+										</div>
 									</div>
-									</div>
-									`)
+														`)
+							})
 			$('#new-entry').addClass('hide-display');
 		}).fail((error) => {
 			console.log(error);
 			$('#new-entry').removeClass('hide-display');
 		})
 	})
-}
-//delete statuses
-function deleteStatus() {
-	$('#delete-button').on('click', () => {
+
+//delete statuses by id
+
+	$('#statuses').on('click', '#delete-button', () => {
 		console.log("delete");
-		let idParameter = $('div').find('.statusID').val();
+		let idParameter = $(this).attr("data-id")
+		console.log($(this));
 		$.ajax({
 			method: 'DELETE',
 			url: '/status/' + idParameter,
@@ -198,43 +224,51 @@ function deleteStatus() {
 			dataType: 'json'
 		}).done((data) => {
 			console.log('deleting status');
-			displayStatusById();
+			displayAllStatuses();
 		}).fail((error) => {
 			console.log(error);
 			$('#new-entry').removeClass('hide-display');
 		})
 	})
-}
+
 //update statuses
 //first retrieve the post by id and put data in form
-function retrieveStatus() {
+
 	$('#statuses').on('click', '#edit-button', () => {
 		console.log("edit");
 		$('#new-entry').removeClass('hide-display');
-		let idParameter = $(this).parent().find('.statusID').val();
+		let idParameter = $(this).attr("data-id")
 		$.ajax({
 			method: 'GET',
 			url: '/status/' + idParameter,
 			contentType: 'application/json'
-		}).done((data) => {
-			$('#statuses').append(`
+		})        .done((statuses) => {
+							statuses.forEach((status) => {
+								$('#statuses').append(`
 									<div class="current-status row list-group">
-									<div class="item  col-xs-4 col-lg-4">
-									<input type="hidden" class="statusID" value="${data._id}">
-									<div class="status-date group inner list-group-item-heading"> <h5>Date:</h5><h6> ${moment(data.date).format("MMM Do YY")}</h6></div>
-									<div class="status-text group inner list-group-item-text"><h5> Status: </h5><h6> ${data.text}</h6></div>
-									<button id="edit-button" class="status-button col-xs-12 col-md-6">Edit</button>
-									<button id="delete-button" data-id="${data._id}" class="status-button col-xs-12 col-md-6">Delete</button>
-									<button id="view-all-button" class="status-button col-xs-12 col-md-6">View All</button>
+										<div class="item  col-xs-4 col-lg-4">
+											<input type="hidden" class="statusID" value="${status._id}">
+											<div class="status-date group inner list-group-item-heading">
+												<h5>Date:</h5>
+												<h6> ${moment(status.date).format("MMM Do YY")}</h6>
+											</div>
+											<div class="status-text group inner list-group-item-text">
+												<h5> Status: </h5>
+												<h6> ${status.text}</h6>
+											</div>
+											<button id="edit-button" class="status-button col-xs-12 col-md-6">Edit</button>
+											<button id="delete-button" data-id="${status._id}" class="status-button col-xs-12 col-md-6">Delete</button>
+											<button id="view-all-button" class="status-button col-xs-12 col-md-6">View All</button>
+										</div>
 									</div>
-									</div>
-									`)
+														`)
+							})
 		}).fail((error) => {
 			console.log(error);
 		})
 	});
-}
-//then submit updated status 
+
+//then submit updated status
 function updateStatus() {
 	let idParameter = $('form').find('.statusID').val();
 	let dateInput = $('form').parent().find('#date').val();
@@ -250,44 +284,32 @@ function updateStatus() {
 		contentType: 'application/json',
 		dataType: 'json',
 		data: JSON.stringify(newDataInput)
-	}).done((data) => {
-		$('#statuses').append(`
+	})        .done((statuses) => {
+						statuses.forEach((status) => {
+							$('#statuses').append(`
 								<div class="current-status row list-group">
-								<div class="item  col-xs-4 col-lg-4">
-								<input type="hidden" class="statusID" value="${data._id}">
-								<div class="status-date group inner list-group-item-heading"> <h5>Date:</h5><h6> ${moment(data.date).format("MMM Do YY")}</h6></div>
-								<div class="status-text group inner list-group-item-text"><h5> Status: </h5><h6> ${data.text}</h6></div>
-								<button id="edit-button" class="status-button col-xs-12 col-md-6">Edit</button>
-								<button id="delete-button" data-id="${data._id}" class="status-button col-xs-12 col-md-6">Delete</button>
-								<button id="view-all-button" class="status-button col-xs-12 col-md-6">View All</button>
+									<div class="item  col-xs-4 col-lg-4">
+										<input type="hidden" class="statusID" value="${status._id}">
+										<div class="status-date group inner list-group-item-heading">
+											<h5>Date:</h5>
+											<h6> ${moment(status.date).format("MMM Do YY")}</h6>
+										</div>
+										<div class="status-text group inner list-group-item-text">
+											<h5> Status: </h5>
+											<h6> ${status.text}</h6>
+										</div>
+										<button id="edit-button" class="status-button col-xs-12 col-md-6">Edit</button>
+										<button id="delete-button" data-id="${status._id}" class="status-button col-xs-12 col-md-6">Delete</button>
+										<button id="view-all-button" class="status-button col-xs-12 col-md-6">View All</button>
+									</div>
 								</div>
-								</div>
-								`)
+													`)
+						})
 		$('form#new-status :input').val("");
 		$('#new-entry').addClass('hide-display');
 	}).fail((error) => {
 		console.log(error);
 	})
-}
-//section for update/delete/and display status buttons
-function handleDisplayStatusById() {
-	$('#statuses').on('click', '#view-all-button', () => {
-		displayStatusById();
-		//$('.current-status').addClass('hide-display');
-	});
-}
-
-function handleUpdateStatus() {
-	$('#statuses').on('click', '#edit-button', (e) => {
-		e.preventDefault();
-		updateStatus();
-	});
-}
-
-function handleDeleteStatus() {
-	$('#statuses').on('click', '#delete-button', () => {
-		deleteStatus();
-	});
 }
 //document ready function
 $(document).ready(() => {
@@ -297,13 +319,10 @@ $(document).ready(() => {
 	postNewStatus();
 	navLogoutButton();
 	displayAllStatuses()
-	//deleteStatus();
-	//displayStatusById();
-	//retrieveStatus();
+
+
+
 	//updateStatus();
-	//handleDeleteStatus();
-	//handleUpdateStatus();
-	//handleDisplayStatusById();
 	//if you're already logged in, bypass the login page and go to post status
 	const checkAuth = localStorage.getItem('token');
 	if (checkAuth) {
