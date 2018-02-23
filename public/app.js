@@ -57,9 +57,9 @@ function postNewStatus() {
 				data: JSON.stringify(dataInput),
 				url: '/status',
 				contentType: 'application/JSON',
-			})	.done((statuses) => {
-						statuses.forEach((status) => {
-							$('#statuses').append(`
+			}).done((statuses) => {
+				statuses.forEach((status) => {
+					$('#statuses').append(`
 											<div class="current-status row list-group">
 												<div class="item  col-xs-4 col-lg-4">
 													<input type="hidden" class="statusID" value="${status._id}">
@@ -77,21 +77,21 @@ function postNewStatus() {
 												</div>
 											</div>
 																`)
-													const checkAuth = localStorage.getItem('token');
-													if (checkAuth){
-																$('#edit-button').removeClass('hide-display');
-																$('#delete-button').removeClass('hide-display');
-																$('#view-all-button').removeClass('hide-display');
-															} else {
-																	$('#edit-button').addClass('hide-display');
-																	$('#delete-button').addClass('hide-display');
-																	$('#view-all-button').addClass('hide-display');
-																}
-						})
+					const checkAuth = localStorage.getItem('token');
+					if (checkAuth) {
+						$('#edit-button').removeClass('hide-display');
+						$('#delete-button').removeClass('hide-display');
+						$('#view-all-button').removeClass('hide-display');
+					} else {
+						$('#edit-button').addClass('hide-display');
+						$('#delete-button').addClass('hide-display');
+						$('#view-all-button').addClass('hide-display');
+					}
+				})
 
-					$('form#new-status :input').val("");
-					$('#new-entry').addClass('hide-display');
-				}).fail((err) => {
+				$('form#new-status :input').val("");
+				$('#new-entry').addClass('hide-display');
+			}).fail((err) => {
 				console.log("error");
 			});
 		};
@@ -159,8 +159,8 @@ function displayAllStatuses() {
 			url: '/status'
 		})
 		.done((statuses) => {
-				statuses.forEach((status) => {
-					$('#statuses').append(`
+			statuses.forEach((status) => {
+				$('#statuses').append(`
 									<div class="current-status row list-group">
 										<div class="item  col-xs-4 col-lg-4">
 											<input type="hidden" class="statusID" value="${status._id}">
@@ -178,17 +178,17 @@ function displayAllStatuses() {
 										</div>
 									</div>
 														`)
-											const checkAuth = localStorage.getItem('token');
-											if (checkAuth){
-														$('#edit-button').removeClass('hide-display');
-														$('#delete-button').removeClass('hide-display');
-														$('#view-all-button').removeClass('hide-display');
-													} else {
-															$('#edit-button').addClass('hide-display');
-															$('#delete-button').addClass('hide-display');
-															$('#view-all-button').addClass('hide-display');
-														}
-				})
+				const checkAuth = localStorage.getItem('token');
+				if (checkAuth) {
+					$('#edit-button').removeClass('hide-display');
+					$('#delete-button').removeClass('hide-display');
+					$('#view-all-button').removeClass('hide-display');
+				} else {
+					$('#edit-button').addClass('hide-display');
+					$('#delete-button').addClass('hide-display');
+					$('#view-all-button').addClass('hide-display');
+				}
+			})
 
 			$('form#new-status :input').val("");
 			$('#new-entry').addClass('hide-display');
@@ -206,9 +206,9 @@ $('#statuses').on('click', '#view-all-button', () => {
 	$.ajax({
 		method: 'GET',
 		url: '/status' + idParameter
-	})	.done((statuses) => {
-				statuses.forEach((status) => {
-					$('#statuses').append(`
+	}).done((statuses) => {
+		statuses.forEach((status) => {
+			$('#statuses').append(`
 									<div class="current-status row list-group">
 										<div class="item  col-xs-4 col-lg-4">
 											<input type="hidden" class="statusID" value="${status._id}">
@@ -226,21 +226,21 @@ $('#statuses').on('click', '#view-all-button', () => {
 										</div>
 									</div>
 														`)
-											const checkAuth = localStorage.getItem('token');
-											if (checkAuth){
-														$('#edit-button').removeClass('hide-display');
-														$('#delete-button').removeClass('hide-display');
-														$('#view-all-button').removeClass('hide-display');
-													} else {
-															$('#edit-button').addClass('hide-display');
-															$('#delete-button').addClass('hide-display');
-															$('#view-all-button').addClass('hide-display');
-														}
-				})
+			const checkAuth = localStorage.getItem('token');
+			if (checkAuth) {
+				$('#edit-button').removeClass('hide-display');
+				$('#delete-button').removeClass('hide-display');
+				$('#view-all-button').removeClass('hide-display');
+			} else {
+				$('#edit-button').addClass('hide-display');
+				$('#delete-button').addClass('hide-display');
+				$('#view-all-button').addClass('hide-display');
+			}
+		})
 
-			$('form#new-status :input').val("");
-			$('#new-entry').addClass('hide-display');
-		}).fail((error) => {
+		$('form#new-status :input').val("");
+		$('#new-entry').addClass('hide-display');
+	}).fail((error) => {
 		console.log(error);
 		$('#new-entry').removeClass('hide-display');
 	})
@@ -277,9 +277,9 @@ $('#statuses').on('click', '#edit-button', () => {
 		method: 'GET',
 		url: '/status/' + idParameter,
 		contentType: 'application/json'
-	})	.done((statuses) => {
-				statuses.forEach((status) => {
-					$('#statuses').append(`
+	}).done((statuses) => {
+		statuses.forEach((status) => {
+			$('#statuses').append(`
 									<div class="current-status row list-group">
 										<div class="item  col-xs-4 col-lg-4">
 											<input type="hidden" class="statusID" value="${status._id}">
@@ -297,21 +297,21 @@ $('#statuses').on('click', '#edit-button', () => {
 										</div>
 									</div>
 														`)
-											const checkAuth = localStorage.getItem('token');
-											if (checkAuth){
-														$('#edit-button').removeClass('hide-display');
-														$('#delete-button').removeClass('hide-display');
-														$('#view-all-button').removeClass('hide-display');
-													} else {
-															$('#edit-button').addClass('hide-display');
-															$('#delete-button').addClass('hide-display');
-															$('#view-all-button').addClass('hide-display');
-														}
-				})
+			const checkAuth = localStorage.getItem('token');
+			if (checkAuth) {
+				$('#edit-button').removeClass('hide-display');
+				$('#delete-button').removeClass('hide-display');
+				$('#view-all-button').removeClass('hide-display');
+			} else {
+				$('#edit-button').addClass('hide-display');
+				$('#delete-button').addClass('hide-display');
+				$('#view-all-button').addClass('hide-display');
+			}
+		})
 
-			$('form#new-status :input').val("");
-			$('#new-entry').addClass('hide-display');
-		}).fail((error) => {
+		$('form#new-status :input').val("");
+		$('#new-entry').addClass('hide-display');
+	}).fail((error) => {
 		console.log(error);
 	})
 });
@@ -327,13 +327,13 @@ function updateStatus() {
 	};
 	let htmlOutput = "";
 	$.ajax({
-		method: 'PUT',
-		url: '/status/' + idParameter,
-		contentType: 'application/json',
-		dataType: 'json',
-		data: JSON.stringify(newDataInput)
-	})
-	.done((statuses) => {
+			method: 'PUT',
+			url: '/status/' + idParameter,
+			contentType: 'application/json',
+			dataType: 'json',
+			data: JSON.stringify(newDataInput)
+		})
+		.done((statuses) => {
 			statuses.forEach((status) => {
 				$('#statuses').append(`
 								<div class="current-status row list-group">
@@ -353,23 +353,23 @@ function updateStatus() {
 									</div>
 								</div>
 													`)
-										const checkAuth = localStorage.getItem('token');
-										if (checkAuth){
-													$('#edit-button').removeClass('hide-display');
-													$('#delete-button').removeClass('hide-display');
-													$('#view-all-button').removeClass('hide-display');
-												} else {
-														$('#edit-button').addClass('hide-display');
-														$('#delete-button').addClass('hide-display');
-														$('#view-all-button').addClass('hide-display');
-													}
+				const checkAuth = localStorage.getItem('token');
+				if (checkAuth) {
+					$('#edit-button').removeClass('hide-display');
+					$('#delete-button').removeClass('hide-display');
+					$('#view-all-button').removeClass('hide-display');
+				} else {
+					$('#edit-button').addClass('hide-display');
+					$('#delete-button').addClass('hide-display');
+					$('#view-all-button').addClass('hide-display');
+				}
 			})
 
-		$('form#new-status :input').val("");
-		$('#new-entry').addClass('hide-display');
-	}).fail((error) => {
-	console.log(error);
-})
+			$('form#new-status :input').val("");
+			$('#new-entry').addClass('hide-display');
+		}).fail((error) => {
+			console.log(error);
+		})
 }
 //document ready function
 $(document).ready(() => {
