@@ -59,6 +59,7 @@ function postNewStatus() {
 				contentType: 'application/JSON',
 			}).done((statuses) => {
 				statuses.forEach((status) => {
+					console.log(statuses);
 					$('#statuses').append(`
 											<div class="current-status row list-group">
 												<div class="item  col-xs-4 col-lg-4">
@@ -200,7 +201,6 @@ function displayAllStatuses() {
 //view statuses by id
 
 $('#statuses').on('click', '#view-all-button', () => {
-	console.log("view all");
 	let idParameter = $(this).attr("data-id")
 	console.log(idParameter);
 	$.ajax({
@@ -249,9 +249,7 @@ $('#statuses').on('click', '#view-all-button', () => {
 //delete statuses by id
 
 $('#statuses').on('click', '#delete-button', () => {
-	console.log("delete");
 	let idParameter = $(this).attr("data-id")
-	console.log($(this));
 	$.ajax({
 		method: 'DELETE',
 		url: '/status/' + idParameter,
@@ -270,7 +268,6 @@ $('#statuses').on('click', '#delete-button', () => {
 //first retrieve the post by id and put data in form
 
 $('#statuses').on('click', '#edit-button', () => {
-	console.log("edit");
 	$('#new-entry').removeClass('hide-display');
 	let idParameter = $(this).attr("data-id")
 	$.ajax({
@@ -278,6 +275,7 @@ $('#statuses').on('click', '#edit-button', () => {
 		url: '/status/' + idParameter,
 		contentType: 'application/json'
 	}).done((statuses) => {
+		console.log("edit");
 		statuses.forEach((status) => {
 			$('#statuses').append(`
 									<div class="current-status row list-group">
