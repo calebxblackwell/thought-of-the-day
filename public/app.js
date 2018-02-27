@@ -37,66 +37,33 @@ function navLogoutButton() {
 //end navbar area
 //post a new status
 function postNewStatus() {
-	$('#new-status').on('submit', (e) => {
-		e.preventDefault();
-		let loggedInUser = localStorage.getItem('token');
-		let username = localStorage.getItem('username');
-		if (!(loggedInUser)) {
-			alert('Please log in or register.');
-		} else {
-			let dateInput = $('#date').val();
-			let textInput = $('#textbox').val();
-			let dataInput = {
-				date: dateInput,
-				text: textInput,
-				username: username
-			};
-			let htmlOutput = "";
-			$.ajax({
-				type: 'POST',
-				data: JSON.stringify(dataInput),
-				url: '/status',
-				contentType: 'application/JSON',
-			}).done((statuses) => {
-				statuses.forEach((status) => {
-					console.log(statuses);
-					$('#statuses').append(`
-											<div class="current-status row list-group">
-												<div class="item  col-xs-4 col-lg-4">
-													<input type="hidden" class="statusID" value="${status._id}">
-													<div class="status-date group inner list-group-item-heading">
-														<h5>Date:</h5>
-														<h6> ${moment(status.date).format("MMM Do YY")}</h6>
-													</div>
-													<div class="status-text group inner list-group-item-text">
-														<h5> Status: </h5>
-														<h6> ${status.text}</h6>
-													</div>
-													<button id="edit-button" class="status-button col-xs-12 col-md-6">Edit</button>
-													<button id="delete-button" data-id="${status._id}" class="status-button col-xs-12 col-md-6">Delete</button>
-													<button id="view-all-button" class="status-button col-xs-12 col-md-6">View All</button>
-												</div>
-											</div>
-																`)
-					const checkAuth = localStorage.getItem('token');
-					if (checkAuth) {
-						$('#edit-button').removeClass('hide-display');
-						$('#delete-button').removeClass('hide-display');
-						$('#view-all-button').removeClass('hide-display');
-					} else {
-						$('#edit-button').addClass('hide-display');
-						$('#delete-button').addClass('hide-display');
-						$('#view-all-button').addClass('hide-display');
-					}
-				})
-
-				$('form#new-status :input').val("");
-				$('#new-entry').addClass('hide-display');
-			}).fail((err) => {
-				console.log("error");
-			});
-		};
-	});
+    $('#new-status').on('submit', (e) => {
+        e.preventDefault();
+        let loggedInUser = localStorage.getItem('token');
+        let username = localStorage.getItem('username');
+        if (!(loggedInUser)) {
+            alert('Please log in or register.');
+        } else {
+            let dateInput = $('#date').val();
+            let textInput = $('#textbox').val();
+            let dataInput = {
+                date: dateInput,
+                text: textInput,
+                username: username
+            };
+            let htmlOutput = "";
+            $.ajax({
+                type: 'POST',
+                data: JSON.stringify(dataInput),
+                url: '/status',
+                contentType: 'application/JSON',
+            }).done((statuses) => {
+                displayAllStatuses()
+            }).fail((err) => {
+                console.log("error");
+            });
+        };
+    });
 }
 //login Area
 $('#login').on('submit', (e) => {
@@ -157,7 +124,8 @@ $('#register-user').on('submit', (e) => {
 function displayAllStatuses() {
 	$.ajax({
 			method: 'GET',
-			url: '/status'
+			url: '/status',
+			dataType: 'json'
 		})
 		.done((statuses) => {
 			statuses.forEach((status) => {
@@ -205,41 +173,10 @@ $('#statuses').on('click', '#view-all-button', () => {
 	console.log(idParameter);
 	$.ajax({
 		method: 'GET',
-		url: '/status' + idParameter
+		url: '/status' + idParameter,
+		dataType: 'json'
 	}).done((statuses) => {
-		statuses.forEach((status) => {
-			$('#statuses').append(`
-									<div class="current-status row list-group">
-										<div class="item  col-xs-4 col-lg-4">
-											<input type="hidden" class="statusID" value="${status._id}">
-											<div class="status-date group inner list-group-item-heading">
-												<h5>Date:</h5>
-												<h6> ${moment(status.date).format("MMM Do YY")}</h6>
-											</div>
-											<div class="status-text group inner list-group-item-text">
-												<h5> Status: </h5>
-												<h6> ${status.text}</h6>
-											</div>
-											<button id="edit-button" class="status-button col-xs-12 col-md-6">Edit</button>
-											<button id="delete-button" data-id="${status._id}" class="status-button col-xs-12 col-md-6">Delete</button>
-											<button id="view-all-button" class="status-button col-xs-12 col-md-6">View All</button>
-										</div>
-									</div>
-														`)
-			const checkAuth = localStorage.getItem('token');
-			if (checkAuth) {
-				$('#edit-button').removeClass('hide-display');
-				$('#delete-button').removeClass('hide-display');
-				$('#view-all-button').removeClass('hide-display');
-			} else {
-				$('#edit-button').addClass('hide-display');
-				$('#delete-button').addClass('hide-display');
-				$('#view-all-button').addClass('hide-display');
-			}
-		})
-
-		$('form#new-status :input').val("");
-		$('#new-entry').addClass('hide-display');
+			displayAllStatuses()
 	}).fail((error) => {
 		console.log(error);
 		$('#new-entry').removeClass('hide-display');
@@ -250,9 +187,10 @@ $('#statuses').on('click', '#view-all-button', () => {
 
 $('#statuses').on('click', '#delete-button', () => {
 	let idParameter = $(this).attr("data-id")
+	console.log($(this));
 	$.ajax({
 		method: 'DELETE',
-		url: '/status/' + idParameter,
+		url: '/status' + idParameter,
 		contentType: 'application/json',
 		dataType: 'json'
 	}).done((data) => {
@@ -268,47 +206,16 @@ $('#statuses').on('click', '#delete-button', () => {
 //first retrieve the post by id and put data in form
 
 $('#statuses').on('click', '#edit-button', () => {
+	console.log("edit button");
 	$('#new-entry').removeClass('hide-display');
 	let idParameter = $(this).attr("data-id")
 	$.ajax({
 		method: 'GET',
 		url: '/status/' + idParameter,
-		contentType: 'application/json'
+		contentType: 'application/json',
+		dataType: 'json'
 	}).done((statuses) => {
-		console.log("edit");
-		statuses.forEach((status) => {
-			$('#statuses').append(`
-									<div class="current-status row list-group">
-										<div class="item  col-xs-4 col-lg-4">
-											<input type="hidden" class="statusID" value="${status._id}">
-											<div class="status-date group inner list-group-item-heading">
-												<h5>Date:</h5>
-												<h6> ${moment(status.date).format("MMM Do YY")}</h6>
-											</div>
-											<div class="status-text group inner list-group-item-text">
-												<h5> Status: </h5>
-												<h6> ${status.text}</h6>
-											</div>
-											<button id="edit-button" class="status-button col-xs-12 col-md-6">Edit</button>
-											<button id="delete-button" data-id="${status._id}" class="status-button col-xs-12 col-md-6">Delete</button>
-											<button id="view-all-button" class="status-button col-xs-12 col-md-6">View All</button>
-										</div>
-									</div>
-														`)
-			const checkAuth = localStorage.getItem('token');
-			if (checkAuth) {
-				$('#edit-button').removeClass('hide-display');
-				$('#delete-button').removeClass('hide-display');
-				$('#view-all-button').removeClass('hide-display');
-			} else {
-				$('#edit-button').addClass('hide-display');
-				$('#delete-button').addClass('hide-display');
-				$('#view-all-button').addClass('hide-display');
-			}
-		})
-
-		$('form#new-status :input').val("");
-		$('#new-entry').addClass('hide-display');
+			displayAllStatuses()
 	}).fail((error) => {
 		console.log(error);
 	})
@@ -332,39 +239,7 @@ function updateStatus() {
 			data: JSON.stringify(newDataInput)
 		})
 		.done((statuses) => {
-			statuses.forEach((status) => {
-				$('#statuses').append(`
-								<div class="current-status row list-group">
-									<div class="item  col-xs-4 col-lg-4">
-										<input type="hidden" class="statusID" value="${status._id}">
-										<div class="status-date group inner list-group-item-heading">
-											<h5>Date:</h5>
-											<h6> ${moment(status.date).format("MMM Do YY")}</h6>
-										</div>
-										<div class="status-text group inner list-group-item-text">
-											<h5> Status: </h5>
-											<h6> ${status.text}</h6>
-										</div>
-										<button id="edit-button" class="status-button col-xs-12 col-md-6">Edit</button>
-										<button id="delete-button" data-id="${status._id}" class="status-button col-xs-12 col-md-6">Delete</button>
-										<button id="view-all-button" class="status-button col-xs-12 col-md-6">View All</button>
-									</div>
-								</div>
-													`)
-				const checkAuth = localStorage.getItem('token');
-				if (checkAuth) {
-					$('#edit-button').removeClass('hide-display');
-					$('#delete-button').removeClass('hide-display');
-					$('#view-all-button').removeClass('hide-display');
-				} else {
-					$('#edit-button').addClass('hide-display');
-					$('#delete-button').addClass('hide-display');
-					$('#view-all-button').addClass('hide-display');
-				}
-			})
-
-			$('form#new-status :input').val("");
-			$('#new-entry').addClass('hide-display');
+				displayAllStatuses()
 		}).fail((error) => {
 			console.log(error);
 		})

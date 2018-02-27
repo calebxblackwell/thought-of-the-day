@@ -121,6 +121,7 @@ app.get('/status', (req, res) => {
 //end get request
 //view statuses by id
 app.get('/status/:id', (req, res) => {
+	console.log("id get request");
 	Status.findById(req.params.id)
 			.then(status => res.json(status))
 			.catch(err => {
@@ -133,6 +134,7 @@ app.get('/status/:id', (req, res) => {
 
 //delete statuses
 app.delete('/status/:id', (req, res) => {
+	console.log("delete request");
 	Status.findByIdAndRemove(req.params.id).then(() => {
 		res.status(204).json({
 			message: 'deleted the status'
@@ -146,6 +148,7 @@ app.delete('/status/:id', (req, res) => {
 })
 //update statuses
 app.put('/status/:id', (req, res) => {
+	console.log("id update put request");
 	const updated = {};
 	const updateableFields = ['date', 'text'];
 	updateableFields.forEach(field => {
