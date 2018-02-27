@@ -141,9 +141,9 @@ function displayAllStatuses() {
 												<h5> Status: </h5>
 												<h6> ${status.text}</h6>
 											</div>
-											<button id="edit-button" class="status-button col-xs-12 col-md-6">Edit</button>
+											<button id="edit-button" data-id="${status._id}" class="status-button col-xs-12 col-md-6">Edit</button>
 											<button id="delete-button" data-id="${status._id}" class="status-button col-xs-12 col-md-6">Delete</button>
-											<button id="view-all-button" class="status-button col-xs-12 col-md-6">View All</button>
+											<button id="view-all-button" data-id="${status._id}" class="status-button col-xs-12 col-md-6">View All</button>
 										</div>
 									</div>
 														`)
