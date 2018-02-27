@@ -168,7 +168,7 @@ function displayAllStatuses() {
 }
 //view statuses by id
 
-$('#statuses').on('click', '#view-all-button', () => {
+$('#statuses').on('click', '#view-all-button', function() {
 	let idParameter = $(this).attr("data-id")
 	console.log(idParameter);
 	$.ajax({
@@ -185,7 +185,7 @@ $('#statuses').on('click', '#view-all-button', () => {
 
 //delete statuses by id
 
-$('#statuses').on('click', '#delete-button', () => {
+$('#statuses').on('click', '#delete-button', function() {
 	let idParameter = $(this).attr("data-id")
 	console.log($(this));
 	$.ajax({
@@ -205,7 +205,7 @@ $('#statuses').on('click', '#delete-button', () => {
 //update statuses
 //first retrieve the post by id and put data in form
 
-$('#statuses').on('click', '#edit-button', () => {
+$('#statuses').on('click', '#edit-button', function() {
 	console.log("edit button");
 	$('#new-entry').removeClass('hide-display');
 	let idParameter = $(this).attr("data-id")
