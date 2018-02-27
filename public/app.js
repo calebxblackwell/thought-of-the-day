@@ -173,7 +173,7 @@ $('#statuses').on('click', '#view-all-button', function() {
 	console.log(idParameter);
 	$.ajax({
 		method: 'GET',
-		url: '/status' + idParameter,
+		url: '/status/' + idParameter,
 		dataType: 'json'
 	}).done((statuses) => {
 			displayAllStatuses()
@@ -187,14 +187,12 @@ $('#statuses').on('click', '#view-all-button', function() {
 
 $('#statuses').on('click', '#delete-button', function() {
 	let idParameter = $(this).attr("data-id")
-	console.log($(this));
 	$.ajax({
 		method: 'DELETE',
-		url: '/status' + idParameter,
+		url: '/status/' + idParameter,
 		contentType: 'application/json',
 		dataType: 'json'
 	}).done((data) => {
-		console.log('deleting status');
 		displayAllStatuses();
 	}).fail((error) => {
 		console.log(error);
