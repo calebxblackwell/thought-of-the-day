@@ -187,31 +187,3 @@ textarea {
         vertical-align: text-top;
     }
 }
-
-/* #entries {
-   border: 1px solid #EB5E28;
-   background: opaque;
-   border-radius: 15px 0 15px 0;
-   margin: 15px;
-   padding: 20px;
-}
-#entries button, .status-button {
-  background: #FFFCF2;
-   padding: 8px;
-   border-radius: 5px;
-   border: 1px solid #EB5E28;
-   text-align: center;
-}
-.current-status h2 {
-    font-size: 18px;
-    font-weight: 500;
-    display: inline;
-}
-#truncate {
-    display: inline-block;
-    width: 300px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    padding: 0;
-} */

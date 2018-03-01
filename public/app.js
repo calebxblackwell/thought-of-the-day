@@ -214,16 +214,16 @@ $('#statuses').on('click', '#edit-button', function() {
 		contentType: 'application/json',
 		dataType: 'json'
 	}).done((statuses) => {
+		//console.log("done edit onclick");
 		$('#new-entry').html(`
 			<div class="current-status row list-group">
 				<div class="item  col-xs-4 col-lg-4">
 					<input type="hidden" class="statusID" value="${status._id}">
-					<form id="new-status" method="post" name="new-status">
-						<h2>Post a status to record your perspective on the day.</h2>
-						<h3>To help focus on the positive, and stay on track.</h3>
+					<form id="update-status" method="get" name="update-status">
+						<h2>Edit your status.</h2>
 						<input class="date" id="date" placeholder="Today's Date" type="date">
 						<input class="title" id="textbox" placeholder="New Status" type="text">
-						<button class="btn-info" id="addbutton">Add</button>
+						<button class="btn-update" id="update-button">Update</button>
 					</form>
 					</div>
 				</div>
@@ -233,7 +233,8 @@ $('#statuses').on('click', '#edit-button', function() {
 	})
 });
 //then submit updated status
-function updateStatus(){
+$('#update-status').on('click', '#update-button', function() {
+	console.log("begin update status after done onclick");
 	let idParameter = $(this).attr("data-id");
 	let dateInput = $('form').parent().find('#date').val();
 	let textInput = $('form').parent().find('#text').val();
@@ -250,12 +251,13 @@ function updateStatus(){
 			data: JSON.stringify(newDataInput)
 		})
 		.done((statuses) => {
+			console.log("done update status after done onclick");
 			displayAllStatuses()
 		}).fail((error) => {
 			console.log(error);
 		})
-}
 
+})
 
 //document ready function
 $(document).ready(() => {
@@ -265,10 +267,8 @@ $(document).ready(() => {
 	postNewStatus();
 	navLogoutButton();
 	displayAllStatuses()
-
-
-
 	//updateStatus();
+
 	//if you're already logged in, bypass the login page and go to post status
 	const checkAuth = localStorage.getItem('token');
 	if (checkAuth) {
