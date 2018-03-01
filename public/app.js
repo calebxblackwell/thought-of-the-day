@@ -122,6 +122,7 @@ $('#register-user').on('submit', (e) => {
 
 //display all statuses
 function displayAllStatuses() {
+	$('#statuses').html("");
 	$.ajax({
 			method: 'GET',
 			url: '/status',
@@ -202,26 +203,38 @@ $('#statuses').on('click', '#delete-button', function() {
 
 //update statuses
 //first retrieve the post by id and put data in form
-
 $('#statuses').on('click', '#edit-button', function() {
-	console.log("edit button");
 	$('#new-entry').removeClass('hide-display');
 	let idParameter = $(this).attr("data-id")
+	let dateInput = $('form').parent().find('#date').val();
+	let textInput = $('form').parent().find('#text').val();
 	$.ajax({
 		method: 'GET',
 		url: '/status/' + idParameter,
 		contentType: 'application/json',
 		dataType: 'json'
 	}).done((statuses) => {
-			displayAllStatuses()
+		$('#new-entry').html(`
+			<div class="current-status row list-group">
+				<div class="item  col-xs-4 col-lg-4">
+					<input type="hidden" class="statusID" value="${status._id}">
+					<form id="new-status" method="post" name="new-status">
+						<h2>Post a status to record your perspective on the day.</h2>
+						<h3>To help focus on the positive, and stay on track.</h3>
+						<input class="date" id="date" placeholder="Today's Date" type="date">
+						<input class="title" id="textbox" placeholder="New Status" type="text">
+						<button class="btn-info" id="addbutton">Add</button>
+					</form>
+					</div>
+				</div>
+			`)
 	}).fail((error) => {
 		console.log(error);
 	})
 });
-
 //then submit updated status
-function updateStatus() {
-	let idParameter = $('form').find('.statusID').val();
+function updateStatus(){
+	let idParameter = $(this).attr("data-id");
 	let dateInput = $('form').parent().find('#date').val();
 	let textInput = $('form').parent().find('#text').val();
 	let newDataInput = {
@@ -237,11 +250,13 @@ function updateStatus() {
 			data: JSON.stringify(newDataInput)
 		})
 		.done((statuses) => {
-				displayAllStatuses()
+			displayAllStatuses()
 		}).fail((error) => {
 			console.log(error);
 		})
 }
+
+
 //document ready function
 $(document).ready(() => {
 	navLoginButton();

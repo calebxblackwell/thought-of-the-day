@@ -134,18 +134,19 @@ app.get('/status/:id', (req, res) => {
 
 //delete statuses
 app.delete('/status/:id', (req, res) => {
-	console.log("delete request");
-	Status.findByIdAndRemove(req.params.id).then(() => {
+	Status.findByIdAndRemove(req.params.id)
+	.then(() => {
 		res.status(204).json({
-			message: 'deleted the status'
-		});
-	}).catch(err => {
-		console.error(err);
-		res.status(500).json({
-			error: 'Status did not delete'
-		});
-	});
+					message: 'deleted the status'
+			});
 })
+	.catch(err => {
+        console.error(err);
+        res.status(500).json({
+            error: 'Status did not delete'
+        });
+    });
+	})
 //update statuses
 app.put('/status/:id', (req, res) => {
 	console.log("id update put request");
