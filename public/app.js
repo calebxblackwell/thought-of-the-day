@@ -217,7 +217,7 @@ $('#statuses').on('click', '#edit-button', function() {
 		console.log("done edit onclick");
 		$('.update-status').html(`
 			<div class="update-status row list-group">
-				<div class="item  col-xs-4 col-lg-4">
+				<div class="item col-xs-4 col-lg-4">
 					<input type="hidden" class="statusID" value="${status._id}">
 					<div class="status-date group inner list-group-item-heading">
 					<form id="update-status" method="get" name="update-status">
@@ -235,7 +235,8 @@ $('#statuses').on('click', '#edit-button', function() {
 	})
 });
 //then submit updated status
-$('.update-status').on('click', '#update-button', function() {
+$('.update-status').on('click', '#update-button', function(e) {
+	e.preventDefault();
 	console.log("begin update status after done onclick");
 	let idParameter = $(this).attr("data-id");
 	let dateInput = $('form').parent().find('#date').val();

@@ -161,7 +161,10 @@ app.put('/status/:id', (req, res) => {
 		$set: updated
 	}, {
 		new: true
-	}).then(updatedStatus => res.status(204).end()).catch(err => res.status(500).json({
+	}).then(updatedStatus => res.status(204)
+		.end())
+		.catch(err => res.status(500)
+		.json({
 		message: 'status did not update'
 	}));
 });
