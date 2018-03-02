@@ -52,6 +52,19 @@
 			<h3>Create a new account, or use the login button at the top of the page if you already have one.</h3><input class="register-username" id="userreg" name="text" placeholder="Create Username" required="" type="text"> <input class="register-password" id="passreg" name="text" placeholder="Create Password" required="" type="password"> <button class="register-account">Register</button>
 		</form>
 	</section><!--end of register user page-->
+	<div class="update-status row list-group"><!--hidden status update area-->
+		<div class="item  col-xs-4 col-lg-4">
+			<input type="hidden" class="statusID" value="${status._id}">
+			<div class="status-date group inner list-group-item-heading">
+			<form id="update-status" method="get" name="update-status">
+				<h2>Edit your status.</h2>
+				<input class="date" id="update-date" placeholder="Today's Date" type="date">
+				<input class="title" id="update-textbox" placeholder="New Status" type="text">
+				<button class="btn-update" id="update-button">Update</button>
+			</form>
+			</div>
+			</div>
+		</div><!--end of hidden update status area-->
 	<main class=" row page" id="status-container">
 		<h2 class="section-header">Statuses</h2>
 		<h3>Look at other statuses to put your day into perspective.</h3>

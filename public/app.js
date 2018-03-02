@@ -204,7 +204,7 @@ $('#statuses').on('click', '#delete-button', function() {
 //update statuses
 //first retrieve the post by id and put data in form
 $('#statuses').on('click', '#edit-button', function() {
-	$('#new-entry').removeClass('hide-display');
+	$('.update-status').removeClass('hide-display');
 	let idParameter = $(this).attr("data-id")
 	let dateInput = $('form').parent().find('#date').val();
 	let textInput = $('form').parent().find('#text').val();
@@ -214,17 +214,19 @@ $('#statuses').on('click', '#edit-button', function() {
 		contentType: 'application/json',
 		dataType: 'json'
 	}).done((statuses) => {
-		//console.log("done edit onclick");
-		$('#new-entry').html(`
-			<div class="current-status row list-group">
+		console.log("done edit onclick");
+		$('.update-status').html(`
+			<div class="update-status row list-group">
 				<div class="item  col-xs-4 col-lg-4">
 					<input type="hidden" class="statusID" value="${status._id}">
+					<div class="status-date group inner list-group-item-heading">
 					<form id="update-status" method="get" name="update-status">
 						<h2>Edit your status.</h2>
-						<input class="date" id="date" placeholder="Today's Date" type="date">
-						<input class="title" id="textbox" placeholder="New Status" type="text">
+						<input class="date" id="update-date" placeholder="Today's Date" type="date">
+						<input class="title" id="update-textbox" placeholder="New Status" type="text">
 						<button class="btn-update" id="update-button">Update</button>
 					</form>
+					</div>
 					</div>
 				</div>
 			`)
@@ -233,7 +235,7 @@ $('#statuses').on('click', '#edit-button', function() {
 	})
 });
 //then submit updated status
-$('#update-status').on('click', '#update-button', function() {
+$('.update-status').on('click', '#update-button', function() {
 	console.log("begin update status after done onclick");
 	let idParameter = $(this).attr("data-id");
 	let dateInput = $('form').parent().find('#date').val();
@@ -275,9 +277,11 @@ $(document).ready(() => {
 		$('.nav-login-button').addClass('hide-display');
 		$('.start-page').addClass('hide-display');
 		$('#new-entry').removeClass('hide-display');
+		$('.update-status').addClass('hide-display');
 	} else {
 		$('.nav-logout-button').addClass('hide-display');
 		$('.nav-login-button').removeClass('hide-display');
 		$('.start-page').removeClass('hide-display');
+		$('.update-status').addClass('hide-display');
 	}
 }); //end bracket for document ready function
