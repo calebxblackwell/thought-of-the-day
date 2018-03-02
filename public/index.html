@@ -54,10 +54,11 @@
 	</section><!--end of register user page-->
 	<section class="update-status row list-group"><!--hidden status update area-->
 		<div class="item col-xs-4 col-lg-4">
-			<input type="hidden" class="statusID" value="${status._id}">
+			<input type="hidden" class="statusID" value="">
 			<div class="status-date group inner list-group-item-heading">
 			<form id="update-status" method="get" name="update-status">
 				<h2>Edit your status.</h2>
+
 				<input class="date" id="update-date" placeholder="Today's Date" type="date">
 				<input class="title" id="update-textbox" placeholder="New Status" type="text">
 				<button class="btn-update" id="update-button">Update</button>
