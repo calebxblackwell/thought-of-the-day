@@ -5,6 +5,7 @@ function navLoginButton() {
 		$('.start-page').removeClass('hide-display');
 		$('#new-entry').addClass('hide-display');
 		$('#register').addClass('hide-display');
+		$('.update-status').addClass('hide-display');
 	})
 }
 //create account button
@@ -13,6 +14,7 @@ function navRegisterButton() {
 		$('#register').removeClass('hide-display');
 		$('#new-entry').addClass('hide-display');
 		$('.start-page').addClass('hide-display');
+		$('.update-status').addClass('hide-display');
 	})
 }
 //status button
@@ -21,6 +23,7 @@ function navStatusButton() {
 		$('#new-entry').removeClass('hide-display');
 		$('#register').addClass('hide-display');
 		$('.start-page').addClass('hide-display');
+		$('.update-status').addClass('hide-display');
 	})
 }
 //logout button
@@ -32,12 +35,14 @@ function navLogoutButton() {
 		$('#register').addClass('hide-display');
 		$('.nav-logout-button').addClass('hide-display');
 		$('.nav-login-button').removeClass('hide-display');
+		$('.update-status').addClass('hide-display');
 	})
 }
 //end navbar area
 //post a new status
 function postNewStatus() {
     $('#new-status').on('submit', (e) => {
+			$('.update-status').addClass('hide-display');
         e.preventDefault();
         let loggedInUser = localStorage.getItem('token');
         let username = localStorage.getItem('username');
@@ -58,6 +63,7 @@ function postNewStatus() {
                 url: '/status',
                 contentType: 'application/JSON',
             }).done((statuses) => {
+								$('.update-status').addClass('hide-display');
                 displayAllStatuses()
             }).fail((err) => {
                 console.log("error");
