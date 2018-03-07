@@ -124,14 +124,13 @@ textarea {
   margin:auto;
   top: 0;
   width: 100%;
-  text-align: center;
+  text-align:center;
 }
 .navbar ul li {
   margin: auto;
-  display: inline-block;
   color: black;
-  text-align: center;
   padding: 14px 16px;
+  display:inline-flex;
 }
 .navbar ul:hover li:hover {
   background: #EB5E28;
