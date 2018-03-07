@@ -4,6 +4,7 @@
 	<meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Thought of the Day</title>
 	<link href="https://fonts.googleapis.com/css?family=Rock+Salt" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 	<link href="index.css" rel="stylesheet">
 </head>
 <body>
@@ -24,7 +25,7 @@
 				<a class="nav-register-button" data-action="register" href="#">Create Account</a>
 			</li>
 			<li>
-				<a class="nav-status-button" data-action="new-entry" href="#">Post New Status</a>
+				<a class="nav-status-button" data-action="new-entry" href="#">Post New Entry</a>
 			</li>
 		</ul>
 	</div>
@@ -38,7 +39,7 @@
 	<section class="hide-display row page" id="new-entry">
 		<!--new status page-->
 		<form id="new-status" method="post" name="new-status">
-			<h2>Post a status to record your perspective on the day.</h2>
+			<h2>Post an entry to record your perspective on the day.</h2>
 			<h3>To help focus on the positive, and stay on track.</h3>
 			<input class="date" id="date" placeholder="Today's Date" type="date">
 			<input class="title" id="textbox" placeholder="New Status" type="text">
@@ -57,7 +58,7 @@
 			<input type="hidden" class="statusID" value="">
 			<div class="status-date group inner list-group-item-heading">
 			<form id="update-status" method="get" name="update-status">
-				<h2>Edit your status.</h2>
+				<h2>Edit your entry.</h2>
 
 				<input class="date" id="update-date" placeholder="Today's Date" type="date">
 				<input class="title" id="update-textbox" placeholder="New Status" type="text">
@@ -67,8 +68,8 @@
 			</div>
 		</section><!--end of hidden update status area-->
 	<main class=" row page" id="status-container">
-		<h2 class="section-header">Statuses</h2>
-		<h3>Look at other statuses to put your day into perspective.</h3>
+		<h2 class="section-header">Entries</h2>
+		<h3>Look at other entries to put your day into perspective.</h3>
 		<h3>Here's what other people have said:</h3>
 		<div id="statuses"></div>
 	</main><!-- <footer class="footer">

@@ -145,7 +145,7 @@ function displayAllStatuses() {
 												<h6> ${moment(status.date).format("MMM Do YY")}</h6>
 											</div>
 											<div class="status-text group inner list-group-item-text">
-												<h5> Status: </h5>
+												<h5> Entry: </h5>
 												<h6> ${status.text}</h6>
 											</div>
 											<button id="edit-button" data-id="${status._id}" class="status-button col-xs-12 col-md-6">Edit</button>

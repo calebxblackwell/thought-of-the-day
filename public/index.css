@@ -1,11 +1,11 @@
 /*header*/
 header {
-    margin-top: 30px;
+
     background-image: url("/images/header-image.jpg");
     background-size: cover;
     width: 100%;
     margin-bottom: 10px;
-    padding: 20px;
+    padding: 40px;
     box-shadow: 0 0 10px #EB5E28;
     display: inline-block;
     flex-grow: 2;
@@ -58,28 +58,43 @@ header h1 {
   text-align: center;
 }
 h2{
+  font-family: 'Open Sans', sans-serif;
   font-size: 18px;
-  font-weight: bold;
+  font-weight: 800;
   text-align: center;
   color: #403D39;
 }
  h3, h4 {
+  font-family: 'Open Sans', sans-serif;
   font-size: 18px;
-  font-weight: normal;
   text-align: center;
   color: #403D39;
 }
 h5 {
+  font-family: 'Open Sans', sans-serif;
   font-size: 18px;
   font-weight: bold;
   text-align: left;
   color: #403D39;
 }
 h6 {
+  font-family: 'Open Sans', sans-serif;
   font-size: 18px;
-  font-weight: normal;
   text-align: left;
   color: #403D39;
+}
+/*Link area*/
+a:link {
+  color: black;
+}
+a:visited {
+  color: #EB5E28;
+}
+a:hover {
+  color: #403D39;
+}
+a:active {
+  color: #EB5E28;
 }
 /*Form area*/
 form fieldset {
