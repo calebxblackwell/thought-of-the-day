@@ -85,6 +85,7 @@ h6 {
 }
 /*Link area*/
 a:link {
+  font-family: 'Open Sans', sans-serif;
   color: black;
 }
 a:visited {
